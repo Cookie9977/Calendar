@@ -4,23 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Window extends JFrame{
 	private static final long serialVersionUID = -7150710923108249953L;
 	private JPanel body, calendar, menyBar, navBar, datePanel;
+	private JPanel[] menyBarHolders;
 	//private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 	
 	public Window(){
 		// basic setup
 		super("Kalendarium");
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -30,70 +29,83 @@ public class Window extends JFrame{
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
+		menyBarHolders = new JPanel[3];
+
 
 		//window size and place
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = 600;
-		int height = 500;
+		int width = 1000;
+		int height = 800;
 		int xStart = getXStart(screenSize, width);
 		int yStart = getYStart(screenSize, height);
-		super.setBounds(xStart, yStart, width, height);
+		setBounds(xStart, yStart, width, height);
+		setPreferredSize(new Dimension(width, height));
 		
 		//components color
 		calendar.setBackground(Color.BLACK);
 		menyBar.setBackground(Color.RED);
 		navBar.setBackground(Color.BLUE);
 		datePanel.setBackground(Color.GREEN);
-		body.setBackground(Color.YELLOW);
 		
 		
 		//window grid
 		GridBagLayout gridBag = new GridBagLayout(); 
 		GridBagConstraints gbc = new GridBagConstraints();
 		body.setLayout(gridBag);
-		
+		navBar.setLayout(gridBag);
+		menyBar.setLayout(gridBag);
+		int gridWith = (width/4);
+		int gridHeight = (height/10);
 		
 		//adding parts
 		add(body);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = (width/3);
-        gbc.gridheight = (height/10);
+		
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = 0.3;
+        
+        gbc.gridwidth = gridWith;
+        gbc.gridheight = gridHeight;
+        gbc.weightx = 0.25;
         gbc.weighty = 0.1;
-        //gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         body.add(datePanel, gbc);
        	
-        gbc.gridx = ((width)/3);
-        gbc.gridy = 0;
-        gbc.gridwidth = ((2*width)/3);
-        gbc.gridheight = (height/10);
-        gbc.weightx = 0.7;
-        gbc.weighty = 0.1;
-        //gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.gridx = gridWith;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 0.75;
        	body.add(menyBar, gbc);
         
        	gbc.gridx = 0;
-        gbc.gridy = (height/10);
-        gbc.gridwidth = ((width)/3);
-        gbc.gridheight = ((9*height)/10);
-        gbc.weightx = 0.3;
+        gbc.gridy = gridHeight;
+        gbc.gridwidth = gridWith;
+        gbc.gridheight = GridBagConstraints.REMAINDER;
+        gbc.weightx = 0.25;
         gbc.weighty = 0.9;
-        //gbc.anchor = GridBagConstraints.LINE_START;
         body.add(navBar, gbc);
         
-        gbc.gridx = ((width)/3);
-        gbc.gridy = (height/10);
-        gbc.gridwidth = ((2*width)/3);
-        gbc.gridheight = ((9*height)/10);
-        gbc.weightx = 0.7;
-        gbc.weighty = 0.9;
+        gbc.gridx = gridWith;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         body.add(calendar, gbc);
-		//pack();
-		
-		
-		
+        /* försök för layout på menybaren
+        gbc = new GridBagConstraints();
+        int margin = 20;
+        int startPos = (width-gridWith+margin);
+        int Buttonwidth = ((width*2)/10);  
+		gbc.gridy = gridHeight;
+		gbc.gridwidth = Buttonwidth;
+		gbc.gridheight = ((width)/20);
+		//gbc.fill = GridBagConstraints.BOTH;
+		gbc.insets = new Insets(((width)/20)0, 0left, 0bottom, 0right);
+		gbc.weightx = 0.1;
+		gbc.weighty = 1.0;
+		gbc.anchor = GridBagConstraints.SOUTH;
+        for (int i = 0; i < menyBarHolders.length; i++) {
+			menyBarHolders[i] = new JPanel();
+			menyBarHolders[i].setBackground(Color.YELLOW);
+			gbc.gridx = startPos+((margin+Buttonwidth)*i);
+
+			menyBar.add(menyBarHolders[i], gbc);
+		}
+        */
+        pack();
 	}
 	
 	private int getXStart(Dimension screenSize,int width) {
