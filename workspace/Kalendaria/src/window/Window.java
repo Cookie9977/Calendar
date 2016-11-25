@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -12,8 +11,9 @@ import javax.swing.JPanel;
 
 public class Window extends JFrame{
 	private static final long serialVersionUID = -7150710923108249953L;
+	//byt ut dessa mot respective jpanel classer som ni har gjort. Body ska vara kvar.
 	private JPanel body, calendar, menyBar, navBar, datePanel;
-	private JPanel[] menyBarHolders;
+	//private JPanel[] menyBarHolders;
 	//private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 	
 	public Window(){
@@ -29,7 +29,7 @@ public class Window extends JFrame{
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
-		menyBarHolders = new JPanel[3];
+		//menyBarHolders = new JPanel[3];
 
 
 		//window size and place
