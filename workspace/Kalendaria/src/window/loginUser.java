@@ -5,20 +5,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import main.JavaDB;
 
 public class loginUser extends JPanel implements ActionListener{
 private JTextField[] textBox;
-protected final JavaDB DB = new JavaDB("192.168.216.168","root","","calendar");
 
 	private static final long serialVersionUID = -2354560402587167649L;
 
@@ -55,8 +51,9 @@ protected final JavaDB DB = new JavaDB("192.168.216.168","root","","calendar");
 	String password = textBox[1].getText();
 	
 	public void displayUsers(String email, String password){
-		String SQL="SELECT email,password FROM user VALUES('?','?');";
-		DB.getData(SQL);
+		//String SQL="SELECT email,password FROM user VALUES('Emma_sw@hotmail.com','?');";
+		//execute(SQL);
+
 }
 
 	public void actionPerformed(ActionEvent e){			
