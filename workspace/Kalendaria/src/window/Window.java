@@ -9,7 +9,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JFrame{
+public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	//byt ut dessa mot respective jpanel classer som ni har gjort. Body ska vara kvar.
 	private JPanel body, calendar, menyBar, navBar, datePanel;
@@ -117,4 +117,5 @@ public class Window extends JFrame{
 		int x = (((int) Math.ceil(screenSize.getHeight())-(height))/2);
 		return x;
 	}
+
 }

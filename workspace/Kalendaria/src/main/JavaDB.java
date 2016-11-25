@@ -16,7 +16,7 @@ public class JavaDB {
 			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
 			con = DriverManager.getConnection("jdbc:mysql://" + host + "/" + db, user, password);
 		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "error");
+			JOptionPane.showMessageDialog(null, error);
 		}
 	}
 
