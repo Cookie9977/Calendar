@@ -3,8 +3,11 @@ package Pane;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.text.DateFormatSymbols;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -16,12 +19,14 @@ public class EventPane extends JPanel{
 	private JTextField[] textFields;
 	private JTextArea description;
 	private String[] labelText = {"Titel", "Plats", "Start", "Stopp", "Kategori", "Beskrivning"};
+	private JComboBox<String> date_e, date_s, month_e, month_s;
 
 	public EventPane() {
 		//declaring
 		labels = new JLabel[6];
 		textFields = new JTextField[2];
 		description = new JTextArea();
+		date_e = addMonths();
 		//set labels
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new JLabel(labelText[i]);
@@ -49,6 +54,19 @@ public class EventPane extends JPanel{
 		add(description);
 	
 
+	}
+	
+	public JComboBox<String> addMonths(){
+		DateFormatSymbols dfc = new DateFormatSymbols();
+        String[] months = dfc.getMonths();
+        for (int i = 0; i < months.length-1; i++) {
+            System.out.println(months[i]);
+        }
+		return month_s;
+	}
+	
+	public JComboBox<String> addDates(){
+		return date_s;
 	}
 
 }
