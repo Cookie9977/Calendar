@@ -9,6 +9,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class JavaDB {
+	public static final String db = null;
 	private Connection con;
 
 	public JavaDB(String host, String user, String password, String db) {
@@ -16,7 +17,7 @@ public class JavaDB {
 			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
 			con = DriverManager.getConnection("jdbc:mysql://" + host + "/" + db, user, password);
 		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, error);
+			JOptionPane.showMessageDialog(null, "Kan inte återupprätta en anslutning");
 		}
 	}
 

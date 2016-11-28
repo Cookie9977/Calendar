@@ -12,6 +12,7 @@ public class Main {
 		EventPane pane = new EventPane();
 		
 		int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
+
 		
 	}
 

@@ -14,6 +14,8 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	//byt ut dessa mot respective jpanel classer som ni har gjort. Body ska vara kvar.
 	private JPanel body, calendar, menyBar, navBar, datePanel;
+	private registerUser registerUser;
+	private loginUser loginUser;
 	//private JPanel[] menyBarHolders;
 	//private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 	
@@ -106,6 +108,10 @@ public class Window extends JFrame {
 			menyBar.add(menyBarHolders[i], gbc);
 		}
         */
+       	registerUser = new registerUser();
+        calendar.add(registerUser);
+       loginUser = new loginUser();
+       navBar.add(loginUser);
         pack();
 	}
 	
