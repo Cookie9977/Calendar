@@ -3,6 +3,7 @@ package window;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,14 +26,12 @@ public class loginUser extends JPanel implements ActionListener{
 		setBackground(new Color(123,123,123));
 		setSize(new Dimension(100,100));
 		setVisible(true);
+		setLayout(new GridLayout(5,1));
 		Font inputFont = new Font("SansSerif",Font.BOLD,20);
 
-		String typeInput[];
-		typeInput = new String[] { "Email","Lösenord"};
-		
-		headingLabel = new JLabel[3];
+		headingLabel = new JLabel[2];
 		String[] heading;
-		heading  = new String[] { "Användarnamn","Email","Lösenord"};
+		heading  = new String[] { "Email","Lösenord"};
 		textBox = new JTextField[1];
 		JPasswordField password = new JPasswordField();
 		for (int i = 0; i < headingLabel.length; i++){
@@ -44,7 +43,7 @@ public class loginUser extends JPanel implements ActionListener{
 		for (int i = 0; i < textBox.length; i++) {
 				
 		   textBox[i] = new JTextField(i);
-		   textBox[i].setText(typeInput[i]);
+		   textBox[i].setFont(inputFont);
 		   textBox[i].setColumns(8);
 		   add(textBox[i]);
 		}

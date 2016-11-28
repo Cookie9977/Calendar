@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -61,12 +65,27 @@ private JLabel[] headingLabel;
 		String email = textBox[1].getText();
 		char[] pass = password.getPassword();
 		 
-		 String SQL="insert into user(username,email,password) values('"+username+"','"+email+"','"+new String(pass)+"')";
+		try{
+		
+			String SQL = "select * from user where email ="+email+" OR username = "+username+"";
+			Object[][] data = Main.db.getData(SQL);
+			for (int i = 0; i < data.length; i++) {
+				for (int j = 0; j < data[i].length; j++) {
+					System.out.println(data[i][j]);
+				}
+			}
+			if(!data[0][0].equals("")){
+				JOptionPane.showMessageDialog(null, "Already Registered!");
+		}else{
+			String SQLI="insert into user(username,email,password) values('"+username+"','"+email+"','"+new String(pass)+"')";
+			Main.db.execute(SQLI);
+			
+		}
+	}catch(Exception f){
+		
+	}
 		 
 		 
-		 
-		 
-		 Main.db.execute(SQL);
 		//
 //		System.out.print(textBox[0].getText());
 //		System.out.print(textBox[1].getText());
