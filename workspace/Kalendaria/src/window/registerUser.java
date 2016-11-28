@@ -82,7 +82,7 @@ private JLabel[] headingLabel;
 			
 		}
 	}catch(Exception f){
-		
+		System.out.println(f);
 	}
 		 
 		 

@@ -16,6 +16,7 @@ public class Window extends JFrame {
 	// vara kvar.
 	private JPanel body, calendar, menyBar, navBar, datePanel;
 	private registerUser registerUser;
+	private navArrowButton navArrowButton;
 	private loginUser loginUser;
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -102,6 +103,8 @@ public class Window extends JFrame {
 		 */
 		registerUser = new registerUser();
 		calendar.add(registerUser);
+		navArrowButton = new navArrowButton();
+		calendar.add(navArrowButton);
 		loginUser = new loginUser();
 		navBar.add(loginUser);
 		pack();
