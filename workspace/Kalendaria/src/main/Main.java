@@ -1,5 +1,6 @@
 package main;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import Pane.EventPane;
@@ -10,8 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		new Window();
 		EventPane pane = new EventPane();
-		
-		int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
+//		int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
 
 		
 	}
