@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.text.PasswordView;
 
 import main.Main;
 public class registerUser extends JPanel implements ActionListener{
@@ -66,24 +62,26 @@ private JLabel[] headingLabel;
 		char[] pass = password.getPassword();
 		 
 		try{
-		
-			String SQL = "select * from user where email ="+email+" OR username = "+username+"";
+			
+			String SQL = "select * from user where email ='"+email+"' OR username = '"+username+"'";
+			String SQLI="insert into user(username,email,password) values('"+username+"','"+email+"','"+new String(pass)+"')";
+			System.out.println(SQL);
+			System.out.println(SQLI);
 			Object[][] data = Main.db.getData(SQL);
-			for (int i = 0; i < data.length; i++) {
-				for (int j = 0; j < data[i].length; j++) {
-					System.out.println(data[i][j]);
-				}
-			}
-			if(!data[0][0].equals("")){
+			
+			if(!(data[0][0] == "")){
+				System.out.println(SQL);
 				JOptionPane.showMessageDialog(null, "Already Registered!");
-		}else{
+				
+			}else{
+				System.out.println(SQLI);
+			}
+				
+		}catch(Exception f){
 			String SQLI="insert into user(username,email,password) values('"+username+"','"+email+"','"+new String(pass)+"')";
 			Main.db.execute(SQLI);
-			
+			//Fuling, måste fixa med typ 'isNull'
 		}
-	}catch(Exception f){
-		
-	}
 		 
 		 
 		//
