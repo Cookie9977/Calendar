@@ -16,8 +16,8 @@ public class Window extends JFrame {
 	// vara kvar.
 	private JPanel body, calendar, menyBar, navBar, datePanel;
 	private registerUser registerUser;
-	private navArrowButton leftArrowButton,rightArrowButton;
-	private MenuNavBar monthButton,weekButton,dayButton;
+	private navArrowButton leftArrowButton, rightArrowButton;
+	private MenuNavBar monthButton, weekButton, dayButton;
 	private loginUser loginUser;
 	private monthView monthView;
 	private weekView weekView;
@@ -80,7 +80,6 @@ public class Window extends JFrame {
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.weightx = 0.75;
 		body.add(menyBar, gbc);
-		
 
 		gbc.gridx = 0;
 		gbc.gridy = gridHeight;
@@ -107,27 +106,32 @@ public class Window extends JFrame {
 		 * 
 		 * menyBar.add(menyBarHolders[i], gbc); }
 		 */
-		
-		//meny bar rutans knappar
-		monthButton = new MenuNavBar(this,0);
-		menyBar.add(monthButton);
-		weekButton = new MenuNavBar(this,1);
-		menyBar.add(weekButton);
-		dayButton = new MenuNavBar(this,2);
-		menyBar.add(dayButton);
-		
-		//Calender rutans saker
-		leftArrowButton = new navArrowButton(this,0);
+
+		// meny bar rutans knappar
+		GridBagConstraints buttonConstraints = new GridBagConstraints();
+		buttonConstraints.gridx = 0;
+		buttonConstraints.ipadx = 170;
+		monthButton = new MenuNavBar(this, 0);
+		monthButton.setBackground(invis);
+		buttonConstraints.gridx = 1;
+		weekButton = new MenuNavBar(this, 1);
+		weekButton.setBackground(invis);
+		dayButton = new MenuNavBar(this, 2);
+		dayButton.setBackground(invis);
+
+		// Calender rutans saker
+		leftArrowButton = new navArrowButton(this, 0);
+		leftArrowButton.setBackground(invis);
 		calendar.add(leftArrowButton);
 		registerUser = new registerUser();
 		calendar.add(registerUser);
-		rightArrowButton = new navArrowButton(this,1);
+		rightArrowButton = new navArrowButton(this, 1);
+		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);
-		
 
-		//navArrowButton = new navArrowButton();
-		//calendar.add(navArrowButton);
-		//calendar.add(calender);
+		// navArrowButton = new navArrowButton();
+		// calendar.add(navArrowButton);
+		// calendar.add(calender);
 		calendar.add(weekView);
 		loginUser = new loginUser();
 		navBar.add(loginUser);
