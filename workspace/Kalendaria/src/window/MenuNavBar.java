@@ -1,11 +1,9 @@
 package window;
 
-import java.awt.Image;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,6 +32,7 @@ public class MenuNavBar extends JPanel implements ActionListener {
 			button.setText(buttonText[2]);
 			break;
 		}
+		button.setPreferredSize(new Dimension(200, 60));
 		button.addActionListener(this);
 		add(button);
 	}

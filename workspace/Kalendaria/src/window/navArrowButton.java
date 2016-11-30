@@ -22,7 +22,6 @@ public class navArrowButton extends JPanel implements ActionListener {
 		this.frame = frame;
 		this.direction = direction;
 		JButton button = new JButton();
-
 		switch (direction) {
 		case 0: // left
 			try {
