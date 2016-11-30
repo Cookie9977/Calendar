@@ -18,6 +18,7 @@ public class Window extends JFrame {
 	private registerUser registerUser;
 	private navArrowButton navArrowButton;
 	private loginUser loginUser;
+	private calender calender;
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 
@@ -34,6 +35,7 @@ public class Window extends JFrame {
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
+		calender = new calender();
 		// menyBarHolders = new JPanel[3];
 
 		// window size and place
@@ -102,9 +104,12 @@ public class Window extends JFrame {
 		 * menyBar.add(menyBarHolders[i], gbc); }
 		 */
 		registerUser = new registerUser();
+
 		calendar.add(registerUser);
+		
 		navArrowButton = new navArrowButton();
 		calendar.add(navArrowButton);
+		calendar.add(calender);
 		loginUser = new loginUser();
 		navBar.add(loginUser);
 		pack();

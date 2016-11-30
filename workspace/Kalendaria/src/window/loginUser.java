@@ -69,7 +69,8 @@ public class loginUser extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		String email = textBox[0].getText();
 		char[] pass = password.getPassword();
-		String id = "";
+		String ids = "";
+		
 		
 	try{
 			String SQL="select * from user where email ='"+email+"' AND password ='"+new String(pass)+"'";
@@ -81,10 +82,11 @@ public class loginUser extends JPanel implements ActionListener{
 			
 			
 			if(!(data[0][0] == "")){
-				System.out.println(SQL+ " Du är inloggad nu iaf" );
-				id = (String) data[0][0];
-				System.out.println(id);
-				//System.out.println("ID = "+);
+				System.out.println(SQL);
+				ids = (String) data[0][0];
+				Main.id = Integer.parseInt(ids);
+				System.out.println("Du är inloggad som "+email+" med ID: "+ Main.id);
+				
 			}else{
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
 				System.out.println(SQL);
