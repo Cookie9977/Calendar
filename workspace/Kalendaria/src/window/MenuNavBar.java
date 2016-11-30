@@ -40,7 +40,17 @@ public class MenuNavBar extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent AE) {
 		String buttonName = ((JButton) AE.getSource()).getText();
-		JOptionPane.showMessageDialog(null, "du vill hit: " + buttonName + " !");
+		switch (buttonName) {
+		case "Månad":
+			
+			break;
+		case "Vecka":
+
+			break;
+		case "Dag":
+
+			break;
+		}
 
 	}
 
