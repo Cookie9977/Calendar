@@ -83,6 +83,8 @@ private JLabel[] headingLabel;
 			//Fuling, måste fixa med typ 'isNull'
 		}
 
+	}
+
 		 
 		 
 		//
@@ -90,6 +92,4 @@ private JLabel[] headingLabel;
 //		System.out.print(textBox[1].getText());
 //		System.out.print(textBox[2].getText());
 		//db.execute(SQL);
-
 	}
-}

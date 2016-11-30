@@ -6,9 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,7 +24,6 @@ public class loginUser extends JPanel implements ActionListener{
 	private static final long serialVersionUID = -2354560402587167649L;
 
 	public loginUser(){
-		String id = "";
 		setBackground(new Color(123,123,123));
 		setSize(new Dimension(100,100));
 		setVisible(true);

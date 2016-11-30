@@ -18,8 +18,7 @@ public class monthView extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
 		JLabel[] dagLabel = new JLabel[8];
 		String[] days;
-		days  = new String[] {"Vecka","Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
-		
+		days  = new String[] {"Vecka","MÃ¥ndag","Tisdag","Onsdag","Torsdag","Fredag","LÃ¶rdag","SÃ¶ndag"};		
 		for (int k = 0; k < dagLabel.length; k++){
 			dagLabel[k] = new JLabel();
 			dagLabel[k].setText(days[k]);
@@ -27,7 +26,7 @@ public class monthView extends JPanel {
 		}
 		for (int i = 0; i < length; i++) {
 			for (int j = 0; j < height; j++) {
-				//Här ska datum sättas in från en funktion
+				//HÃ¤r ska datum sÃ¤ttas in frÃ¥n en funktion
 				final JLabel label = new JLabel("Label");
 			    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			    add(label);
