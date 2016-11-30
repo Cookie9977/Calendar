@@ -4,10 +4,10 @@ package Pane;
 
 import javax.swing.JComboBox;
 
-public class DateComboBox extends JComboBox<String>{
+public class CustomComboBox extends JComboBox<String>{
 	private static final long serialVersionUID = -580013767804396255L;
 	private int id;
-	public DateComboBox() {}
+	public CustomComboBox() {}
 
 	public int getId() {
 		return id;
