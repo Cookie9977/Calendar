@@ -82,11 +82,7 @@ private JLabel[] headingLabel;
 			Main.db.execute(SQLI);
 			//Fuling, måste fixa med typ 'isNull'
 		}
-<<<<<<< HEAD
-	}
-=======
 
->>>>>>> origin/master
 		 
 		 
 		//
@@ -94,4 +90,6 @@ private JLabel[] headingLabel;
 //		System.out.print(textBox[1].getText());
 //		System.out.print(textBox[2].getText());
 		//db.execute(SQL);
+
 	}
+}

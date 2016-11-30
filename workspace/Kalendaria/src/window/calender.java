@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 public class calender extends JPanel {
 	public calender(){
 		setPreferredSize(new Dimension(500,500));
-		int height = 7;
+		int height = 6;
 		int length = 6;
 		setLayout(new GridLayout(height,length));
 		setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-		JLabel[] dagLabel = new JLabel[7];
+		JLabel[] dagLabel = new JLabel[8];
 		String[] days;
-		days  = new String[] {"Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
+		days  = new String[] {"Vecka","Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
 		
 		for (int k = 0; k < dagLabel.length; k++){
 			dagLabel[k] = new JLabel();
