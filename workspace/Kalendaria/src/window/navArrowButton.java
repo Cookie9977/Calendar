@@ -57,6 +57,7 @@ public class navArrowButton extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent AE) {
+		//här ska det finnas val beroende på vart knappen befinner sig(dayview, vecka, månad)
 		JOptionPane.showMessageDialog(null,"du är i: "+panel+" .");
 	}
 	
