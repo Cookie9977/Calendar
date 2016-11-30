@@ -36,7 +36,12 @@ public class MenuNavBar extends JPanel implements ActionListener {
 		button.addActionListener(this);
 		add(button);
 	}
-
+	/*
+	 * Efter remove och revalidate så gör pack();
+	 * TODO: strukturera om kod till en visa vy, visa vy ska finnas för varje enskild klass
+	 * för att måla upp deras grej men sen också för huvudfönstret där varje panel kommer att visas in.
+	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent AE) {
 		String buttonName = ((JButton) AE.getSource()).getText();
