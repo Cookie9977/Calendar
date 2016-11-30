@@ -21,6 +21,7 @@ public class Window extends JFrame {
 	private loginUser loginUser;
 	private monthView monthView;
 	private weekView weekView;
+	protected Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 
@@ -111,13 +112,18 @@ public class Window extends JFrame {
 		GridBagConstraints buttonConstraints = new GridBagConstraints();
 		buttonConstraints.gridx = 0;
 		buttonConstraints.ipadx = 170;
+		buttonConstraints.gridy = gridHeight;
 		monthButton = new MenuNavBar(this, 0);
 		monthButton.setBackground(invis);
+		menyBar.add(monthButton, buttonConstraints);
 		buttonConstraints.gridx = 1;
 		weekButton = new MenuNavBar(this, 1);
 		weekButton.setBackground(invis);
+		menyBar.add(weekButton, buttonConstraints);
+		buttonConstraints.gridx = 2;
 		dayButton = new MenuNavBar(this, 2);
 		dayButton.setBackground(invis);
+		menyBar.add(dayButton, buttonConstraints);
 
 		// Calender rutans saker
 		leftArrowButton = new navArrowButton(this, 0);
