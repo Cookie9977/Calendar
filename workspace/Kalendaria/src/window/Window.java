@@ -13,7 +13,7 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	// byt ut dessa mot respective jpanel classer som ni har gjort. Body ska
 	// vara kvar.
-	private JPanel body, calendar, menyBar, navBar, datePanel;
+	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	private registerUser registerUser;
 	private navArrowButton leftArrowButton, rightArrowButton;
 	private MenuNavBar monthButton, weekButton, dayButton;
@@ -39,6 +39,7 @@ public class Window extends JFrame {
 		datePanel = new JPanel();
 		monthView = new monthView();
 		weekView = new weekView();
+
 		// menyBarHolders = new JPanel[3];
 
 		// window size and place
@@ -120,15 +121,15 @@ public class Window extends JFrame {
 		/*
 		 * Knapparna.
 		 */
-		monthButton = new MenuNavBar(this, 0);
+		monthButton = new MenuNavBar(this, 0, this);
 		monthButton.setBackground(invis);
 		menyBar.add(monthButton, buttonConstraints);
 		buttonConstraints.gridx = 1;
-		weekButton = new MenuNavBar(this, 1);
+		weekButton = new MenuNavBar(this, 1, this);
 		weekButton.setBackground(invis);
 		menyBar.add(weekButton, buttonConstraints);
 		buttonConstraints.gridx = 2;
-		dayButton = new MenuNavBar(this, 2);
+		dayButton = new MenuNavBar(this, 2, this);
 		dayButton.setBackground(invis);
 		menyBar.add(dayButton, buttonConstraints);
 
@@ -148,6 +149,7 @@ public class Window extends JFrame {
 		calendar.add(weekView);
 		loginUser = new loginUser();
 		navBar.add(loginUser);
+
 		pack();
 	}
 

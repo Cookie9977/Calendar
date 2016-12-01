@@ -9,9 +9,9 @@ public class Main {
 	public static int id = 3;
 	public final static JavaDB db = new JavaDB("192.168.216.144", "Test", "qwerty123", "calendar");
 	public static void main(String[] args) {
-		//new Window();
+		new Window();
 		EventPane pane = new EventPane();
-		int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
+//		int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
 		
 	}
 
