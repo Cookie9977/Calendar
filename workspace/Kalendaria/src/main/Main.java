@@ -6,7 +6,8 @@ import Pane.EventPane;
 import window.Window;
 
 public class Main {
-	public static int id = 3;
+	public static int id;
+
 	public final static JavaDB db = new JavaDB("192.168.216.144", "Test", "qwerty123", "calendar");
 	public static void main(String[] args) {
 		new Window();

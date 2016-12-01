@@ -19,6 +19,7 @@ public class Window extends JFrame {
 	private MenuNavBar monthButton, weekButton, dayButton;
 	private loginUser loginUser;
 	private monthView monthView;
+	private dayView dayView;
 	private weekView weekView;
 	protected Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
@@ -39,7 +40,7 @@ public class Window extends JFrame {
 		datePanel = new JPanel();
 		monthView = new monthView();
 		weekView = new weekView();
-
+		dayView = new dayView();
 		// menyBarHolders = new JPanel[3];
 
 		// window size and place
@@ -143,10 +144,17 @@ public class Window extends JFrame {
 		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);
 
+		//navArrowButton = new navArrowButton();
+		//calendar.add(navArrowButton);
+		
+		//calendar.add(monthView);
+		//calendar.add(weekView);
+		calendar.add(dayView);
 		// navArrowButton = new navArrowButton();
 		// calendar.add(navArrowButton);
 		// calendar.add(calender);
-		calendar.add(weekView);
+		//calendar.add(weekView);
+
 		loginUser = new loginUser();
 		navBar.add(loginUser);
 

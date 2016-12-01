@@ -10,7 +10,7 @@ public class windowModifications {
 	}
 
 	public void showMonthView() {
-		JOptionPane.showMessageDialog(null, " yatta, månad" + window);
+		JOptionPane.showMessageDialog(null, " yatta, månad");
 		window.calendar.removeAll();
 		window.pack();
 	}
