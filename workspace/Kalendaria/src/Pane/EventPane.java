@@ -13,14 +13,19 @@ import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 
+import friend.Friend;
+import friend.FriendList;
 import main.Main;
 
 public class EventPane extends JPanel implements ActionListener {
@@ -28,20 +33,32 @@ public class EventPane extends JPanel implements ActionListener {
 	private JLabel[] labels;
 	private JTextField[] textFields;
 	private JTextArea description;
-	private String[] labelText = { "Titel", "Plats", "Start", "Stopp", "Kategori", "Beskrivning","Start datum", "Slut datum" };
+	private String[] labelText = { "Titel", "Plats", "Start", "Stopp", "Kategori", "Beskrivning", "Start datum",
+			"Slut datum" };
 	private CustomComboBox date_e, date_s, month_e, month_s, category;
 	private JFormattedTextField time_s, time_e;
 	private ArrayList<String> temp;
+	private ArrayList<Friend> friends;
 	private DefaultComboBoxModel<String> model;
+	private JButton friendButton;
+	private FriendPane pane;
+	private Friend friend_temp;
+	private JPanel friend_display;
+	private JLabel friend_name;
 
 	public EventPane() {
 		// declaring
 		labels = new JLabel[labelText.length];
 		textFields = new JTextField[2];
 		description = new JTextArea();
-		time_s = new JFormattedTextField();
-		time_e = new JFormattedTextField();
-		
+
+		friend_display = new JPanel();
+		friend_display.setBorder(BorderFactory.createTitledBorder("Inbjudna vänner"));
+		friend_display.setPreferredSize(new Dimension(200, 200));
+
+		friendButton = new JButton("Lägg till vän");
+		friendButton.addActionListener(this);
+
 		date_e = new CustomComboBox();
 		date_e.setModel(addDate(getMonths()));
 		date_e.setId(1);
@@ -60,10 +77,12 @@ public class EventPane extends JPanel implements ActionListener {
 
 		category = new CustomComboBox();
 		category.setModel(addDate(getCategories()));
-		
+
+		time_s = new JFormattedTextField();
 		time_s.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("HH':'mm"))));
 		time_s.setValue(Calendar.getInstance().getTime());
 
+		time_e = new JFormattedTextField();
 		time_e.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("HH':'mm"))));
 		time_e.setValue(Calendar.getInstance().getTime());
 		// set labels
@@ -88,6 +107,7 @@ public class EventPane extends JPanel implements ActionListener {
 		description.setBorder(BorderFactory.createEtchedBorder());
 		labels[5].setLabelFor(description);
 
+		add(friend_display);
 		add(labels[5]);
 		add(description);
 		add(date_e);
@@ -97,6 +117,7 @@ public class EventPane extends JPanel implements ActionListener {
 		add(category);
 		add(time_e);
 		add(time_s);
+		add(friendButton);
 
 	}
 
@@ -152,11 +173,28 @@ public class EventPane extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CustomComboBox temp = (CustomComboBox) e.getSource();
-		if (temp.getId() == 1) {
-			month_e.setModel(addDate(getDates((String) temp.getSelectedItem())));
+		if (e.getActionCommand().equals("comboBoxChanged")) {
+			CustomComboBox temp = (CustomComboBox) e.getSource();
+			if (temp.getId() == 1) {
+				month_e.setModel(addDate(getDates((String) temp.getSelectedItem())));
+			} else {
+				month_s.setModel(addDate(getDates((String) temp.getSelectedItem())));
+			}
 		} else {
-			month_s.setModel(addDate(getDates((String) temp.getSelectedItem())));
+			pane = new FriendPane();
+			int result = JOptionPane.showConfirmDialog(null, pane, "Lägg till en vän", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION) {
+				friend_temp = new Friend(pane.selected);
+				friends = new ArrayList<Friend>();
+				friends.add(friend_temp);
+
+				friend_name = new JLabel(friend_temp.toString());
+				System.out.println(friend_temp.toString());
+				friend_display.add(friend_name);
+				friend_display.validate();
+				friend_display.repaint();
+				//pack();
+			}
 		}
 	}
 

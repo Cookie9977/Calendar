@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -110,11 +109,19 @@ public class Window extends JFrame {
 		 * menyBar.add(menyBarHolders[i], gbc); }
 		 */
 
-		// meny bar rutans knappar
+		/*
+		 * menybar rutans knappar knapparnas gridbag
+		 */
 		GridBagConstraints buttonConstraints = new GridBagConstraints();
 		buttonConstraints.gridx = 0;
+		buttonConstraints.anchor = GridBagConstraints.PAGE_END;
 		buttonConstraints.ipadx = 170;
-		buttonConstraints.gridy = gridHeight;
+		buttonConstraints.ipady = 20;
+		buttonConstraints.weighty = 1;
+		buttonConstraints.fill = GridBagConstraints.NONE;
+		/*
+		 * Knapparna.
+		 */
 		monthButton = new MenuNavBar(this, 0);
 		monthButton.setBackground(invis);
 		menyBar.add(monthButton, buttonConstraints);

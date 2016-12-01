@@ -1,11 +1,9 @@
 package window;
 
-import java.awt.Image;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,14 +32,30 @@ public class MenuNavBar extends JPanel implements ActionListener {
 			button.setText(buttonText[2]);
 			break;
 		}
+		button.setPreferredSize(new Dimension(200, 60));
 		button.addActionListener(this);
 		add(button);
 	}
-
+	/*
+	 * Efter remove och revalidate så gör pack();
+	 * TODO: strukturera om kod till en visa vy, visa vy ska finnas för varje enskild klass
+	 * för att måla upp deras grej men sen också för huvudfönstret där varje panel kommer att visas in.
+	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent AE) {
 		String buttonName = ((JButton) AE.getSource()).getText();
-		JOptionPane.showMessageDialog(null, "du vill hit: " + buttonName + " !");
+		switch (buttonName) {
+		case "Månad":
+			
+			break;
+		case "Vecka":
+
+			break;
+		case "Dag":
+
+			break;
+		}
 
 	}
 
