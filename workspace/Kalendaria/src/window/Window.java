@@ -148,8 +148,8 @@ public class Window extends JFrame {
 		//calendar.add(navArrowButton);
 		
 		//calendar.add(monthView);
-		//calendar.add(weekView);
-		calendar.add(dayView);
+		calendar.add(weekView);
+		//calendar.add(dayView);
 		// navArrowButton = new navArrowButton();
 		// calendar.add(navArrowButton);
 		// calendar.add(calender);

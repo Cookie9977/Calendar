@@ -23,7 +23,7 @@ public class dayView extends JPanel{
 	private JPanel[][] dayPanel;
 	public dayView(){
 		
-		int height = 26;
+		int height = 24;
 		int length = 2;
 		dayPanel = new JPanel[height][length];
 		setLayout(new GridLayout(height, length));
@@ -38,13 +38,36 @@ public class dayView extends JPanel{
 		time = new JPanel();
 		time.setPreferredSize(new Dimension(300,30));
 		time.setBackground(Color.black);
+		//Gammal
+		int[] hours = IntStream.iterate(0, n -> n + 1 ).limit(24).toArray();		
+		int[] minutes = IntStream.iterate(0, n -> n + 5 ).limit(24).toArray();;
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < minutes.length; j++) {
+				
+			
+				//Här ska datum sättas in från en funktion
+				final JLabel label = new JLabel();
+				label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				System.out.println(hours[i]);
+				System.out.println(minutes[i]);
+				label.setText(String.valueOf(hours[i])+":"+String.valueOf(minutes[j]));
+				label.setSize(20,300);
+				dayPanel[i][0].add(label);
+		
+			}
+		}		
+	//Ny	
+		
+		
+		
 		
 		dayPanel[0][0].add(time);
 	
 		setPreferredSize(new Dimension(600,600));
 		hoursMinutes = new JPanel();
 		hoursMinutes.setBackground(Color.CYAN);
-		dayPanel[0][1].add(hoursMinutes);
+		
 //		int height = 25;
 //		int length = 6;
 //		setLayout(new GridLayout(height,length));
@@ -70,7 +93,7 @@ public class dayView extends JPanel{
 ////				time.add(label);
 //		
 //	}
-		setBackground(Color.WHITE);
+		setBackground(Color.darkGray);
 		
 	}
 }
