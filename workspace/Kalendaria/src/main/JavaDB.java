@@ -24,23 +24,23 @@ public class JavaDB {
 	public Object[][] getData(String SQL) {
 		Object[][] data = null;
 		try {
-			Statement statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			ResultSet rs = statement.executeQuery(SQL);
+			Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = stmt.executeQuery(SQL);
 			ResultSetMetaData md = rs.getMetaData();
-			int Kolumn = md.getColumnCount();
-			int Rader = 0;
+			int column = md.getColumnCount();
+			int rows = 0;
 
 			while (rs.next()) {
-				Rader++;
+				rows++;
 			}
 			rs.beforeFirst();
-			data = new Object[Rader][Kolumn];
-			int rad = 0;
+			data = new Object[rows][column];
+			int row = 0;
 			while (rs.next()) {
-				for (int i = 0; i <	Kolumn; i++) {
-					data[rad][i] = rs.getString(i+1);
+				for (int i = 0; i <	column; i++) {
+					data[row][i] = rs.getString(i+1);
 				}
-				rad++;
+				row++;
 			}
 		} catch (Exception error) {
 			JOptionPane.showMessageDialog(null, error);
@@ -51,10 +51,28 @@ public class JavaDB {
 	
 	public void execute(String SQL){
 		try {
-			Statement statement = con.createStatement();
-			statement.execute(SQL);
+			Statement stmt = con.createStatement();
+			stmt.execute(SQL);
 		} catch (Exception error) {
 			JOptionPane.showMessageDialog(null, error);
 		}
+	}
+	public int executeReturn(String SQL){
+		try {
+			Statement stmt = con.createStatement();
+			int id = 0;
+			stmt.executeUpdate(SQL, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+			//System.out.println(id.getInt(0));
+			//TODO returner insert id
+			return id;
+		} catch (Exception error) {
+			System.out.println(error);
+			JOptionPane.showMessageDialog(null, error);
+		}
+		return 0;
 	}
 }

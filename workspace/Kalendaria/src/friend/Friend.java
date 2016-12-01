@@ -14,7 +14,6 @@ public class Friend {
 
 	public Friend(int id) {
 		this.id = id;
-		System.out.println(id);
 		String SQL = "SELECT user.username, user.email FROM user WHERE user.id = "+id;
 		Object[][] data = Main.db.getData(SQL);
 		this.username = (String) data[0][0];
