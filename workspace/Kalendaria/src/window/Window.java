@@ -23,7 +23,7 @@ public class Window extends JFrame {
 	protected monthView monthView;
 	protected DayView dayView;
 	protected WeekView weekView;
-	// protected DatePanelDate datePanelDate;
+	protected DatePanelDate datePanelDate;
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -41,7 +41,7 @@ public class Window extends JFrame {
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
-		// datePanelDate = new DatePanelDate();
+		datePanelDate = new DatePanelDate();
 		monthView = new monthView();
 		weekView = new WeekView();
 		dayView = new DayView();
@@ -122,8 +122,8 @@ public class Window extends JFrame {
 		datePanelC.anchor = GridBagConstraints.CENTER;
 		datePanelC.weighty = 1;
 		datePanelC.fill = GridBagConstraints.NONE;
-		// datePanel.add(datePanelDate,datePanelC);
-		// datePanelDate.setBackground(invis);
+		datePanel.add(datePanelDate,datePanelC);
+		datePanelDate.setBackground(invis);
 
 		/*
 		 * menybar rutans knappar knapparnas gridbag
