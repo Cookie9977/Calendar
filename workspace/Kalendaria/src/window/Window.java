@@ -178,5 +178,4 @@ public class Window extends JFrame {
 		int x = (((int) Math.ceil(screenSize.getHeight()) - (height)) / 2);
 		return x;
 	}
-
 }

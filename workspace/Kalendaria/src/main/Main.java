@@ -11,13 +11,14 @@ public class Main {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				 new Window();
+				new Window();
 			}
 		});
-	//	EventPane pane = new EventPane();
-	//	int test = JOptionPane.showConfirmDialog(null, pane, "test", JOptionPane.OK_CANCEL_OPTION);
-	//	if (test == JOptionPane.OK_OPTION) {
-	//		EventLogic.checkEvent(pane);
-	//	}
+		// EventPane pane = new EventPane();
+		// int test = JOptionPane.showConfirmDialog(null, pane, "test",
+		// JOptionPane.OK_CANCEL_OPTION);
+		// if (test == JOptionPane.OK_OPTION) {
+		// EventLogic.checkEvent(pane);
+		// }
 	}
 }
