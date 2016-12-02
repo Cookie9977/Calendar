@@ -34,6 +34,17 @@ public class FriendPane extends JPanel {
 		add(list);
 
 	}
+	
+	public FriendPane(boolean unimportant){
+		friendList = new FriendList();
+		list = new JList<Friend>();
+		list.setModel(friendList);
+
+		list.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
+		list.setPreferredSize(new Dimension(200, 200));
+		list.setAutoscrolls(true);
+		add(list);
+	}
 
 	class Mousehandler extends MouseAdapter {
 		public void mouseReleased(MouseEvent e) {

@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import logic.EventLogic;
 
 public class AddButtonsPane extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 5973341942470877467L;
@@ -33,6 +36,27 @@ public class AddButtonsPane extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
+		String command = e.getActionCommand();
+		switch (command) {
+		case "Lägg til en ny event":
+			EventLogic logic = new EventLogic();
+			EventPane eventPane = new EventPane();
+			int test = JOptionPane.showConfirmDialog(null, eventPane, "test",
+			JOptionPane.OK_CANCEL_OPTION);
+			if (test == JOptionPane.OK_OPTION) {
+				logic.checkEvent(eventPane);
+			}
+			break;
+		case "Lägg till vänner":
+			System.out.println("här ska lägga till vänner rutan ligga");
+			break;
+		case "visa vänner":
+			FriendPane friendPane = new FriendPane();
+			JOptionPane.showMessageDialog(null,friendPane);
+			break;
+
+		}
+		
 	}
 
 }
