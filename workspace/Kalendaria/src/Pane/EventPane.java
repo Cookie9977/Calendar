@@ -74,38 +74,64 @@ public class EventPane extends JPanel implements ActionListener {
 
 		category = new CustomComboBox();
 		category.setModel(addThings(getCategories()));
+		
+		// layout
+		GridBagLayout gridBag = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		setLayout(gridBag);
+		
+		gbc.gridx = 0;
+		gbc.gridy= 0;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.weightx = 0.5;
+		
+		System.out.println(4%2);
 
 		// set labels
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new JLabel(labelText[i]);
 		}
 		for (int i = 0; i < textFields.length; i++) {
+			gbc.gridx = 0;
 			textFields[i] = new JTextField();
 			textFields[i].setPreferredSize(new Dimension(175, 20));
 			labels[i].setLabelFor(textFields[i]);
-			add(labels[i]);
-			add(textFields[i]);
-
+			add(labels[i],gbc);
+			gbc.gridx = 1;
+			add(textFields[i],gbc);
+			gbc.gridy++;
 		}
-		// layout
-		GridBagLayout gridBag = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		setLayout(gridBag);
 
 		// description setup
 		description.setPreferredSize(new Dimension(175, 100));
 		description.setBorder(BorderFactory.createEtchedBorder());
 		labels[5].setLabelFor(description);
 
-		add(friend_display);
-		add(labels[5]);
-		add(description);
-		add(category);
-		add(friendButton);
-		add(s_timeButton);
-		add(e_timeButton);
-		add(time_s_display);
-		add(time_e_display);
+		gbc.gridx = 0;
+		add(labels[5],gbc);
+		gbc.gridx = 1;
+		add(description,gbc);
+		gbc.gridy++;
+		gbc.gridx = 0;
+		add(labels[4],gbc);
+		gbc.gridx = 1;
+		add(category,gbc);
+		gbc.gridy++;
+		gbc.gridx = 0;
+		add(friendButton,gbc);
+		gbc.gridx = 1;
+		add(friend_display,gbc);
+		gbc.gridy++;
+		gbc.gridx = 0;
+		add(s_timeButton,gbc);
+		gbc.gridx = 1;
+		add(time_s_display,gbc);
+		gbc.gridy++;
+		gbc.gridx = 0;
+		add(e_timeButton,gbc);
+		gbc.gridx = 1;
+		add(time_e_display,gbc);
+		
 
 	}
 
