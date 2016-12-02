@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import Pane.EventPane;
 import friend.Friend;
 import main.Main;
+import pane.EventPane;
 
 public class EventLogic {
 	
