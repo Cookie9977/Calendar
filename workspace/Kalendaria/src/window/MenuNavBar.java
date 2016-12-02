@@ -6,23 +6,25 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuNavBar extends JPanel implements ActionListener {
-	private Window window;
+	private Window windowVal;
 	private windowModifications windowmodifications;
 	private JFrame frame;
 	private int type;
 	private String[] buttonText = { "Månad", "Vecka", "Dag" };
+	protected monthView monthView;
+	protected weekView weekView;
+	protected dayView dayView;
 
 	private static final long serialVersionUID = -6222480473508548550L;
 
-	public MenuNavBar(JFrame frame, int type, Window window) {
-		this.frame = frame;
+	public MenuNavBar(Window windowVal, int type) {
 		this.type = type;
-		this.window = window;
+		this.windowVal = windowVal;
 		JButton button = new JButton();
-		windowmodifications = new windowModifications(window);
 
 		switch (type) {
 		case 0: // Månad
@@ -48,10 +50,16 @@ public class MenuNavBar extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent AE) {
+		windowmodifications = windowVal.getModifications();
 		String buttonName = ((JButton) AE.getSource()).getText();
 		switch (buttonName) {
 		case "Månad":
-			windowmodifications.showMonthView();
+			try {
+				windowmodifications.showMonthView();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getStackTrace());
+				JOptionPane.showMessageDialog(null, e);
+			}
 			break;
 		case "Vecka":
 			windowmodifications.showWeekView();
