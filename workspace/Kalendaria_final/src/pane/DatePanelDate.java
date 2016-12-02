@@ -1,4 +1,4 @@
-package window;
+package pane;
 
 import java.awt.Font;
 import java.time.LocalDate;
