@@ -2,7 +2,9 @@ package window;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +19,7 @@ import main.Main;
 
 public class RegisterUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
+	private JPanel[] holders;
 	private JPasswordField password;
 	private JLabel[] headingLabel;
 
@@ -26,33 +29,48 @@ public class RegisterUser extends JPanel implements ActionListener {
 		setBackground(new Color(123, 123, 123));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
-		Font inputFont = new Font("SansSerif", Font.BOLD, 20);
-
+		//layout
+		GridBagLayout gridBag = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		setLayout(gridBag);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.weightx = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		holders = new JPanel[3];
+		for (int i = 0; i < holders.length; i++) {
+			holders[i] = new JPanel();
+			holders[i].setLayout(new GridLayout(1, 2));
+			add(holders[i],gbc);
+			gbc.gridy++;
+		}
+		
 		headingLabel = new JLabel[3];
 		String[] heading;
-		heading = new String[] { "Användarnamn", "Email", "Lösenord" };
-
+		heading = new String[] { "Användarnamn:", "E-mail:", "Lösenord:" };
 		for (int i = 0; i < headingLabel.length; i++) {
 			headingLabel[i] = new JLabel();
 			headingLabel[i].setText(heading[i]);
-			add(headingLabel[i]);
+			holders[i].add(headingLabel[i]);
 		}
-
 		textBox = new JTextField[2];
 		password = new JPasswordField(16);
 		for (int i = 0; i < textBox.length; i++) {
 			textBox[i] = new JTextField(i);
 			textBox[i].setColumns(8);
-			add(textBox[i]);
+			holders[i].add(textBox[i]);
 		}
 
 		password.setColumns(8);
-		add(password);
+		holders[2].add(password);
 
 		JButton submitButton = new JButton();
 		submitButton.setText("Registrera");
 		submitButton.addActionListener(this);
-		add(submitButton);
+		gbc.gridy++;
+		add(submitButton,gbc);
 
 	}
 

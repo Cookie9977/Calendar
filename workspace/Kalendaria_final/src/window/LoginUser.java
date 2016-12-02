@@ -2,7 +2,8 @@ package window;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ public class LoginUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
 	private JPasswordField password;
 	private JLabel[] headingLabel;
+	private JPanel[] holders;
 	private Window windowVal;
 	private WindowModifications windowmodifications;
 
@@ -30,8 +32,24 @@ public class LoginUser extends JPanel implements ActionListener {
 		setBackground(new Color(123, 123, 123));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
-		setLayout(new GridLayout(5, 1));
-		Font inputFont = new Font("SansSerif", Font.BOLD, 20);
+		// Font inputFont = new Font("SansSerif", Font.BOLD, 20);
+		// layout
+		GridBagLayout gridBag = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		setLayout(gridBag);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.weightx = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+
+		holders = new JPanel[2];
+		for (int i = 0; i < holders.length; i++) {
+			holders[i] = new JPanel();
+			holders[i].setLayout(new GridLayout(1, 2));
+			add(holders[i], gbc);
+			gbc.gridy++;
+		}
 
 		headingLabel = new JLabel[2];
 		String[] heading;
@@ -41,24 +59,25 @@ public class LoginUser extends JPanel implements ActionListener {
 		for (int i = 0; i < headingLabel.length; i++) {
 			headingLabel[i] = new JLabel();
 			headingLabel[i].setText(heading[i]);
-			add(headingLabel[i]);
+			holders[i].add(headingLabel[i]);
 		}
 
 		for (int i = 0; i < textBox.length; i++) {
 
 			textBox[i] = new JTextField(i);
-			textBox[i].setFont(inputFont);
+			// textBox[i].setFont(inputFont);
 			textBox[i].setColumns(8);
-			add(textBox[i]);
+			holders[i].add(textBox[i]);
 		}
 
 		password.setColumns(8);
-		add(password);
+		holders[1].add(password);
 
 		JButton submitButton = new JButton();
 		submitButton.setText("Logga in");
 		submitButton.addActionListener(this);
-		add(submitButton);
+		gbc.gridy++;
+		add(submitButton, gbc);
 
 	}
 	// String email = textBox[0].getText();

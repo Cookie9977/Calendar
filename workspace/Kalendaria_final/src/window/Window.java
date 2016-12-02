@@ -160,8 +160,6 @@ public class Window extends JFrame {
 		leftArrowButton = new NavArrowButton(this, 0);
 		leftArrowButton.setBackground(invis);
 		calendar.add(leftArrowButton);
-		registerUser = new RegisterUser();
-		calendar.add(registerUser);
 		rightArrowButton = new NavArrowButton(this, 1);
 		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);
@@ -185,10 +183,11 @@ public class Window extends JFrame {
 		// calendar.add(calender);
 		// calendar.add(weekView);
 
+		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
 		navBar.setLayout(new GridLayout(3, 1));
 		navBar.add(loginUser);
-		navBar.add(addButtons);
+		navBar.add(registerUser);
 
 		pack();
 	}
