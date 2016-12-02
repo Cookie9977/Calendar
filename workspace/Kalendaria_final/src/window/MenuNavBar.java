@@ -15,7 +15,7 @@ public class MenuNavBar extends JPanel implements ActionListener {
 	private int type;
 	private String[] buttonText = { "Månad", "Vecka", "Dag" };
 
-	protected monthView monthView;
+	protected MonthView monthView;
 	protected WeekView weekView;
 	protected DayView dayView;
 

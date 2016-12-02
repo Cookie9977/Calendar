@@ -1,23 +1,16 @@
 package window;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.util.stream.IntStream;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class DayView extends JPanel {
+	private static final long serialVersionUID = -5546841496999182019L;
 	private JPanel time;
 	private JPanel hoursMinutes;
 	private JPanel[][] dayPanel;
@@ -29,7 +22,6 @@ public class DayView extends JPanel {
 		dayPanel = new JPanel[height][length];
 		setLayout(new GridLayout(height, length));
 		setPreferredSize(new Dimension(800, 600));
-		System.out.println(1);
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < length; j++) {

@@ -1,11 +1,11 @@
 package window;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JTextField;
 
 public class TextFields extends JTextField {
+	private static final long serialVersionUID = 9197347533364164232L;
 	public Font font;
 
 	public TextFields(Font font) {
@@ -18,6 +18,5 @@ public class TextFields extends JTextField {
 
 	public void setFont(Font font) {
 		this.font = font;
-		System.out.println(1);
-	} 
+	}
 }

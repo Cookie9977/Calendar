@@ -4,17 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class WeekView extends JPanel {
 	private JLabel veckaLabel;
@@ -84,7 +78,7 @@ public class WeekView extends JPanel {
 			label.setFont(new Font("SansSerif", Font.BOLD, 20));
 			containDays.add(label);
 		}
-		System.out.println(1);
+
 		setBackground(Color.WHITE);
 
 	}

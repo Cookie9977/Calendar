@@ -46,7 +46,7 @@ public class EventPane extends JPanel implements ActionListener {
 		labels = new JLabel[labelText.length];
 		textFields = new JTextField[2];
 		description = new JTextArea();
-		System.out.println(1);
+
 		friend_display = new JPanel();
 		friend_display.setBorder(BorderFactory.createTitledBorder("Inbjudna vänner"));
 		friend_display.setPreferredSize(new Dimension(200, 200));
@@ -70,18 +70,18 @@ public class EventPane extends JPanel implements ActionListener {
 
 		category = new CustomComboBox();
 		category.setModel(addThings(getCategories()));
-		
+
 		// layout
 		GridBagLayout gridBag = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		setLayout(gridBag);
-		
+
 		gbc.gridx = 0;
-		gbc.gridy= 0;
+		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.weightx = 0.5;
-		
-		System.out.println(4%2);
+
+		System.out.println(4 % 2);
 
 		// set labels
 		for (int i = 0; i < labelText.length; i++) {
@@ -92,9 +92,9 @@ public class EventPane extends JPanel implements ActionListener {
 			textFields[i] = new JTextField();
 			textFields[i].setPreferredSize(new Dimension(175, 20));
 			labels[i].setLabelFor(textFields[i]);
-			add(labels[i],gbc);
+			add(labels[i], gbc);
 			gbc.gridx = 1;
-			add(textFields[i],gbc);
+			add(textFields[i], gbc);
 			gbc.gridy++;
 		}
 
@@ -104,30 +104,29 @@ public class EventPane extends JPanel implements ActionListener {
 		labels[5].setLabelFor(description);
 
 		gbc.gridx = 0;
-		add(labels[5],gbc);
+		add(labels[5], gbc);
 		gbc.gridx = 1;
-		add(description,gbc);
+		add(description, gbc);
 		gbc.gridy++;
 		gbc.gridx = 0;
-		add(labels[4],gbc);
+		add(labels[4], gbc);
 		gbc.gridx = 1;
-		add(category,gbc);
+		add(category, gbc);
 		gbc.gridy++;
 		gbc.gridx = 0;
-		add(friendButton,gbc);
+		add(friendButton, gbc);
 		gbc.gridx = 1;
-		add(friend_display,gbc);
+		add(friend_display, gbc);
 		gbc.gridy++;
 		gbc.gridx = 0;
-		add(s_timeButton,gbc);
+		add(s_timeButton, gbc);
 		gbc.gridx = 1;
-		add(time_s_display,gbc);
+		add(time_s_display, gbc);
 		gbc.gridy++;
 		gbc.gridx = 0;
-		add(e_timeButton,gbc);
+		add(e_timeButton, gbc);
 		gbc.gridx = 1;
-		add(time_e_display,gbc);
-		
+		add(time_e_display, gbc);
 
 	}
 
@@ -158,7 +157,7 @@ public class EventPane extends JPanel implements ActionListener {
 		} else {
 			temp_time += "-" + ((int) timePane.month.getSelectedIndex() + 1);
 		}
-		if (timePane.day.getSelectedIndex() + 1  < 10) {
+		if (timePane.day.getSelectedIndex() + 1 < 10) {
 			temp_time += "-0" + timePane.day.getSelectedItem();
 		} else {
 			temp_time += "-" + timePane.day.getSelectedItem();

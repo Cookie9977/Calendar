@@ -37,8 +37,8 @@ public class JavaDB {
 			data = new Object[rows][column];
 			int row = 0;
 			while (rs.next()) {
-				for (int i = 0; i <	column; i++) {
-					data[row][i] = rs.getString(i+1);
+				for (int i = 0; i < column; i++) {
+					data[row][i] = rs.getString(i + 1);
 				}
 				row++;
 			}
@@ -48,8 +48,8 @@ public class JavaDB {
 
 		return data;
 	}
-	
-	public void execute(String SQL){
+
+	public void execute(String SQL) {
 		try {
 			Statement stmt = con.createStatement();
 			stmt.execute(SQL);
@@ -57,7 +57,8 @@ public class JavaDB {
 			JOptionPane.showMessageDialog(null, error);
 		}
 	}
-	public int executeReturn(String SQL){
+
+	public int executeReturn(String SQL) {
 		try {
 			Statement stmt = con.createStatement();
 			int id = 0;
@@ -66,8 +67,8 @@ public class JavaDB {
 			if (rs.next()) {
 				id = rs.getInt(1);
 			}
-			//System.out.println(id.getInt(0));
-			//TODO returner insert id
+			// System.out.println(id.getInt(0));
+			// TODO returner insert id
 			return id;
 		} catch (Exception error) {
 			System.out.println(error);

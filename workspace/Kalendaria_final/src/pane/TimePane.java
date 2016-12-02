@@ -25,17 +25,16 @@ public class TimePane extends JPanel implements ActionListener {
 	public TimePane() {
 		year = new CustomComboBox();
 		month = new CustomComboBox();
-		System.out.println(1);
 		day = new CustomComboBox();
 		time = new JFormattedTextField();
-		
+
 		month.setModel(addThings(getMonths()));
 		month.addActionListener(this);
 		day.setModel(addThings(getDays("")));
 		year.setModel(addThings(getYear()));
 		time.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("HH':'mm"))));
 		time.setValue(Calendar.getInstance().getTime());
-		
+
 		add(year);
 		add(month);
 		add(day);
@@ -71,19 +70,19 @@ public class TimePane extends JPanel implements ActionListener {
 		}
 		return temp;
 	}
-	
-	public ArrayList<String> getYear(){
+
+	public ArrayList<String> getYear() {
 		temp = new ArrayList<String>();
 		Calendar cal = new GregorianCalendar();
 		int thisYear = cal.get(Calendar.YEAR);
-		
+
 		for (int i = 0; i < 21; i++) {
 			temp.add(String.valueOf(thisYear + i));
 		}
-		
+
 		return temp;
 	}
-	
+
 	public DefaultComboBoxModel<String> addThings(ArrayList<String> dates) {
 		model = new DefaultComboBoxModel<String>();
 		for (int i = 0; i < dates.size(); i++) {

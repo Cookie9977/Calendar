@@ -12,30 +12,29 @@ import javax.swing.JPanel;
 import friend.Friend;
 import friend.FriendList;
 
-public class FriendPane extends JPanel{
+public class FriendPane extends JPanel {
 	private FriendList friendList;
 	private JList<Friend> list;
 	public int selected;
 	private static final long serialVersionUID = 509271110346269191L;
-	
+
 	public FriendPane() {
-		
+
 		friendList = new FriendList();
 		list = new JList<Friend>();
 		list.setModel(friendList);
-		System.out.println(1);
-		
+
 		list.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 		list.setPreferredSize(new Dimension(200, 200));
 		list.setAutoscrolls(true);
 		list.addMouseListener(new Mousehandler());
 		for (int i = 0; i < friendList.getSize(); i++) {
 		}
-		
+
 		add(list);
-		
 
 	}
+
 	class Mousehandler extends MouseAdapter {
 		public void mouseReleased(MouseEvent e) {
 			selected = list.getSelectedValue().getId();

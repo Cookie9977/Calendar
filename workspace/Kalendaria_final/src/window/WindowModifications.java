@@ -1,14 +1,14 @@
 package window;
 
 public class WindowModifications {
-	protected monthView monthView;
+	protected MonthView monthView;
 	protected WeekView weekView;
 	protected DayView dayView;
 	protected Window window;
 	protected RegisterUser registerView;
 	protected LoginUser loginView;
 
-	public WindowModifications(monthView monthView, WeekView weekView, DayView dayView, Window window) {
+	public WindowModifications(MonthView monthView, WeekView weekView, DayView dayView, Window window) {
 		this.monthView = monthView;
 		this.weekView = weekView;
 		this.dayView = dayView;
@@ -26,7 +26,7 @@ public class WindowModifications {
 		window.calendar.remove(weekView);
 		window.calendar.add(monthView);
 		window.calendar.revalidate();
-		window.repaint();
+		window.pack();
 	}
 
 	public void showWeekView() {
@@ -34,7 +34,7 @@ public class WindowModifications {
 		window.calendar.remove(monthView);
 		window.calendar.add(weekView);
 		window.calendar.revalidate();
-		window.repaint();
+		window.pack();
 	}
 
 	public void showDayView() {
@@ -42,15 +42,14 @@ public class WindowModifications {
 		window.calendar.remove(weekView);
 		window.calendar.add(dayView);
 		window.calendar.revalidate();
-		window.repaint();
+		window.pack();
 	}
 
 	public void showLoggedinView() {
 		window.navBar.remove(loginView);
 		window.calendar.remove(registerView);
 		window.revalidate();
-		window.repaint();
-		System.err.println(1);
+		window.pack();
 	}
-	
+
 }

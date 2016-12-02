@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Window extends JFrame {
@@ -20,7 +19,7 @@ public class Window extends JFrame {
 	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	protected MenuNavBar monthButton, weekButton, dayButton;
 	protected WindowModifications windowmodifications;
-	protected monthView monthView;
+	protected MonthView monthView;
 	protected DayView dayView;
 	protected WeekView weekView;
 	protected DatePanelDate datePanelDate;
@@ -42,7 +41,7 @@ public class Window extends JFrame {
 		navBar = new JPanel();
 		datePanel = new JPanel();
 		datePanelDate = new DatePanelDate();
-		monthView = new monthView();
+		monthView = new MonthView();
 		weekView = new WeekView();
 		dayView = new DayView();
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
@@ -122,7 +121,7 @@ public class Window extends JFrame {
 		datePanelC.anchor = GridBagConstraints.CENTER;
 		datePanelC.weighty = 1;
 		datePanelC.fill = GridBagConstraints.NONE;
-		datePanel.add(datePanelDate,datePanelC);
+		datePanel.add(datePanelDate, datePanelC);
 		datePanelDate.setBackground(invis);
 
 		/*

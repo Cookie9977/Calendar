@@ -9,8 +9,8 @@ import main.Main;
 import pane.EventPane;
 
 public class EventLogic {
-	
-	public void checkEvent(EventPane event){
+
+	public void checkEvent(EventPane event) {
 		String title = event.textFields[0].getText();
 		String place = event.textFields[1].getText();
 		ArrayList<Friend> friend;
@@ -29,7 +29,7 @@ public class EventLogic {
 		int category = event.category.getSelectedIndex() + 1;
 		boolean dubbleBok = true;
 		if (correctTime) {
-			 dubbleBok = checkTime(startTime, endTime, Main.id, category);				
+			dubbleBok = checkTime(startTime, endTime, Main.id, category);
 		}
 		if (!dubbleBok && correctTime) {
 			addEvent(Main.id, title, place, description, startTime, endTime, category, friend);
@@ -37,9 +37,9 @@ public class EventLogic {
 			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
 		}
 	}
-	
-	private void addEvent(int id, String title, String place, String description, String startTime,
-		String endTime, int category, ArrayList<Friend> friend) {
+
+	private void addEvent(int id, String title, String place, String description, String startTime, String endTime,
+			int category, ArrayList<Friend> friend) {
 		String SQL = "INSERT INTO event(title, description, location, start, end, category) VALUES ('" + title + "','"
 				+ description + "','" + place + "','" + startTime + "','" + endTime + "','" + category + "')";
 		int add_id = Main.db.executeReturn(SQL);
