@@ -50,7 +50,6 @@ public class WindowModifications {
 		window.calendar.remove(registerView);
 		window.revalidate();
 		window.pack();
-		System.err.println(1);
 	}
-	
+
 }

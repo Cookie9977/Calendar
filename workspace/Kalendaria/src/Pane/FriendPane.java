@@ -23,7 +23,6 @@ public class FriendPane extends JPanel{
 		friendList = new FriendList();
 		list = new JList<Friend>();
 		list.setModel(friendList);
-		System.out.println(1);
 		
 		list.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 		list.setPreferredSize(new Dimension(200, 200));

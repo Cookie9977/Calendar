@@ -29,7 +29,6 @@ public class DayView extends JPanel {
 		dayPanel = new JPanel[height][length];
 		setLayout(new GridLayout(height, length));
 		setPreferredSize(new Dimension(800, 600));
-		System.out.println(1);
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < length; j++) {

@@ -49,7 +49,6 @@ public class LoginUser extends JPanel implements ActionListener {
 			textBox[i] = new JTextField(i);
 			textBox[i].setFont(inputFont);
 			textBox[i].setColumns(8);
-			System.out.println(1);
 			add(textBox[i]);
 		}
 

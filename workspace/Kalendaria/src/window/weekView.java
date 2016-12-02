@@ -84,7 +84,7 @@ public class WeekView extends JPanel {
 			label.setFont(new Font("SansSerif", Font.BOLD, 20));
 			containDays.add(label);
 		}
-		System.out.println(1);
+
 		setBackground(Color.WHITE);
 
 	}
