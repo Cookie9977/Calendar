@@ -26,7 +26,7 @@ public class WindowModifications {
 		window.calendar.remove(weekView);
 		window.calendar.add(monthView);
 		window.calendar.revalidate();
-		window.pack();
+		window.repaint();
 	}
 
 	public void showWeekView() {
@@ -34,7 +34,7 @@ public class WindowModifications {
 		window.calendar.remove(monthView);
 		window.calendar.add(weekView);
 		window.calendar.revalidate();
-		window.pack();
+		window.repaint();
 	}
 
 	public void showDayView() {
@@ -42,14 +42,14 @@ public class WindowModifications {
 		window.calendar.remove(weekView);
 		window.calendar.add(dayView);
 		window.calendar.revalidate();
-		window.pack();
+		window.repaint();
 	}
 
 	public void showLoggedinView() {
 		window.navBar.remove(loginView);
 		window.calendar.remove(registerView);
 		window.revalidate();
-		window.pack();
+		window.repaint();
 	}
 
 }
