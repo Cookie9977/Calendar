@@ -1,5 +1,7 @@
 package window;
 
+import pane.AddButtonsPane;
+
 public class WindowModifications {
 	protected MonthView monthView;
 	protected WeekView weekView;
@@ -7,6 +9,7 @@ public class WindowModifications {
 	protected Window window;
 	protected RegisterUser registerView;
 	protected LoginUser loginView;
+	protected AddButtonsPane addButtons;
 
 	public WindowModifications(MonthView monthView, WeekView weekView, DayView dayView, Window window) {
 		this.monthView = monthView;
@@ -15,10 +18,11 @@ public class WindowModifications {
 		this.window = window;
 	}
 
-	public WindowModifications(LoginUser loginView, RegisterUser registerView, Window window) {
+	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons, Window window) {
 		this.window = window;
 		this.loginView = loginView;
 		this.registerView = registerView;
+		this.addButtons = addButtons;
 	}
 
 	public void showMonthView() {
@@ -47,7 +51,8 @@ public class WindowModifications {
 
 	public void showLoggedinView() {
 		window.navBar.remove(loginView);
-		window.calendar.remove(registerView);
+		window.navBar.remove(registerView);
+		window.navBar.add(addButtons);
 		window.revalidate();
 		window.repaint();
 	}

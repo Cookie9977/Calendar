@@ -19,7 +19,7 @@ public class Window extends JFrame {
 	// vara kvar.
 	private NavArrowButton leftArrowButton, rightArrowButton;
 	private LoginUser loginUser;
-	private AddButtonsPane addButtons;
+	protected AddButtonsPane addButtons;
 	protected RegisterUser registerUser;
 	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	protected MenuNavBar monthButton, weekButton, dayButton;
