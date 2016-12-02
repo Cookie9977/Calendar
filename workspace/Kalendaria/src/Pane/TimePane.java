@@ -25,6 +25,7 @@ public class TimePane extends JPanel implements ActionListener {
 	public TimePane() {
 		year = new CustomComboBox();
 		month = new CustomComboBox();
+		System.out.println(1);
 		day = new CustomComboBox();
 		time = new JFormattedTextField();
 		

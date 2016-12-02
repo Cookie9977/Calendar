@@ -46,7 +46,7 @@ public class EventPane extends JPanel implements ActionListener {
 		labels = new JLabel[labelText.length];
 		textFields = new JTextField[2];
 		description = new JTextArea();
-
+		System.out.println(1);
 		friend_display = new JPanel();
 		friend_display.setBorder(BorderFactory.createTitledBorder("Inbjudna vänner"));
 		friend_display.setPreferredSize(new Dimension(200, 200));

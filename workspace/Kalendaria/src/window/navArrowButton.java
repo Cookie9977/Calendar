@@ -56,6 +56,7 @@ public class NavArrowButton extends JPanel implements ActionListener {
 		// här ska det finnas val beroende på vart knappen befinner sig(dayview,
 		// vecka, månad)
 		JOptionPane.showMessageDialog(null, "du är i: " + frame + " .");
+		System.err.println(1);
 	}
 
 }

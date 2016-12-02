@@ -18,5 +18,6 @@ public class TextFields extends JTextField {
 
 	public void setFont(Font font) {
 		this.font = font;
+		System.out.println(1);
 	} 
 }

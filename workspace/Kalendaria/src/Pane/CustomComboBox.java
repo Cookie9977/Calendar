@@ -14,6 +14,7 @@ public class CustomComboBox extends JComboBox<String>{
 	}
 	public void setId(int id) {
 		this.id = id;
+		System.err.println(1);
 	}
 
 }
