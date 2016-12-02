@@ -23,6 +23,7 @@ public class Window extends JFrame {
 	protected monthView monthView;
 	protected dayView dayView;
 	protected weekView weekView;
+	protected DatePanelDate datePanelDate;
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -40,6 +41,7 @@ public class Window extends JFrame {
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
+		datePanelDate = new DatePanelDate();
 		monthView = new monthView();
 		weekView = new weekView();
 		dayView = new dayView();
@@ -68,6 +70,7 @@ public class Window extends JFrame {
 		body.setLayout(gridBag);
 		navBar.setLayout(gridBag);
 		menyBar.setLayout(gridBag);
+		datePanel.setLayout(gridBag);
 		int gridWith = (width / 4);
 		int gridHeight = (height / 10);
 
@@ -112,6 +115,15 @@ public class Window extends JFrame {
 		 * 
 		 * menyBar.add(menyBarHolders[i], gbc); }
 		 */
+		/*
+		 * DatePanelDate, visar upp dagens datum i högra hörnet av fönstret.
+		 */
+		GridBagConstraints datePanelC= new GridBagConstraints();
+		datePanelC.anchor = GridBagConstraints.CENTER;
+		datePanelC.weighty = 1;
+		datePanelC.fill = GridBagConstraints.NONE;
+		datePanel.add(datePanelDate,datePanelC);
+		datePanelDate.setBackground(invis);
 
 		/*
 		 * menybar rutans knappar knapparnas gridbag

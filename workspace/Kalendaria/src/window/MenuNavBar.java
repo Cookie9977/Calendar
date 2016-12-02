@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 public class MenuNavBar extends JPanel implements ActionListener {
 	private Window windowVal;
 	private windowModifications windowmodifications;
-	private JFrame frame;
-	private int type;
 	private String[] buttonText = { "Månad", "Vecka", "Dag" };
 	protected monthView monthView;
 	protected weekView weekView;
@@ -22,7 +20,6 @@ public class MenuNavBar extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -6222480473508548550L;
 
 	public MenuNavBar(Window windowVal, int type) {
-		this.type = type;
 		this.windowVal = windowVal;
 		JButton button = new JButton();
 
