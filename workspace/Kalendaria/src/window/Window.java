@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Window extends JFrame {
@@ -16,12 +17,14 @@ public class Window extends JFrame {
 	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	private registerUser registerUser;
 	private navArrowButton leftArrowButton, rightArrowButton;
-	private MenuNavBar monthButton, weekButton, dayButton;
+	protected MenuNavBar monthButton, weekButton, dayButton;
 	private loginUser loginUser;
-	private monthView monthView;
-	private dayView dayView;
-	private weekView weekView;
-	protected Color invis = new Color(0, 0, 0, 0);
+	protected windowModifications windowmodifications;
+	protected monthView monthView;
+	protected dayView dayView;
+	protected weekView weekView;
+	//protected DatePanelDate datePanelDate;
+	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
 
@@ -38,9 +41,12 @@ public class Window extends JFrame {
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
+		//datePanelDate = new DatePanelDate();
 		monthView = new monthView();
 		weekView = new weekView();
 		dayView = new dayView();
+		windowmodifications = new windowModifications(monthView, weekView, dayView, this);
+
 		// menyBarHolders = new JPanel[3];
 
 		// window size and place
@@ -64,6 +70,7 @@ public class Window extends JFrame {
 		body.setLayout(gridBag);
 		navBar.setLayout(gridBag);
 		menyBar.setLayout(gridBag);
+		datePanel.setLayout(gridBag);
 		int gridWith = (width / 4);
 		int gridHeight = (height / 10);
 
@@ -108,6 +115,15 @@ public class Window extends JFrame {
 		 * 
 		 * menyBar.add(menyBarHolders[i], gbc); }
 		 */
+		/*
+		 * DatePanelDate, visar upp dagens datum i högra hörnet av fönstret.
+		 */
+		GridBagConstraints datePanelC= new GridBagConstraints();
+		datePanelC.anchor = GridBagConstraints.CENTER;
+		datePanelC.weighty = 1;
+		datePanelC.fill = GridBagConstraints.NONE;
+		//datePanel.add(datePanelDate,datePanelC);
+		//datePanelDate.setBackground(invis);
 
 		/*
 		 * menybar rutans knappar knapparnas gridbag
@@ -122,15 +138,15 @@ public class Window extends JFrame {
 		/*
 		 * Knapparna.
 		 */
-		monthButton = new MenuNavBar(this, 0, this);
+		monthButton = new MenuNavBar(this, 0);
 		monthButton.setBackground(invis);
 		menyBar.add(monthButton, buttonConstraints);
 		buttonConstraints.gridx = 1;
-		weekButton = new MenuNavBar(this, 1, this);
+		weekButton = new MenuNavBar(this, 1);
 		weekButton.setBackground(invis);
 		menyBar.add(weekButton, buttonConstraints);
 		buttonConstraints.gridx = 2;
-		dayButton = new MenuNavBar(this, 2, this);
+		dayButton = new MenuNavBar(this, 2);
 		dayButton.setBackground(invis);
 		menyBar.add(dayButton, buttonConstraints);
 
@@ -144,21 +160,34 @@ public class Window extends JFrame {
 		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);
 
+
 		//navArrowButton = new navArrowButton();
 		//calendar.add(navArrowButton);
 		
 		calendar.add(monthView);
 		//calendar.add(weekView);
 		//calendar.add(dayView);
+
+		// navArrowButton = new navArrowButton();
+		// calendar.add(navArrowButton);
+
+		// calendar.add(monthView);
+		calendar.add(weekView);
+		// calendar.add(dayView);
+
 		// navArrowButton = new navArrowButton();
 		// calendar.add(navArrowButton);
 		// calendar.add(calender);
-		//calendar.add(weekView);
+		// calendar.add(weekView);
 
 		loginUser = new loginUser();
 		navBar.add(loginUser);
 
 		pack();
+	}
+
+	public windowModifications getModifications() {
+		return windowmodifications;
 	}
 
 	private int getXStart(Dimension screenSize, int width) {
@@ -170,5 +199,4 @@ public class Window extends JFrame {
 		int x = (((int) Math.ceil(screenSize.getHeight()) - (height)) / 2);
 		return x;
 	}
-
 }

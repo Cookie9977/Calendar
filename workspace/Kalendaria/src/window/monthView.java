@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class monthView extends JPanel {
+
+private static final long serialVersionUID = 6304391601622162482L;
 	public monthView(){
 		setPreferredSize(new Dimension(600,600));
 //		int height = 6;
@@ -39,13 +41,6 @@ public class monthView extends JPanel {
 		theDays.setPreferredSize(new Dimension(500,90));
 		topLine.add(theDays, BorderLayout.EAST);
 		
-		for (int k = 0; k < dagLabel.length; k++){
-			dagLabel[k] = new JLabel();
-			dagLabel[k].setPreferredSize(new Dimension(10,50));
-			dagLabel[k].setText(days[k]);
-			theDays.add(dagLabel[k]);
-		}
-		
 		JPanel westLine = new JPanel();
 		westLine.setSize(new Dimension(80,400));
 		westLine.setLayout(new BorderLayout());
@@ -63,7 +58,8 @@ public class monthView extends JPanel {
 			veckan.setBorder(BorderFactory.createLineBorder(Color.blue));
 			veckan.setText("v.");
 			timeView.add(veckan);
-			
+
+
 		}
 		
 		JPanel containDays = new JPanel();
@@ -117,8 +113,7 @@ public class monthView extends JPanel {
 //
 //	}
 		setBackground(Color.WHITE);
-		
-		
+
 	}
 
 }

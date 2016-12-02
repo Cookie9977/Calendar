@@ -1,29 +1,40 @@
 package window;
 
-import javax.swing.JOptionPane;
-
 public class windowModifications {
+	protected monthView monthView;
+	protected weekView weekView;
+	protected dayView dayView;
 	protected Window window;
 
-	public windowModifications(Window window) {
+	public windowModifications(monthView monthView, weekView weekView, dayView dayView, Window window) {
+		this.monthView = monthView;
+		this.weekView = weekView;
+		this.dayView = dayView;
 		this.window = window;
 	}
 
 	public void showMonthView() {
-		JOptionPane.showMessageDialog(null, " yatta, månad");
-		window.calendar.removeAll();
+		window.calendar.remove(dayView);
+		window.calendar.remove(weekView);
+		window.calendar.add(monthView);
+		window.calendar.revalidate();
 		window.pack();
 	}
 
 	public void showWeekView() {
-		JOptionPane.showMessageDialog(null, " yatta, vecka");
-		window.calendar.removeAll();
+		window.calendar.remove(dayView);
+		window.calendar.remove(monthView);
+		window.calendar.add(weekView);
+		window.calendar.revalidate();
 		window.pack();
 	}
 
 	public void showDayView() {
-		JOptionPane.showMessageDialog(null, " yatta, dag");
-		window.calendar.removeAll();
+		window.calendar.remove(monthView);
+		window.calendar.remove(weekView);
+		window.calendar.add(dayView);
+		window.calendar.revalidate();
 		window.pack();
 	}
+
 }
