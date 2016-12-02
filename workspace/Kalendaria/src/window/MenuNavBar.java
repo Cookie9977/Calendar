@@ -5,14 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuNavBar extends JPanel implements ActionListener {
 	private Window windowVal;
 	private windowModifications windowmodifications;
+	@SuppressWarnings("unused")
+	private int type;
 	private String[] buttonText = { "Månad", "Vecka", "Dag" };
+	
 	protected monthView monthView;
 	protected weekView weekView;
 	protected dayView dayView;
@@ -21,6 +23,7 @@ public class MenuNavBar extends JPanel implements ActionListener {
 
 	public MenuNavBar(Window windowVal, int type) {
 		this.windowVal = windowVal;
+		this.type = type;
 		JButton button = new JButton();
 
 		switch (type) {
