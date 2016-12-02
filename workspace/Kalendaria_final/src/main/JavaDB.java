@@ -17,7 +17,7 @@ public class JavaDB {
 			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
 			con = DriverManager.getConnection("jdbc:mysql://" + host + "/" + db, user, password);
 		} catch (Exception error) {
-			JOptionPane.showMessageDialog(null, "Kan inte återupprätta en anslutning");
+			JOptionPane.showMessageDialog(null, error);
 		}
 	}
 
