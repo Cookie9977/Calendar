@@ -20,10 +20,13 @@ public class loginUser extends JPanel implements ActionListener{
 	private JTextField[] textBox;
 	private JPasswordField password;
 	private JLabel[] headingLabel;
+	private Window windowVal;
+	private windowModifications windowmodifications;
 
 	private static final long serialVersionUID = -2354560402587167649L;
 
-	public loginUser(){
+	public loginUser(Window windowVal){
+		this.windowVal = windowVal;
 		setBackground(new Color(123,123,123));
 		setSize(new Dimension(100,100));
 		setVisible(true);
@@ -70,7 +73,7 @@ public class loginUser extends JPanel implements ActionListener{
 		
 	try{
 			String SQL="select * from user where email ='"+email+"' AND password ='"+new String(pass)+"'";
-			System.out.println(SQL);
+			//System.out.println(SQL);
 			
 			Object[][] data = Main.db.getData(SQL);
 			   
@@ -78,10 +81,18 @@ public class loginUser extends JPanel implements ActionListener{
 			
 			
 			if(!(data[0][0] == "")){
-				System.out.println(SQL);
+				//System.out.println(SQL);
 				ids = (String) data[0][0];
 				Main.id = Integer.parseInt(ids);
 				System.out.println("Du är inloggad som "+email+" med ID: "+ Main.id);
+				// TODO försvinn
+				windowmodifications = new windowModifications(this, windowVal.registerUser, windowVal);
+				//windowmodifications = windowVal.getModifications();
+				try {
+					windowmodifications.showLoggedinView();					
+				} catch (NullPointerException e2) {
+					System.err.println(e2);
+				}
 				
 			}else{
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");

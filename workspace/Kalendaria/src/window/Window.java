@@ -14,11 +14,11 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	// byt ut dessa mot respective jpanel classer som ni har gjort. Body ska
 	// vara kvar.
-	protected JPanel body, calendar, menyBar, navBar, datePanel;
-	private registerUser registerUser;
 	private navArrowButton leftArrowButton, rightArrowButton;
-	protected MenuNavBar monthButton, weekButton, dayButton;
 	private loginUser loginUser;
+	protected registerUser registerUser;
+	protected JPanel body, calendar, menyBar, navBar, datePanel;
+	protected MenuNavBar monthButton, weekButton, dayButton;
 	protected windowModifications windowmodifications;
 	protected monthView monthView;
 	protected dayView dayView;
@@ -159,7 +159,7 @@ public class Window extends JFrame {
 		// calendar.add(calender);
 		// calendar.add(weekView);
 
-		loginUser = new loginUser();
+		loginUser = new loginUser(this);
 		navBar.add(loginUser);
 
 		pack();
