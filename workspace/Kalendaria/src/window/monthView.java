@@ -9,10 +9,13 @@ import java.util.stream.IntStream;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class monthView extends JPanel {
 
 private static final long serialVersionUID = 6304391601622162482L;
+private JTable table;
 	public monthView(){
 		setPreferredSize(new Dimension(600,600));
 //		int height = 6;
@@ -66,8 +69,8 @@ private static final long serialVersionUID = 6304391601622162482L;
 		containDays.setPreferredSize(new Dimension(600,500));
 		containDays.setBackground(Color.green);
 		containDays.setBorder(BorderFactory.createLineBorder(Color.RED));
-		containDays.setLayout(new GridLayout(5,7));
-		add(containDays, BorderLayout.EAST);
+		containDays.setLayout(new GridLayout(1,1));
+		add(containDays, BorderLayout.CENTER);
 		
 //		JPanel lengthDays = new JPanel();
 //		lengthDays.setPreferredSize(new Dimension(200,40));
@@ -81,7 +84,11 @@ private static final long serialVersionUID = 6304391601622162482L;
 		//heightDays.setLayout(new GridLayout(5,7));
 		heightDays.setBackground(Color.GREEN);
 		
-		containDays.add(heightDays);
+		//containDays.add(heightDays);
+		table = new JTable(5,7);
+		table.setRowHeight(100);
+		JScrollPane scroll = new JScrollPane(table);
+		containDays.add(scroll);
 		heightDays.setLocation(0,0);
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 5; j++) {
