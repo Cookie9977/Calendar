@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import pane.AddButtonsPane;
 import pane.DatePanelDate;
 
 public class Window extends JFrame {
@@ -17,6 +19,7 @@ public class Window extends JFrame {
 	// vara kvar.
 	private NavArrowButton leftArrowButton, rightArrowButton;
 	private LoginUser loginUser;
+	private AddButtonsPane addButtons;
 	protected RegisterUser registerUser;
 	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	protected MenuNavBar monthButton, weekButton, dayButton;
@@ -25,6 +28,7 @@ public class Window extends JFrame {
 	protected DayView dayView;
 	protected WeekView weekView;
 	protected DatePanelDate datePanelDate;
+	
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -46,6 +50,7 @@ public class Window extends JFrame {
 		monthView = new MonthView();
 		weekView = new WeekView();
 		dayView = new DayView();
+		addButtons = new AddButtonsPane();
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
 
 		// menyBarHolders = new JPanel[3];
@@ -181,7 +186,9 @@ public class Window extends JFrame {
 		// calendar.add(weekView);
 
 		loginUser = new LoginUser(this);
+		navBar.setLayout(new GridLayout(3, 1));
 		navBar.add(loginUser);
+		navBar.add(addButtons);
 
 		pack();
 	}

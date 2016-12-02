@@ -1,7 +1,9 @@
 package main;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pane.AddButtonsPane;
 import window.Window;
 
 public class Main {
@@ -14,11 +16,5 @@ public class Main {
 				new Window();
 			}
 		});
-		// EventPane pane = new EventPane();
-		// int test = JOptionPane.showConfirmDialog(null, pane, "test",
-		// JOptionPane.OK_CANCEL_OPTION);
-		// if (test == JOptionPane.OK_OPTION) {
-		// EventLogic.checkEvent(pane);
-		// }
 	}
 }
