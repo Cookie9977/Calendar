@@ -1,5 +1,5 @@
 package window;
 
-public class submitButton {
+public class SubmitButton {
 
 }

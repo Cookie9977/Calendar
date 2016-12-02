@@ -15,14 +15,14 @@ import javax.swing.JTextField;
 
 import main.Main;
 
-public class registerUser extends JPanel implements ActionListener {
+public class RegisterUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
 	private JPasswordField password;
 	private JLabel[] headingLabel;
 
 	private static final long serialVersionUID = -2354560402587167649L;
 
-	public registerUser() {
+	public RegisterUser() {
 		setBackground(new Color(123, 123, 123));
 		setSize(new Dimension(100, 100));
 		setVisible(true);

@@ -1,4 +1,4 @@
-package Pane;
+package pane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

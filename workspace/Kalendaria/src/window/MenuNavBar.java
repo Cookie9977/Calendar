@@ -10,14 +10,14 @@ import javax.swing.JPanel;
 
 public class MenuNavBar extends JPanel implements ActionListener {
 	private Window windowVal;
-	private windowModifications windowmodifications;
+	private WindowModifications windowmodifications;
 	@SuppressWarnings("unused")
 	private int type;
 	private String[] buttonText = { "Månad", "Vecka", "Dag" };
-	
+
 	protected monthView monthView;
-	protected weekView weekView;
-	protected dayView dayView;
+	protected WeekView weekView;
+	protected DayView dayView;
 
 	private static final long serialVersionUID = -6222480473508548550L;
 

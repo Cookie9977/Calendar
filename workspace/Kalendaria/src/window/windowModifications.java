@@ -1,22 +1,21 @@
 package window;
 
-public class windowModifications {
+public class WindowModifications {
 	protected monthView monthView;
-	protected weekView weekView;
-	protected dayView dayView;
+	protected WeekView weekView;
+	protected DayView dayView;
 	protected Window window;
-	protected registerUser registerView;
-	protected loginUser loginView;
-	
+	protected RegisterUser registerView;
+	protected LoginUser loginView;
 
-	public windowModifications(monthView monthView, weekView weekView, dayView dayView, Window window) {
+	public WindowModifications(monthView monthView, WeekView weekView, DayView dayView, Window window) {
 		this.monthView = monthView;
 		this.weekView = weekView;
 		this.dayView = dayView;
 		this.window = window;
 	}
-	
-	public windowModifications(loginUser loginView, registerUser registerView, Window window){
+
+	public WindowModifications(LoginUser loginView, RegisterUser registerView, Window window) {
 		this.window = window;
 		this.loginView = loginView;
 		this.registerView = registerView;
@@ -45,8 +44,8 @@ public class windowModifications {
 		window.calendar.revalidate();
 		window.pack();
 	}
-	
-	public void showLoggedinView(){
+
+	public void showLoggedinView() {
 		window.navBar.remove(loginView);
 		window.calendar.remove(registerView);
 		window.revalidate();

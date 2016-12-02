@@ -1,4 +1,4 @@
-package Pane;
+package pane;
 
 import java.awt.Color;
 import java.awt.Dimension;
