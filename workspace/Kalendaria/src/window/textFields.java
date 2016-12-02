@@ -5,10 +5,10 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
-public class textFields extends JTextField{
+public class TextFields extends JTextField {
 	public Font font;
-	
-	public textFields(Font font){
+
+	public TextFields(Font font) {
 		this.font = font;
 	}
 

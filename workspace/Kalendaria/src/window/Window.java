@@ -14,16 +14,16 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	// byt ut dessa mot respective jpanel classer som ni har gjort. Body ska
 	// vara kvar.
-	private navArrowButton leftArrowButton, rightArrowButton;
-	private loginUser loginUser;
-	protected registerUser registerUser;
+	private NavArrowButton leftArrowButton, rightArrowButton;
+	private LoginUser loginUser;
+	protected RegisterUser registerUser;
 	protected JPanel body, calendar, menyBar, navBar, datePanel;
 	protected MenuNavBar monthButton, weekButton, dayButton;
-	protected windowModifications windowmodifications;
+	protected WindowModifications windowmodifications;
 	protected monthView monthView;
-	protected dayView dayView;
-	protected weekView weekView;
-	//protected DatePanelDate datePanelDate;
+	protected DayView dayView;
+	protected WeekView weekView;
+	// protected DatePanelDate datePanelDate;
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -41,11 +41,11 @@ public class Window extends JFrame {
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
-		//datePanelDate = new DatePanelDate();
+		// datePanelDate = new DatePanelDate();
 		monthView = new monthView();
-		weekView = new weekView();
-		dayView = new dayView();
-		windowmodifications = new windowModifications(monthView, weekView, dayView, this);
+		weekView = new WeekView();
+		dayView = new DayView();
+		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
 
 		// menyBarHolders = new JPanel[3];
 
@@ -118,12 +118,12 @@ public class Window extends JFrame {
 		/*
 		 * DatePanelDate, visar upp dagens datum i högra hörnet av fönstret.
 		 */
-		GridBagConstraints datePanelC= new GridBagConstraints();
+		GridBagConstraints datePanelC = new GridBagConstraints();
 		datePanelC.anchor = GridBagConstraints.CENTER;
 		datePanelC.weighty = 1;
 		datePanelC.fill = GridBagConstraints.NONE;
-		//datePanel.add(datePanelDate,datePanelC);
-		//datePanelDate.setBackground(invis);
+		// datePanel.add(datePanelDate,datePanelC);
+		// datePanelDate.setBackground(invis);
 
 		/*
 		 * menybar rutans knappar knapparnas gridbag
@@ -151,22 +151,21 @@ public class Window extends JFrame {
 		menyBar.add(dayButton, buttonConstraints);
 
 		// Calender rutans saker
-		leftArrowButton = new navArrowButton(this, 0);
+		leftArrowButton = new NavArrowButton(this, 0);
 		leftArrowButton.setBackground(invis);
 		calendar.add(leftArrowButton);
-		registerUser = new registerUser();
+		registerUser = new RegisterUser();
 		calendar.add(registerUser);
-		rightArrowButton = new navArrowButton(this, 1);
+		rightArrowButton = new NavArrowButton(this, 1);
 		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);
 
+		// navArrowButton = new navArrowButton();
+		// calendar.add(navArrowButton);
 
-		//navArrowButton = new navArrowButton();
-		//calendar.add(navArrowButton);
-		
 		calendar.add(monthView);
-		//calendar.add(weekView);
-		//calendar.add(dayView);
+		// calendar.add(weekView);
+		// calendar.add(dayView);
 
 		// navArrowButton = new navArrowButton();
 		// calendar.add(navArrowButton);
@@ -180,13 +179,13 @@ public class Window extends JFrame {
 		// calendar.add(calender);
 		// calendar.add(weekView);
 
-		loginUser = new loginUser(this);
+		loginUser = new LoginUser(this);
 		navBar.add(loginUser);
 
 		pack();
 	}
 
-	public windowModifications getModifications() {
+	public WindowModifications getModifications() {
 		return windowmodifications;
 	}
 

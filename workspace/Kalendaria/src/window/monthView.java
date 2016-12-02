@@ -86,6 +86,7 @@ private JTable table;
 		
 		//containDays.add(heightDays);
 		table = new JTable(5,7);
+		table.setTableHeader(null);
 		table.setRowHeight(100);
 		JScrollPane scroll = new JScrollPane(table);
 		containDays.add(scroll);

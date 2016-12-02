@@ -11,14 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class navArrowButton extends JPanel implements ActionListener {
+public class NavArrowButton extends JPanel implements ActionListener {
 	private String[] buttonText = { "", "" };
 	private JFrame frame;
 	private int direction;
 
 	private static final long serialVersionUID = 5363273381463559887L;
 
-	public navArrowButton(JFrame frame, int direction) {
+	public NavArrowButton(JFrame frame, int direction) {
 		this.frame = frame;
 		this.direction = direction;
 		JButton button = new JButton();
