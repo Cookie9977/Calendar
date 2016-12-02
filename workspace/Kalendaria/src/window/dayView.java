@@ -49,8 +49,8 @@ public class dayView extends JPanel{
 				//Här ska datum sättas in från en funktion
 				final JLabel label = new JLabel();
 				label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				System.out.println(hours[i]);
-				System.out.println(minutes[i]);
+				//System.out.println(hours[i]);
+				//System.out.println(minutes[i]);
 				label.setText(String.valueOf(hours[i])+":"+String.valueOf(minutes[j]));
 				label.setSize(20,300);
 				dayPanel[i][0].add(label);

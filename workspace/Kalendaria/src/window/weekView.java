@@ -1,6 +1,7 @@
 package window;
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,63 +9,83 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class weekView extends JPanel {
+	private JLabel veckaLabel;
 	public weekView(){
 		
-//		setPreferredSize(new Dimension(600,600));
-//		int height = 2;
-//		int length = 4;
-//		setLayout(new GridLayout(height,length));
-		//setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-		JLabel[] dagLabel = new JLabel[8];
+		setPreferredSize(new Dimension(700,600));
+		setLayout(new BorderLayout());
+		JPanel topLine = new JPanel();
+		topLine.setPreferredSize(new Dimension(700,90));
+		topLine.setLayout(new BorderLayout());
+		add(topLine, BorderLayout.NORTH);
+		
+		JPanel westLine = new JPanel();
+		westLine.setSize(new Dimension(80,600));
+		westLine.setLayout(new BorderLayout());
+		add(westLine, BorderLayout.WEST);
+		
+		veckaLabel = new JLabel();
+		JPanel vecka = new JPanel();
+		vecka.setPreferredSize(new Dimension(80,90));
+		veckaLabel.setText("Vecka: 50");
+		vecka.setLayout(new GridLayout(0,1));
+		vecka.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		topLine.add(vecka, BorderLayout.WEST);
+		vecka.add(veckaLabel);
+		
+		JPanel timeView = new JPanel();
+		timeView.setBackground(Color.GRAY);
+		timeView.setPreferredSize(new Dimension(80,500));
+		timeView.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		
+		westLine.add(timeView);
+		
+		JLabel[] dagLabel = new JLabel[7];
 		String[] days;
-		days  = new String[] {"Vecka","Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
-		int width = 600;
-		int height = 500;
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int xStart = getXStart(screenSize, width);
-		int yStart = getYStart(screenSize, height);
-		setBounds(xStart, yStart, width, height);
-		setPreferredSize(new Dimension(width, height));
-		
-		GridBagLayout gridBag = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		
-		int gridWith = (width / 2);
-		int gridHeight = (height / 4);
-		
-		setLayout(gridBag);
-		
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridwidth = gridWith;
-		gbc.gridheight = gridHeight;
-		gbc.weightx = 0.25;
-		gbc.weighty = 0.1;
-		//add(datePanel, gbc);
+		days  = new String[] {"Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
+		JPanel theDays = new JPanel();
+		theDays.setLayout(new GridLayout(1,7));
+		theDays.setPreferredSize(new Dimension(619,90));
+		topLine.add(theDays, BorderLayout.EAST);
+
+	for (int k = 0; k < dagLabel.length; k++){
+		dagLabel[k] = new JLabel();
+		dagLabel[k].setText(days[k]);
+		dagLabel[k].setPreferredSize(new Dimension(150,160));
+		dagLabel[k].setBackground(Color.CYAN);
+		dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		dagLabel[k].setFont(new Font("SansSerif",Font.BOLD,20));
+		theDays.add(dagLabel[k]);
+	}
 	
-//		for (int k = 0; k < dagLabel.length; k++){
-//			dagLabel[k] = new JLabel();
-//			dagLabel[k].setText(days[k]);
-//			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//			dagLabel[k].setFont(new Font("SansSerif",Font.BOLD,20));
-//			add(dagLabel[k]);
-//		}
-//		for (int i = 0; i < length; i++) {
-//			for (int j = 0; j < height; j++) {
-//				//Här ska datum sättas in från en funktion
-//				final JLabel label = new JLabel("Label");
-//			    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//			    add(label);
-//			    
-//			}
-//			
-//		}
-		setBackground(Color.WHITE);
+		JPanel containDays = new JPanel();
+		containDays.setPreferredSize(new Dimension(620,500));
+		containDays.setBackground(Color.green);
+		containDays.setLayout(new GridLayout(1,7));
+		add(containDays, BorderLayout.EAST);
+		
+		for (int i = 0; i < dagLabel.length; i++) {
+				
+					//Här ska datum sättas in från en funktion
+			JLabel label = new JLabel();
+			label.setText("DINDAG");
+			label.setPreferredSize(new Dimension(71,160));
+			label.setBackground(Color.CYAN);
+			label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			label.setFont(new Font("SansSerif",Font.BOLD,20));
+				    containDays.add(label);
+				}
+	
+	setBackground(Color.WHITE);
 		
 		
 	}
