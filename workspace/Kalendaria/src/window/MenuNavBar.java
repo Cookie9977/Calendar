@@ -22,8 +22,8 @@ public class MenuNavBar extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -6222480473508548550L;
 
 	public MenuNavBar(Window windowVal, int type) {
-		this.type = type;
 		this.windowVal = windowVal;
+		this.type = type;
 		JButton button = new JButton();
 
 		switch (type) {
