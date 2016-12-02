@@ -1,14 +1,9 @@
 package main;
 
-import java.awt.Event;
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import Pane.EventPane;
-import friend.Friend;
-import logic.EventLogic;
 import window.Window;
 
 public class Main {
@@ -18,7 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				// new Window();
+				 new Window();
 			}
 		});
 		EventPane pane = new EventPane();
