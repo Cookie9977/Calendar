@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 import pane.AddButtonsPane;
 
 public class WindowModifications {
-	private JLabel label;
 	protected MonthView monthView;
 	protected WeekView weekView;
 	protected DayView dayView;
@@ -19,6 +18,7 @@ public class WindowModifications {
 		this.weekView = weekView;
 		this.dayView = dayView;
 		this.window = window;
+
 	}
 
 	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons, Window window) {
@@ -32,8 +32,7 @@ public class WindowModifications {
 		window.calendar.remove(dayView);
 		window.calendar.remove(weekView);
 		window.calendar.add(monthView);
-		label = new JLabel("Månad");
-		window.calendar.add(label);
+		window.view.setText("Månad");
 		window.calendar.revalidate();
 		window.repaint();
 	}
@@ -42,8 +41,7 @@ public class WindowModifications {
 		window.calendar.remove(dayView);
 		window.calendar.remove(monthView);
 		window.calendar.add(weekView);
-		label = new JLabel("Vecka");
-		window.calendar.add(label);
+		window.view.setText("Vecka");
 		window.calendar.revalidate();
 		window.repaint();
 	}
@@ -52,8 +50,7 @@ public class WindowModifications {
 		window.calendar.remove(monthView);
 		window.calendar.remove(weekView);
 		window.calendar.add(dayView);
-		label = new JLabel("Dag");
-		window.calendar.add(label);
+		window.view.setText("Dag");
 		window.calendar.revalidate();
 		window.repaint();
 	}

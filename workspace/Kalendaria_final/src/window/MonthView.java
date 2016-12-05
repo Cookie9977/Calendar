@@ -104,7 +104,7 @@ public class MonthView extends JPanel {
 				if(lopNummer > 1 && lopNummer<lastDayOfMonth+1 ){
 					tableMonth.setValueAt(lopNummer, j, i);
 					lopNummer++;
-				}else if(j==0 && 3 == i){
+				}else if(j==0 && 3 == i){//Fixa 3
 					tableMonth.setValueAt(lopNummer, j, i);
 					lopNummer++;
 				}else if(lopNummer>lastDayOfMonth){

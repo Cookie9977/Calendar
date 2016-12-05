@@ -4,16 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import main.Main;
 
 public class AddFriend extends JFrame implements ActionListener {
 
@@ -112,7 +115,24 @@ public class AddFriend extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
+		String Email = textBox.getText();
+		boolean regex = Pattern.matches("^[a-zA-Z0-9]+\\@[a-zA-Z0-9]+\\.[a-zA-Z]+", Email);
+		if (regex == true) {
+			try {
+				String receiverSQL = "SELECT id FROM user WHERE email='" + Email + "'";
+				Object[][] receiverID = Main.db.getData(receiverSQL);
+				String friendsql = "INSERT INTO friend_link(`requester`, `reciver`, `accepted`) VALUES (" + Main.id
+						+ ", " + receiverID[0][0] + ", 0)";
+				Main.db.execute(friendsql);
+				dispose();
+			} catch (Exception errorAdd) {
+				System.out.println("Vi har fångat ett fel!: " + errorAdd);
+				JOptionPane.showMessageDialog(null, "Emailen du försökte lägga till hittas inte.");
+			}
 
+		} else {
+			JOptionPane.showMessageDialog(null, "Eposten är inte korrekt angiven");
+		}
 	}
 }

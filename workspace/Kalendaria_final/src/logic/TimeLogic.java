@@ -10,6 +10,7 @@ public class TimeLogic {
 	private ArrayList<String> tamp;
 	private Calendar cal;
 
+	// Retunerar dagar i månad, in = sträng på månadens namn.
 	public ArrayList<String> getDays(String month) {
 		DateFormatSymbols dfc = new DateFormatSymbols();
 		temp = new ArrayList<String>();
@@ -29,6 +30,7 @@ public class TimeLogic {
 		}
 		return temp;
 	}
+
 	
 	public int firstDayMonth(){
 		Calendar cal1;
@@ -61,6 +63,10 @@ public class TimeLogic {
 		return temp;
 	}
 	
+
+
+	// returnerar månadernas namn.
+
 	public ArrayList<String> getMonths() {
 		DateFormatSymbols dfc = new DateFormatSymbols();
 		temp = new ArrayList<String>();
@@ -72,6 +78,7 @@ public class TimeLogic {
 	}
 	
 
+	// Hämtar ut året plus 20 framåt(för planeirng)
 	public ArrayList<String> getYear() {
 		temp = new ArrayList<String>();
 		cal = new GregorianCalendar();
@@ -83,6 +90,7 @@ public class TimeLogic {
 
 		return temp;
 	}
+
 	
 	public int getCurrentMonth(){
 		cal = new GregorianCalendar();
@@ -90,8 +98,10 @@ public class TimeLogic {
 		return currentMonth;
 	}
 
-	
-	public int getWeek(){
+
+	// returnerar den aktuella veckan.
+	public int getWeek() {
+
 		cal = new GregorianCalendar();
 		int week = cal.get(Calendar.WEEK_OF_YEAR);
 		return week;
