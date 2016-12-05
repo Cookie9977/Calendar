@@ -10,15 +10,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import logic.TimeLogic;
+
 public class WeekView extends JPanel {
 
 	private JLabel veckaLabel;
+	private TimeLogic thisWeek;
 
 	private static final long serialVersionUID = -1542039657044981535L;
 
 	public WeekView() {
 
-		setPreferredSize(new Dimension(700, 600));
+		setPreferredSize(new Dimension(600, 500));
 		setLayout(new BorderLayout());
 		JPanel topLine = new JPanel();
 		topLine.setPreferredSize(new Dimension(700, 90));
@@ -26,23 +29,34 @@ public class WeekView extends JPanel {
 		add(topLine, BorderLayout.NORTH);
 
 		JPanel westLine = new JPanel();
-		westLine.setSize(new Dimension(80, 600));
+		westLine.setSize(new Dimension(80, 500));
 		westLine.setLayout(new BorderLayout());
 		add(westLine, BorderLayout.WEST);
 
 		veckaLabel = new JLabel();
 		JPanel vecka = new JPanel();
 		vecka.setPreferredSize(new Dimension(80, 90));
-		veckaLabel.setText("Vecka: 50");
+		thisWeek = new TimeLogic();
+		veckaLabel.setText("Vecka:" + thisWeek.getWeek());
 		vecka.setLayout(new GridLayout(0, 1));
 		vecka.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		topLine.add(vecka, BorderLayout.WEST);
 		vecka.add(veckaLabel);
 
+		JLabel[] timeLabel = new JLabel[24];
 		JPanel timeView = new JPanel();
 		timeView.setBackground(Color.GRAY);
 		timeView.setPreferredSize(new Dimension(80, 500));
 		timeView.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		timeView.setLayout(new GridLayout(24,1));
+		for(int ii=0; ii < 24; ii++){
+			timeLabel[ii] = new JLabel();
+			timeLabel[ii].setText(ii+":00");
+			timeLabel[ii].setPreferredSize(new Dimension(80,20));
+			timeLabel[ii].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+			timeLabel[ii].setFont(new Font("SansSerif",Font.BOLD ,18));
+			timeView.add(timeLabel[ii]);
+		}
 
 		westLine.add(timeView);
 
@@ -51,7 +65,7 @@ public class WeekView extends JPanel {
 		days = new String[] { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 7));
-		theDays.setPreferredSize(new Dimension(619, 90));
+		theDays.setPreferredSize(new Dimension(600, 90));
 		topLine.add(theDays, BorderLayout.EAST);
 
 		for (int k = 0; k < dagLabel.length; k++) {
@@ -65,7 +79,7 @@ public class WeekView extends JPanel {
 		}
 
 		JPanel containDays = new JPanel();
-		containDays.setPreferredSize(new Dimension(620, 500));
+		containDays.setPreferredSize(new Dimension(600, 500));
 		containDays.setBackground(Color.green);
 		containDays.setLayout(new GridLayout(1, 7));
 		add(containDays, BorderLayout.EAST);
@@ -75,7 +89,7 @@ public class WeekView extends JPanel {
 			// Här ska datum sättas in från en funktion
 			JLabel label = new JLabel();
 			label.setText("DINDAG");
-			label.setPreferredSize(new Dimension(71, 160));
+			label.setPreferredSize(new Dimension(70, 160));
 			label.setBackground(Color.CYAN);
 			label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			label.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -86,11 +100,13 @@ public class WeekView extends JPanel {
 
 	}
 
+	@SuppressWarnings("unused")
 	private int getXStart(Dimension screenSize, int width) {
 		int x = (((int) Math.ceil(screenSize.getWidth()) - (width)) / 2);
 		return x;
 	}
 
+	@SuppressWarnings("unused")
 	private int getYStart(Dimension screenSize, int height) {
 		int y = (((int) Math.ceil(screenSize.getHeight()) - (height)) / 2);
 		return y;
