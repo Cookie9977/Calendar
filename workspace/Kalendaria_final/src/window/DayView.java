@@ -46,7 +46,7 @@ public class DayView extends JPanel {
 		
 		for (int i = 0; i < hours.length; i++) {
 			//time[0][i] = hours[i];
-			System.out.println(hours[i]);
+			//System.out.println(hours[i]);
 		}
 		
 		timeTable = new JTable(time,columnNames);
