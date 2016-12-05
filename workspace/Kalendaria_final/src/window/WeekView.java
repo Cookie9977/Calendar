@@ -48,13 +48,17 @@ public class WeekView extends JPanel {
 		timeView.setBackground(Color.GRAY);
 		timeView.setPreferredSize(new Dimension(80, 500));
 		timeView.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-		timeView.setLayout(new GridLayout(24,1));
-		for(int ii=0; ii < 24; ii++){
+		timeView.setLayout(new GridLayout(24, 1));
+		for (int ii = 0; ii < 24; ii++) {
 			timeLabel[ii] = new JLabel();
-			timeLabel[ii].setText(ii+":00");
-			timeLabel[ii].setPreferredSize(new Dimension(80,20));
+			if (ii < 10) {
+				timeLabel[ii].setText("0" + ii + ":00");
+			} else {
+				timeLabel[ii].setText(ii + ":00");
+			}
+			timeLabel[ii].setPreferredSize(new Dimension(80, 20));
 			timeLabel[ii].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-			timeLabel[ii].setFont(new Font("SansSerif",Font.BOLD ,18));
+			timeLabel[ii].setFont(new Font("SansSerif", Font.BOLD, 18));
 			timeView.add(timeLabel[ii]);
 		}
 
