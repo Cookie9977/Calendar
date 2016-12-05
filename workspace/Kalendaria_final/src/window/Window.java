@@ -160,6 +160,8 @@ public class Window extends JFrame {
 		leftArrowButton = new NavArrowButton(this, 0);
 		leftArrowButton.setBackground(invis);
 		calendar.add(leftArrowButton);
+		//TODO lägg till jlabel för vilen du befinner di i nu
+		
 		rightArrowButton = new NavArrowButton(this, 1);
 		rightArrowButton.setBackground(invis);
 		calendar.add(rightArrowButton);

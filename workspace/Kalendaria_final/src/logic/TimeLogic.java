@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 
 public class TimeLogic {
 	private ArrayList<String> temp;
+	private Calendar cal;
 
 	public ArrayList<String> getDays(String month) {
 		DateFormatSymbols dfc = new DateFormatSymbols();
@@ -19,7 +20,7 @@ public class TimeLogic {
 				break;
 			}
 		}
-		Calendar cal = new GregorianCalendar();
+		cal = new GregorianCalendar();
 		cal.set(cal.get(Calendar.YEAR), monthValue, cal.get(Calendar.DAY_OF_MONTH));
 		int nrDays = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
@@ -40,7 +41,7 @@ public class TimeLogic {
 
 	public ArrayList<String> getYear() {
 		temp = new ArrayList<String>();
-		Calendar cal = new GregorianCalendar();
+		cal = new GregorianCalendar();
 		int thisYear = cal.get(Calendar.YEAR);
 
 		for (int i = 0; i < 21; i++) {
@@ -48,5 +49,11 @@ public class TimeLogic {
 		}
 
 		return temp;
+	}
+	
+	public int getWeek(){
+		cal = new GregorianCalendar();
+		int week = cal.get(Calendar.WEEK_OF_YEAR);
+		return week;
 	}
 }
