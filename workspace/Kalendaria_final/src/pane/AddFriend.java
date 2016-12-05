@@ -4,14 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -112,7 +113,14 @@ public class AddFriend extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
+	public void actionPerformed(ActionEvent e) {
+		String Email = textBox.getText();
+		boolean regex = Pattern.matches("^[a-zA-Z]+\\@[a-zA-Z]+\\.[a-zA-Z]+",Email);
+		if(regex == true){
+			dispose(); //varning, testa den 
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Eposten är inte korrekt anginven");
+		}
 	}
 }
