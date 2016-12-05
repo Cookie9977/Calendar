@@ -2,12 +2,14 @@ package window;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pane.AddButtonsPane;
@@ -28,6 +30,7 @@ public class Window extends JFrame {
 	protected DayView dayView;
 	protected WeekView weekView;
 	protected DatePanelDate datePanelDate;
+	protected JLabel view;
 	
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
@@ -51,6 +54,9 @@ public class Window extends JFrame {
 		weekView = new WeekView();
 		dayView = new DayView();
 		addButtons = new AddButtonsPane();
+		view = new JLabel("Dag");
+		view.setFont(new Font("SansSerif", Font.BOLD, 20));
+		view.setForeground(Color.YELLOW);
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
 
 		// menyBarHolders = new JPanel[3];
@@ -161,6 +167,7 @@ public class Window extends JFrame {
 		leftArrowButton.setBackground(invis);
 		calendar.add(leftArrowButton);
 		//TODO lägg till jlabel för vilen du befinner di i nu
+		calendar.add(view);
 		
 		rightArrowButton = new NavArrowButton(this, 1);
 		rightArrowButton.setBackground(invis);
