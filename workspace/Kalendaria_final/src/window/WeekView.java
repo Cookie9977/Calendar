@@ -11,7 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class WeekView extends JPanel {
+
 	private JLabel veckaLabel;
+
+	private static final long serialVersionUID = -1542039657044981535L;
 
 	public WeekView() {
 
