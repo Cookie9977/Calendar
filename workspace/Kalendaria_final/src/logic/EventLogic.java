@@ -95,4 +95,10 @@ public class EventLogic {
 		time = time.replace(" ", "");
 		return Long.parseLong(time);
 	}
+	
+	public Object[][] getEvent() {
+		String SQL = "";
+		Object[][] event = Main.db.getData(SQL);
+		return event;
+	}
 }

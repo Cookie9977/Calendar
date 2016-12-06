@@ -3,24 +3,27 @@ package window;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import logic.TimeLogic;
 
 public class MonthView extends JPanel {
 
 	private static final long serialVersionUID = 6304391601622162482L;
 	private JTable tableMonth;
 	private pane.TimePane TimePane;
+	private TimeLogic TimeLogic;
 
 	public MonthView() {
 		TimePane = new pane.TimePane();
+		TimeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(600, 600));
 		setLayout(new BorderLayout());
@@ -83,7 +86,45 @@ public class MonthView extends JPanel {
 		tableMonth = new JTable(5, 7);
 		tableMonth.setTableHeader(null);
 		tableMonth.setRowHeight(110);
+
 		containDays.add(tableMonth);
+		
+
+		ArrayList<String> dag = TimeLogic.getWeekday();
+		System.out.println(dag);
+		int thisMonth = TimeLogic.getCurrentMonth();
+		int firstDayOfMonth = TimeLogic.firstDayMonth();
+		int lastDayOfMonth = TimeLogic.lastDayMonth();
+		ArrayList<String> daysOfMonth = TimeLogic.getDays(""+thisMonth);
+		int lopNummer = 1;
+		
+		for (int j = 0; j < tableMonth.getRowCount(); j++) {
+			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
+			
+				if(lopNummer > 1 && lopNummer<lastDayOfMonth+1 ){
+					tableMonth.setValueAt(lopNummer, j, i);
+					lopNummer++;
+				}else if(j==0 && 3 == i){//Fixa 3
+					tableMonth.setValueAt(lopNummer, j, i);
+					lopNummer++;
+				}else if(lopNummer>lastDayOfMonth){
+					tableMonth.setValueAt("Empty", j, i);
+					
+				}
+				//tableMonth.setValueAt(dag.get(i), j, i);
+				String thisDay = daysOfMonth.get(i);
+				System.out.println(firstDayOfMonth);
+				System.out.println(lastDayOfMonth);
+				
+				
+			}
+		}
+		System.out.println(daysOfMonth);
+
+		
+		
+		
+		
 
 
 	
