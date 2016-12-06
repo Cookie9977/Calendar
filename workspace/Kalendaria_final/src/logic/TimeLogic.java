@@ -1,6 +1,8 @@
 package logic;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,6 +29,20 @@ public class TimeLogic {
 		int nrDays = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
 			temp.add(String.valueOf(i + 1));
+		}
+		return temp;
+	}
+	//returnerar dagar i vecka, in = sträng på veckonummer,
+	public ArrayList<String>  getWeekDays (int Week){
+		temp = new ArrayList<String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
+		cal = new GregorianCalendar();
+		cal.setFirstDayOfWeek(Calendar.MONDAY);
+		cal.set(Calendar.WEEK_OF_YEAR, Week);
+		for(int i = 1; i < 8;i++){
+			cal.set(Calendar.DAY_OF_WEEK,i+1 );			
+//			System.out.println(sdf.format(cal.getTime())+" Siffran är: "+i);
+			temp.add(String.valueOf(sdf.format(cal.getTime())));
 		}
 		return temp;
 	}
@@ -91,7 +107,7 @@ public class TimeLogic {
 		return temp;
 	}
 
-	
+	//returnerar den aktuella månaden.
 	public int getCurrentMonth(){
 		cal = new GregorianCalendar();
 		int currentMonth = cal.get(Calendar.MONTH);

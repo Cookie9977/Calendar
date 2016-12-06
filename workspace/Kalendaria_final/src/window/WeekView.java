@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -17,11 +18,12 @@ public class WeekView extends JPanel {
 
 	private JLabel veckaLabel;
 	private TimeLogic thisWeek;
+	private TimeLogic TimeLogic;
 
 	private static final long serialVersionUID = -1542039657044981535L;
 
 	public WeekView() {
-
+		TimeLogic = new logic.TimeLogic();
 		// general window
 		setPreferredSize(new Dimension(700, 600));
 		setLayout(new BorderLayout());
@@ -41,11 +43,11 @@ public class WeekView extends JPanel {
 
 		// Aktuell vecka som label i vecko panel
 		veckaLabel = new JLabel();
-		thisWeek = new TimeLogic();
 		veckaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		veckaLabel.setText("V." + thisWeek.getWeek());
+		veckaLabel.setText("V." + TimeLogic.getWeek());
 		veckaLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		vecka.add(veckaLabel);
+
 
 		// West line, timestamps on the left
 		JPanel westLine = new JPanel();
@@ -55,22 +57,26 @@ public class WeekView extends JPanel {
 
 		// dagarpanelen i top line
 		JLabel[] dagLabel = new JLabel[7];
-		String[] days;
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 7));
 		theDays.setPreferredSize(new Dimension(630, 96));
 		topLine.add(theDays, BorderLayout.CENTER);
 
 		// Labels veckodagarna i headernamepanelen
-		days = new String[] { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
+		ArrayList<String> days;
+		days = TimeLogic.getWeekDays(TimeLogic.getWeek());
+		
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
-			dagLabel[k].setText(days[k]);
+			String tempVal = days.get(k);
+			String[] tempArray = tempVal.split("\\/");
+			System.out.println(tempArray[0]+" + "+tempArray[1]);
+			dagLabel[k].setText("<html><p>"+tempArray[0]+"</p><p> "+tempArray[1]+"</p></html>");
 			dagLabel[k].setPreferredSize(new Dimension(90, 96));
 			dagLabel[k].setBackground(Color.CYAN);
 			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			dagLabel[k].setHorizontalAlignment(SwingConstants.CENTER);
-			dagLabel[k].setFont(new Font("SansSerif", Font.PLAIN, 20));
+			dagLabel[k].setFont(new Font("SansSerif", Font.PLAIN, 18));
 			theDays.add(dagLabel[k]);
 		}
 
