@@ -20,6 +20,7 @@ public class MonthView extends JPanel {
 	private JTable tableMonth;
 	private pane.TimePane TimePane;
 	private TimeLogic TimeLogic;
+	
 
 	public MonthView() {
 		TimePane = new pane.TimePane();
@@ -62,11 +63,11 @@ public class MonthView extends JPanel {
 
 		JPanel timeView = new JPanel();
 		timeView.setBackground(Color.GRAY);
-		timeView.setPreferredSize(new Dimension(52, 500));
-		timeView.setLayout(new GridLayout(5, 1));
+		timeView.setPreferredSize(new Dimension(54, 500));
+		timeView.setLayout(new GridLayout(6, 1));
 		westLine.add(timeView);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			JLabel veckan = new JLabel();
 			veckan.setText("v.");
 			veckan.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -81,44 +82,67 @@ public class MonthView extends JPanel {
 		containDays.setBorder(BorderFactory.createLineBorder(Color.RED));
 		containDays.setLayout(new GridLayout(1, 1));
 		add(containDays, BorderLayout.CENTER);
-
 		
-		tableMonth = new JTable(5, 7);
+		
+		
+		tableMonth = new JTable(6, 7);
 		tableMonth.setTableHeader(null);
-		tableMonth.setRowHeight(110);
+		tableMonth.setRowHeight(92);
 
 		containDays.add(tableMonth);
 		
-
 		ArrayList<String> dag = TimeLogic.getWeekday();
 		System.out.println(dag);
 		int thisMonth = TimeLogic.getCurrentMonth();
 		int firstDayOfMonth = TimeLogic.firstDayMonth();
 		int lastDayOfMonth = TimeLogic.lastDayMonth();
+		int dayOfWeek = TimeLogic.dayOfWeek();
+		int firstDayNextMonth = TimeLogic.firstDayNextMonth();
+		int lastDayLastMonth = TimeLogic.lastDayLastMonth();
+		int justering = dayOfWeek;
+		//int justering = TimeLogic.justering();
 		ArrayList<String> daysOfMonth = TimeLogic.getDays(""+thisMonth);
 		int lopNummer = 1;
+		
+		
+		
 		
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
 			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
 			
+				
 				if(lopNummer > 1 && lopNummer<lastDayOfMonth+1 ){
 					tableMonth.setValueAt(lopNummer, j, i);
 					lopNummer++;
-				}else if(j==0 && 3 == i){//Fixa 3
+				
+				}else if(j==0 && dayOfWeek == i){
 					tableMonth.setValueAt(lopNummer, j, i);
-					lopNummer++;
-				}else if(lopNummer>lastDayOfMonth){
-					tableMonth.setValueAt("Empty", j, i);
+					System.out.println(i);
+					System.out.println(j);
+					lopNummer++;	
 					
+				}else if(lopNummer>lastDayOfMonth){
+					tableMonth.setValueAt(firstDayNextMonth++, j, i);	
 				}
-				//tableMonth.setValueAt(dag.get(i), j, i);
-				String thisDay = daysOfMonth.get(i);
-				System.out.println(firstDayOfMonth);
-				System.out.println(lastDayOfMonth);
 				
-				
+				else if(lopNummer<lastDayLastMonth){
+					tableMonth.setValueAt(lastDayLastMonth-justering+1, j, (dayOfWeek-justering));
+					justering--;
+				}	
 			}
 		}
+
+//		Object value = tableMonth.getValueAt(3, 3);
+//		System.out.println(value);
+//	    if ((int)value == lastDayOfMonth) {
+//	        tableMonth.setBackground(Color.red);
+//	    } else if ((int)value == 2) {
+//	        tableMonth.setBackground(Color.green);
+//	    } else {
+//	       tableMonth.setBackground(Color.gray);
+//	    }
+
+		
 		System.out.println(daysOfMonth);
 
 		
