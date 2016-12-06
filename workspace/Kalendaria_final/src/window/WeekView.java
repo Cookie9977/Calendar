@@ -9,16 +9,18 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import logic.TimeLogic;
+import main.ClickListener;
 
 public class WeekView extends JPanel {
 
 	private JLabel veckaLabel;
-	private TimeLogic thisWeek;
 	private TimeLogic TimeLogic;
+	protected Color Invisible = new Color(0, 0, 0, 0);
 
 	private static final long serialVersionUID = -1542039657044981535L;
 
@@ -44,10 +46,9 @@ public class WeekView extends JPanel {
 		// Aktuell vecka som label i vecko panel
 		veckaLabel = new JLabel();
 		veckaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		veckaLabel.setText("V." + TimeLogic.getWeek());
+		veckaLabel.setText("V." + TimeLogic.getWeek()[0]);
 		veckaLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		vecka.add(veckaLabel);
-
 
 		// West line, timestamps on the left
 		JPanel westLine = new JPanel();
@@ -64,14 +65,15 @@ public class WeekView extends JPanel {
 
 		// Labels veckodagarna i headernamepanelen
 		ArrayList<String> days;
-		days = TimeLogic.getWeekDays(TimeLogic.getWeek());
-		
+		//
+		int weekDaysParam[] = TimeLogic.getWeek();
+		days = TimeLogic.getWeekDays(weekDaysParam[0],weekDaysParam[1]);
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			String tempVal = days.get(k);
 			String[] tempArray = tempVal.split("\\/");
-			System.out.println(tempArray[0]+" + "+tempArray[1]);
-			dagLabel[k].setText("<html><p>"+tempArray[0]+"</p><p> "+tempArray[1]+"</p></html>");
+			// System.out.println(tempArray[0]+" + "+tempArray[1]);
+			dagLabel[k].setText("<html><p>" + tempArray[0] + "</p><p> " + tempArray[1] + "</p></html>");
 			dagLabel[k].setPreferredSize(new Dimension(90, 96));
 			dagLabel[k].setBackground(Color.CYAN);
 			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -97,18 +99,18 @@ public class WeekView extends JPanel {
 		westLine.add(timeView);
 
 		// Time label, tiderna i west line som labels.
-		for (int ii = 0; ii < 24; ii++) {
-			timeLabel[ii] = new JLabel();
-			if (ii < 10) {
-				timeLabel[ii].setText("0" + ii + ":00");
+		for (int i = 0; i < 24; i++) {
+			timeLabel[i] = new JLabel();
+			if (i < 10) {
+				timeLabel[i].setText("0" + i + ":00");
 			} else {
-				timeLabel[ii].setText(ii + ":00");
+				timeLabel[i].setText(i + ":00");
 			}
-			timeLabel[ii].setPreferredSize(new Dimension(70, 21));
-			timeLabel[ii].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-			timeLabel[ii].setHorizontalAlignment(SwingConstants.CENTER);
-			timeLabel[ii].setFont(new Font("SansSerif", Font.PLAIN, 10));
-			timeView.add(timeLabel[ii]);
+			timeLabel[i].setPreferredSize(new Dimension(70, 21));
+			timeLabel[i].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+			timeLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
+			timeLabel[i].setFont(new Font("SansSerif", Font.PLAIN, 10));
+			timeView.add(timeLabel[i]);
 		}
 
 		// Individuella dag kolumner
@@ -117,20 +119,29 @@ public class WeekView extends JPanel {
 			// TODO Kalender funktioner ska hit.
 			JPanel currentDay = new JPanel();
 			currentDay.setPreferredSize(new Dimension(90, 504));
-			currentDay.setBackground(new Color(0, 0, 0, 0));
+			currentDay.setBackground(new Color(238, 238, 238));
 			currentDay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			currentDay.setFont(new Font("SansSerif", Font.PLAIN, 20));
 			currentDay.setLayout(new GridLayout(24, 1, 0, 2));
 
 			// Dagarnas egna celler
 			for (int j = 0; j < 24; j++) {
+				// Paneler för labels att ligga i, behövs för mouselistener
+				JPanel dayTimeP = new JPanel();
+				dayTimeP.setPreferredSize(new Dimension(90, 21));
+				dayTimeP.setBackground(Invisible);
+				dayTimeP.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+				dayTimeP.setLayout(new GridLayout(1, 1));
+				dayTimeP.addMouseListener(new ClickListener(dayTimeP));
+				
+				// Labels för dags cellerna.
 				JLabel dayTime = new JLabel();
-				dayTime.setText("c:" + j);
+				dayTime.setText("");
 				dayTime.setPreferredSize(new Dimension(90, 21));
-				dayTime.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 				dayTime.setHorizontalAlignment(SwingConstants.CENTER);
-				dayTime.setFont(new Font("SansSerif", Font.PLAIN, 10));
-				currentDay.add(dayTime);
+				dayTime.setFont(new Font("SansSerif", Font.PLAIN, 12));
+				dayTimeP.add(dayTime);
+				currentDay.add(dayTimeP);
 			}
 			containDays.add(currentDay);
 		}
