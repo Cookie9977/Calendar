@@ -56,4 +56,24 @@ public class TimeLogic {
 		int week = cal.get(Calendar.WEEK_OF_YEAR);
 		return week;
 	}
+	// get a double between 0 and 24 only whole and halfs allowed outpust a Stinrg in HH:mm format
+	public String doubleToTime(double input){
+		double fraction = input % 1;
+		double whole = input - fraction;
+		String time;
+		
+		if (whole < 10) {
+			time = "0"+(int)whole;
+		} else {
+			time = String.valueOf((int)whole);
+		}
+		time += ":";
+		
+		if (fraction != 0) {
+			time += "30";
+		} else {
+			time += "00";
+		}		
+		return time;
+	}
 }

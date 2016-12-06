@@ -1,7 +1,5 @@
 package window;
 
-import javax.swing.JLabel;
-
 import pane.AddButtonsPane;
 
 public class WindowModifications {
