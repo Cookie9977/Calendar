@@ -31,54 +31,50 @@ public class TimeLogic {
 		}
 		return temp;
 	}
-	//returnerar dagar i vecka, in = sträng på veckonummer,
-	public ArrayList<String>  getWeekDays (int Week){
+
+	// returnerar dagar i vecka, in = sträng på veckonummer,
+	public ArrayList<String> getWeekDays(int Week) {
 		temp = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
 		cal = new GregorianCalendar();
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
 		cal.set(Calendar.WEEK_OF_YEAR, Week);
-		for(int i = 1; i < 8;i++){
-			cal.set(Calendar.DAY_OF_WEEK,i+1 );			
-//			System.out.println(sdf.format(cal.getTime())+" Siffran är: "+i);
+		for (int i = 1; i < 8; i++) {
+			cal.set(Calendar.DAY_OF_WEEK, i + 1);
+			// System.out.println(sdf.format(cal.getTime())+" Siffran är: "+i);
 			temp.add(String.valueOf(sdf.format(cal.getTime())));
 		}
 		return temp;
 	}
 
-	
-	public int firstDayMonth(){
+	public int firstDayMonth() {
 		Calendar cal1;
 		cal1 = new GregorianCalendar();
 		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), 1);
 		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
 	}
-	
-	public int lastDayMonth(){
+
+	public int lastDayMonth() {
 		Calendar cal1;
 		cal1 = new GregorianCalendar();
 		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), 1);
 		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
-		
-		}
-	
+
+	}
+
 	public ArrayList<String> getWeekday() {
 		temp = new ArrayList<String>();
 		tamp = new ArrayList<String>();
 		cal = new GregorianCalendar();
 		int weekDay = cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-		String[] weekDayName = new String[]{"Måndag","Tisdag","Onsdag","Torsdag","Fredag","Lördag","Söndag"};
+		String[] weekDayName = new String[] { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
 		for (int i = 0; i < 7; i++) {
 			temp.add(String.valueOf(weekDay + i));
 			tamp.add(weekDayName[i]);
-			
-		}
 
+		}
 		return temp;
 	}
-	
-
 
 	// returnerar månadernas namn.
 
@@ -91,7 +87,6 @@ public class TimeLogic {
 		}
 		return temp;
 	}
-	
 
 	// Hämtar ut året plus 20 framåt(för planeirng)
 	public ArrayList<String> getYear() {
@@ -106,13 +101,12 @@ public class TimeLogic {
 		return temp;
 	}
 
-	//returnerar den aktuella månaden.
-	public int getCurrentMonth(){
+	// returnerar den aktuella månaden.
+	public int getCurrentMonth() {
 		cal = new GregorianCalendar();
 		int currentMonth = cal.get(Calendar.MONTH);
 		return currentMonth;
 	}
-
 
 	// returnerar den aktuella veckan.
 	public int getWeek() {
