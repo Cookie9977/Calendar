@@ -54,13 +54,43 @@ public class TimeLogic {
 		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
 	}
 
+	public int firstDayNextMonth(){
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth()+1, 1);
+		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+	}
+	
+
 	public int lastDayMonth() {
+
 		Calendar cal1;
 		cal1 = new GregorianCalendar();
 		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), 1);
 		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+		}
+	
+	public int lastDayLastMonth(){
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth()-1, 1);
+		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);		
+		}
+	
+	public int dayOfWeek(){
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), -1);
+		return cal1.get(Calendar.DAY_OF_WEEK);
 	}
+	public int justering(){
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth()-1, -1);
+		return cal1.get(Calendar.DAY_OF_WEEK);
+	}
+
 
 	public ArrayList<String> getWeekday() {
 		temp = new ArrayList<String>();
