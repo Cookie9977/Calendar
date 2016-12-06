@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -88,6 +87,10 @@ public class MonthView extends JPanel {
 		tableMonth = new JTable(6, 7);
 		tableMonth.setTableHeader(null);
 		tableMonth.setRowHeight(92);
+		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare());
+		tableMonth.setCellSelectionEnabled(true);
+		tableMonth.setEnabled(false);
+		int monthColumn;
 
 		containDays.add(tableMonth);
 		
@@ -109,50 +112,35 @@ public class MonthView extends JPanel {
 		
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
 			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
-			
+			tableMonth.getColumnModel().getColumn(j+1).setCellRenderer(new TabellRenderare());
 				
 				if(lopNummer > 1 && lopNummer<lastDayOfMonth+1 ){
 					tableMonth.setValueAt(lopNummer, j, i);
+					
+					//tableMonth.getRowCount().getRow(i).setCellRenderer(new TabellRenderare());
 					lopNummer++;
 				
 				}else if(j==0 && dayOfWeek == i){
 					tableMonth.setValueAt(lopNummer, j, i);
-					System.out.println(i);
-					System.out.println(j);
+//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
+//					System.out.println(i);
+//					System.out.println(j);
 					lopNummer++;	
 					
 				}else if(lopNummer>lastDayOfMonth){
 					tableMonth.setValueAt(firstDayNextMonth++, j, i);	
+//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
 				}
 				
 				else if(lopNummer<lastDayLastMonth){
 					tableMonth.setValueAt(lastDayLastMonth-justering+1, j, (dayOfWeek-justering));
+//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
 					justering--;
+					monthColumn = i;
+					System.out.println("MonthCol = "+monthColumn);
 				}	
 			}
 		}
-
-//		Object value = tableMonth.getValueAt(3, 3);
-//		System.out.println(value);
-//	    if ((int)value == lastDayOfMonth) {
-//	        tableMonth.setBackground(Color.red);
-//	    } else if ((int)value == 2) {
-//	        tableMonth.setBackground(Color.green);
-//	    } else {
-//	       tableMonth.setBackground(Color.gray);
-//	    }
-
-		
-		System.out.println(daysOfMonth);
-
-		
-		
-		
-		
-
-
-	
-
 	}
 
 }
