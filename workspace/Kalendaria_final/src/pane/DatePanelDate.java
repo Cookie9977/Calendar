@@ -20,13 +20,9 @@ public class DatePanelDate extends JPanel {
 		LocalDate localDate = LocalDate.now();
 		// System.out.println(dtf.format(localDate)); // 2 december 2016
 		dateLabel.setText(dtf.format(localDate));
-//		dateLabel.setPreferredSize(new Dimension(250,200));
-		dateLabel.setBackground(new Color(244, 66, 137));
 		dateLabel.setVerticalAlignment(SwingConstants.CENTER);
 		dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		dateLabel.setOpaque(true);
 		dateLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-		add(dateLabel);
 	}
 
 }
