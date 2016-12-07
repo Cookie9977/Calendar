@@ -16,16 +16,15 @@ import pane.EventPane;
 
 public class ClickListener extends MouseAdapter implements ActionListener {
 	private int clickInterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
-	private JPanel holder;
-	private static JPanel oldHolder;
-	private Timer timer;
+	protected JPanel holder;
+	protected static JPanel oldHolder;
+	protected Timer timer;
 
 	public ClickListener(JPanel holder) {
 		this.holder = holder;
 		timer = new Timer(clickInterval, this);
-
 	}
-
+	//Den här ska kopieras över till överskrivningen för att kunna skriva över färg i deselect
 	public void mouseReleased(MouseEvent e) {
 		if (oldHolder != null && oldHolder != holder) {
 			deSelect();
@@ -59,7 +58,7 @@ public class ClickListener extends MouseAdapter implements ActionListener {
 			logic.checkEvent(eventPane);
 		}
 	}
-
+	//För annan deselect färg, ta med den här och byt ut färgen.
 	public void deSelect() {
 		oldHolder.setBackground(new Color(238, 238, 238));
 		holder.validate();

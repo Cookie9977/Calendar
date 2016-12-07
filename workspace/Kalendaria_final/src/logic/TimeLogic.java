@@ -31,16 +31,16 @@ public class TimeLogic {
 	}
 
 	// returnerar dagar i vecka, in = sträng på veckonummer,
-	public ArrayList<String> getWeekDays(int Week) {
+	public ArrayList<String> getWeekDays(int Week, int year) {
 		temp = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
-		cal = new GregorianCalendar();
-		cal.setFirstDayOfWeek(Calendar.MONDAY);
-		cal.set(Calendar.WEEK_OF_YEAR, Week);
+		Calendar calIns = Calendar.getInstance();
+		calIns.set(Calendar.YEAR, year);
+		calIns.set(Calendar.WEEK_OF_YEAR, Week);
 		for (int i = 1; i < 8; i++) {
-			cal.set(Calendar.DAY_OF_WEEK, i + 1);
-			// System.out.println(sdf.format(cal.getTime())+" Siffran är: "+i);
-			temp.add(String.valueOf(sdf.format(cal.getTime())));
+			// System.out.println(calIns.getTime());
+			calIns.set(Calendar.DAY_OF_WEEK, i + 1);
+			temp.add(String.valueOf(sdf.format(calIns.getTime())));
 		}
 		return temp;
 	}
@@ -50,10 +50,37 @@ public class TimeLogic {
 		return cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
 	}
 
+	public int firstDayNextMonth() {
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() + 1, 1);
+		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+	}
+
 	public int lastDayMonth() {
 		cal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
 		return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
 
+	public int lastDayLastMonth() {
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() - 1, 1);
+		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	public int dayOfWeek() {
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), -1);
+		return cal1.get(Calendar.DAY_OF_WEEK);
+	}
+
+	public int justering() {
+		Calendar cal1;
+		cal1 = new GregorianCalendar();
+		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() - 1, -1);
+		return cal1.get(Calendar.DAY_OF_WEEK);
 	}
 
 	public ArrayList<String> getWeekday() {
@@ -65,7 +92,6 @@ public class TimeLogic {
 		for (int i = 0; i < 7; i++) {
 			temp.add(String.valueOf(weekDay + i));
 			tamp.add(weekDayName[i]);
-
 		}
 		return temp;
 	}
@@ -102,28 +128,40 @@ public class TimeLogic {
 	}
 
 	// returnerar den aktuella veckan.
-	public int getWeek() {
+	public int[] getWeek() {
+		int[] retval = new int[2];
+		cal = new GregorianCalendar();
 		int week = cal.get(Calendar.WEEK_OF_YEAR);
-		return week;
+		Calendar calIns = Calendar.getInstance();
+		int year = calIns.getWeekYear();
+		calIns.set(Calendar.YEAR, year);
+		if (week > 52) {
+			week = week - 52;
+		}
+		retval[0] = week;
+		retval[1] = year;
+		return retval;
 	}
-	// get a double between 0 and 24 only whole and halfs allowed outpust a Stinrg in HH:mm format
-	public String doubleToTime(double input){
+
+	// get a double between 0 and 24 only whole and halfs allowed outpust a
+	// String in HH:mm format
+	public String doubleToTime(double input) {
 		double fraction = input % 1;
 		double whole = input - fraction;
 		String time;
-		
+
 		if (whole < 10) {
-			time = "0"+(int)whole;
+			time = "0" + (int) whole;
 		} else {
-			time = String.valueOf((int)whole);
+			time = String.valueOf((int) whole);
 		}
 		time += ":";
-		
+
 		if (fraction != 0) {
 			time += "30";
 		} else {
 			time += "00";
-		}		
+		}
 		return time;
 	}
 	
