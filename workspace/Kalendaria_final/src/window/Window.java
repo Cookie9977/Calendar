@@ -1,16 +1,17 @@
 package window;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import pane.AddButtonsPane;
 import pane.DatePanelDate;
@@ -23,7 +24,8 @@ public class Window extends JFrame {
 	private LoginUser loginUser;
 	protected AddButtonsPane addButtons;
 	protected RegisterUser registerUser;
-	protected JPanel body, calendar, menyBar, navBar, datePanel;
+	protected JPanel body, menyBar, navBar, datePanel, topLine, westLine, centerBlock, cTop, cContent, cWest, cEast,
+			cSouth;
 	protected MenuNavBar monthButton, weekButton, dayButton;
 	protected WindowModifications windowmodifications;
 	protected MonthView monthView;
@@ -31,7 +33,7 @@ public class Window extends JFrame {
 	protected WeekView weekView;
 	protected DatePanelDate datePanelDate;
 	protected JLabel view;
-	
+
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -39,13 +41,21 @@ public class Window extends JFrame {
 	public Window() {
 		// basic setup
 		super("Kalendarium");
+		lookAndFeel();
 		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// declaring parts
 		body = new JPanel();
-		calendar = new JPanel();
+		topLine = new JPanel();
+		westLine = new JPanel();
+		centerBlock = new JPanel();
+		cTop = new JPanel();
+		cContent = new JPanel();
+		cWest = new JPanel();
+		cEast = new JPanel();
+		cSouth = new JPanel();
 		menyBar = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
@@ -54,7 +64,8 @@ public class Window extends JFrame {
 		weekView = new WeekView();
 		dayView = new DayView();
 		addButtons = new AddButtonsPane();
-		view = new JLabel("Dag");
+		// FIXME byt färg och sånt, gör den fin. ser hemskt ut just nu.
+		view = new JLabel("Månad");
 		view.setFont(new Font("SansSerif", Font.BOLD, 20));
 		view.setForeground(Color.YELLOW);
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
@@ -63,146 +74,171 @@ public class Window extends JFrame {
 
 		// window size and place
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = 1000;
-		int height = 800;
+		int width = 1000; // 1125
+		int height = 800; // 900
 		int xStart = getXStart(screenSize, width);
 		int yStart = getYStart(screenSize, height);
 		setBounds(xStart, yStart, width, height);
+		int gridWidth = (width / 4);
+		int gridHeight = (height / 10);
+
+		// giving window sizes and layout
 		setPreferredSize(new Dimension(width, height));
+		setLayout(new BorderLayout());
 
 		// components color
-		calendar.setBackground(Color.BLACK);
-		menyBar.setBackground(Color.RED);
+		menyBar.setBackground(invis.RED);
 		navBar.setBackground(Color.BLUE);
 		datePanel.setBackground(Color.GREEN);
 
 		// window grid
-		GridBagLayout gridBag = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		body.setLayout(gridBag);
-		navBar.setLayout(gridBag);
-		menyBar.setLayout(gridBag);
-		datePanel.setLayout(gridBag);
-		int gridWith = (width / 4);
-		int gridHeight = (height / 10);
-
-		// adding parts
+		// GridBagConstraints gbc = new GridBagConstraints();
+		body.setPreferredSize(new Dimension(width, height));
+		body.setLayout(new BorderLayout());
 		add(body);
 
-		gbc.fill = GridBagConstraints.BOTH;
+		// TopLine för allt som ska vara på samma linje i norra delen
+		topLine.setPreferredSize(new Dimension(width, gridHeight));
+		topLine.setBackground(invis);
+		topLine.setLayout(new BorderLayout());
+		body.add(topLine, BorderLayout.NORTH);
 
-		gbc.gridwidth = gridWith;
-		gbc.gridheight = gridHeight;
-		gbc.weightx = 0.25;
-		gbc.weighty = 0.1;
-		body.add(datePanel, gbc);
-
-		gbc.gridx = gridWith;
-		gbc.gridwidth = GridBagConstraints.REMAINDER;
-		gbc.weightx = 0.75;
-		body.add(menyBar, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = gridHeight;
-		gbc.gridwidth = gridWith;
-		gbc.gridheight = GridBagConstraints.REMAINDER;
-		gbc.weightx = 0.25;
-		gbc.weighty = 0.9;
-		body.add(navBar, gbc);
-
-		gbc.gridx = gridWith;
-		gbc.gridwidth = GridBagConstraints.REMAINDER;
-		body.add(calendar, gbc);
-		/*
-		 * försök för layout på menybaren gbc = new GridBagConstraints(); int
-		 * margin = 20; int startPos = (width-gridWith+margin); int Buttonwidth
-		 * = ((width*2)/10); gbc.gridy = gridHeight; gbc.gridwidth =
-		 * Buttonwidth; gbc.gridheight = ((width)/20); //gbc.fill =
-		 * GridBagConstraints.BOTH; gbc.insets = new Insets(((width)/20)0,
-		 * 0left, 0bottom, 0right); gbc.weightx = 0.1; gbc.weighty = 1.0;
-		 * gbc.anchor = GridBagConstraints.SOUTH; for (int i = 0; i <
-		 * menyBarHolders.length; i++) { menyBarHolders[i] = new JPanel();
-		 * menyBarHolders[i].setBackground(Color.YELLOW); gbc.gridx =
-		 * startPos+((margin+Buttonwidth)*i);
-		 * 
-		 * menyBar.add(menyBarHolders[i], gbc); }
-		 */
-		/*
-		 * DatePanelDate, visar upp dagens datum i högra hörnet av fönstret.
-		 */
-		GridBagConstraints datePanelC = new GridBagConstraints();
-		datePanelC.anchor = GridBagConstraints.CENTER;
-		datePanelC.weighty = 1;
-		datePanelC.fill = GridBagConstraints.NONE;
-		datePanel.add(datePanelDate, datePanelC);
-		datePanelDate.setBackground(invis);
+		// Westline, Vänsterkolumnen för allt som ska ligga i den raden.
+		westLine.setPreferredSize(new Dimension(gridWidth, (height - gridHeight)));
+		westLine.setBackground(new Color(155, 155, 155, 155));
+		westLine.setLayout(new BorderLayout());
+		body.add(westLine, BorderLayout.WEST);
 
 		/*
-		 * menybar rutans knappar knapparnas gridbag
+		 * centerBlock, Center blocket i det sydvästra delen av fönstret.
+		 * Content panelen där kalender vyer kommer att finnas.
 		 */
-		GridBagConstraints buttonConstraints = new GridBagConstraints();
-		buttonConstraints.gridx = 0;
-		buttonConstraints.anchor = GridBagConstraints.PAGE_END;
-		buttonConstraints.ipadx = 170;
-		buttonConstraints.ipady = 20;
-		buttonConstraints.weighty = 1;
-		buttonConstraints.fill = GridBagConstraints.NONE;
+		centerBlock.setPreferredSize(new Dimension((width - gridWidth), (height - gridHeight)));
+		centerBlock.setBackground(new Color(255, 0, 255));
+		centerBlock.setLayout(new BorderLayout());
+		body.add(centerBlock, BorderLayout.CENTER);
+
+		// Top höger där dagens datum kommer att stå. finns i topLine.
+		datePanel.setPreferredSize(new Dimension(gridWidth, gridHeight));
+		datePanel.setBackground(new Color(238, 231, 56));
+		datePanel.setLayout(new GridLayout(1, 1));
+		topLine.add(datePanel, BorderLayout.WEST);
+
+		// NavBar, där navigering mellan vyer sker. finns i topLine.
+		navBar.setPreferredSize(new Dimension((width - gridWidth), gridHeight));
+		navBar.setBackground(new Color(66, 244, 229));
+		navBar.setLayout(new GridLayout(1, 3, 0, 0));
+		topLine.add(navBar, BorderLayout.CENTER);
+
 		/*
-		 * Knapparna.
+		 * MenyBar, sidopanelen där funktionalitet kommer finnas t.ex. logga in
+		 * och ut och saker som lägg till vänner o vänlista, lite beroende på
+		 * inloggningstatusen.
 		 */
+		menyBar.setPreferredSize(new Dimension(gridWidth, (height - gridHeight)));
+		menyBar.setBackground(new Color(66, 86, 244, 255));
+		menyBar.setLayout(new GridLayout(5, 1));
+		westLine.add(menyBar, BorderLayout.CENTER);
+		
+		//Dagens datum.
+		datePanel.add(datePanelDate);
+
+		// Holders till navbar knapparna
+		JPanel[] navBarHolders = new JPanel[3];
+		for (int i = 0; i < 3; i++) {
+			navBarHolders[i] = new JPanel();
+			navBarHolders[i].setLayout(new BorderLayout());
+			navBarHolders[i].setBackground(invis);
+			navBar.add(navBarHolders[i]);
+		}
+
+		// Navbar knapparna läggs in i olika holders.
 		monthButton = new MenuNavBar(this, 0);
 		monthButton.setBackground(invis);
-		menyBar.add(monthButton, buttonConstraints);
-		buttonConstraints.gridx = 1;
+		navBarHolders[0].add(monthButton, BorderLayout.CENTER);
 		weekButton = new MenuNavBar(this, 1);
 		weekButton.setBackground(invis);
-		menyBar.add(weekButton, buttonConstraints);
-		buttonConstraints.gridx = 2;
+		navBarHolders[1].add(weekButton, BorderLayout.CENTER);
 		dayButton = new MenuNavBar(this, 2);
 		dayButton.setBackground(invis);
-		menyBar.add(dayButton, buttonConstraints);
+		navBarHolders[2].add(dayButton, BorderLayout.CENTER);
 
-		// Calender rutans saker
-		leftArrowButton = new NavArrowButton(this, 0);
-		leftArrowButton.setBackground(invis);
-		calendar.add(leftArrowButton);
-		//TODO lägg till jlabel för vilen du befinner di i nu
-		calendar.add(view);
-		
-		rightArrowButton = new NavArrowButton(this, 1);
-		rightArrowButton.setBackground(invis);
-		calendar.add(rightArrowButton);
-
-		// navArrowButton = new navArrowButton();
-		// calendar.add(navArrowButton);
-
-		calendar.add(monthView);
-		// calendar.add(weekView);
-		 //calendar.add(dayView);
-
-		// navArrowButton = new navArrowButton();
-		// calendar.add(navArrowButton);
-
-		// calendar.add(monthView);
-		//calendar.add(weekView);
-		// calendar.add(dayView);
-
-		// navArrowButton = new navArrowButton();
-		// calendar.add(navArrowButton);
-		// calendar.add(calender);
-		// calendar.add(weekView);
-
+		//Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
-		navBar.setLayout(new GridLayout(3, 1));
-		navBar.add(loginUser);
-		navBar.add(registerUser);
+		menyBar.add(loginUser);
+		menyBar.add(registerUser);
+		
+		/*
+		 * Padding rutor i centerBlock
+		 */
+
+		// Center blockets top, ska inehålla view och nav pilar.
+		cTop.setPreferredSize(new Dimension((width - gridWidth), gridHeight / 2));
+		cTop.setBackground(Color.gray);
+
+		// Center blockets västra del, ska vara padding i samma bredd som
+		// navknappavståndet
+		cWest.setPreferredSize(new Dimension((gridWidth / 8), (height - (gridHeight) * 2)));
+		cWest.setBackground(Color.DARK_GRAY);
+
+		// Center blockets östra del, ska vara padding i samma bredd som
+		// navknappavståndet
+		cEast.setPreferredSize(new Dimension((gridWidth / 8), (height - (gridHeight) * 2)));
+		cEast.setBackground(Color.DARK_GRAY);
+
+		// Center blockets södra del, ska vara padding i botten
+		cSouth.setPreferredSize(new Dimension((width - (gridWidth * 2)), gridHeight / 2));
+		cSouth.setBackground(Color.GRAY);
+
+		// Center blockets Content del, här ska kalendrar visas upp.
+		cContent.setPreferredSize(new Dimension((int) (gridHeight * 2.75), (gridHeight * 8)));
+		cContent.setBackground(Color.blue);
+		
+		//Lägg in blocken
+		centerBlock.add(cTop, BorderLayout.NORTH);
+		centerBlock.add(cWest, BorderLayout.WEST);
+		centerBlock.add(cEast, BorderLayout.EAST);
+		centerBlock.add(cSouth, BorderLayout.SOUTH);
+		centerBlock.add(cContent, BorderLayout.CENTER);
+		
+		//Vänster pilen i top vyn, följt av visa vilken kalender vi har sen högerknappen.
+		leftArrowButton = new NavArrowButton(this, 0);
+		leftArrowButton.setBackground(invis);
+		cTop.add(leftArrowButton);
+		
+		cTop.add(view);
+
+		rightArrowButton = new NavArrowButton(this, 1);
+		rightArrowButton.setBackground(invis);
+		cTop.add(rightArrowButton);
+		
+		//default content view.
+		cContent.add(monthView);
+		// cContent.add(weekView);
+		// cContent.add(dayView);
+		
 
 		pack();
 	}
 
 	public WindowModifications getModifications() {
 		return windowmodifications;
+	}
+
+	public void lookAndFeel() {
+		try {
+			// Set cross-platform Java L&F (also called "Metal")
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exception
+		}
 	}
 
 	private int getXStart(Dimension screenSize, int width) {

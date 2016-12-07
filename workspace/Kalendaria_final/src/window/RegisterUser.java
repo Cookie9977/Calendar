@@ -26,10 +26,10 @@ public class RegisterUser extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -2354560402587167649L;
 
 	public RegisterUser() {
-		setBackground(new Color(123, 123, 123));
+		setBackground(new Color(0, 0, 0, 0));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
-		//layout
+		// layout
 		GridBagLayout gridBag = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		setLayout(gridBag);
@@ -38,15 +38,15 @@ public class RegisterUser extends JPanel implements ActionListener {
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		
+
 		holders = new JPanel[3];
 		for (int i = 0; i < holders.length; i++) {
 			holders[i] = new JPanel();
 			holders[i].setLayout(new GridLayout(1, 2));
-			add(holders[i],gbc);
+			add(holders[i], gbc);
 			gbc.gridy++;
 		}
-		
+
 		headingLabel = new JLabel[3];
 		String[] heading;
 		heading = new String[] { "Användarnamn:", "E-mail:", "Lösenord:" };
@@ -70,7 +70,7 @@ public class RegisterUser extends JPanel implements ActionListener {
 		submitButton.setText("Registrera");
 		submitButton.addActionListener(this);
 		gbc.gridy++;
-		add(submitButton,gbc);
+		add(submitButton, gbc);
 
 	}
 

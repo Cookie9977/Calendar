@@ -1,6 +1,8 @@
 package window;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,7 +39,8 @@ public class MenuNavBar extends JPanel implements ActionListener {
 			button.setText(buttonText[2]);
 			break;
 		}
-		button.setPreferredSize(new Dimension(200, 60));
+		button.setPreferredSize(new Dimension(200, 70));
+		button.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		button.addActionListener(this);
 		add(button);
 	}
