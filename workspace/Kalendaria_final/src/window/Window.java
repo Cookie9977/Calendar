@@ -74,8 +74,8 @@ public class Window extends JFrame {
 
 		// window size and place
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = 1000; // 1125
-		int height = 800; // 900
+		int width = 1125; // 1125
+		int height = 900; // 900
 		int xStart = getXStart(screenSize, width);
 		int yStart = getYStart(screenSize, height);
 		setBounds(xStart, yStart, width, height);
@@ -192,7 +192,7 @@ public class Window extends JFrame {
 		cSouth.setBackground(Color.GRAY);
 
 		// Center blockets Content del, här ska kalendrar visas upp.
-		cContent.setPreferredSize(new Dimension((int) (gridHeight * 2.75), (gridHeight * 8)));
+		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
 		cContent.setBackground(Color.blue);
 		
 		//Lägg in blocken

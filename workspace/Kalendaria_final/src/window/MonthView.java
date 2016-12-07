@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import logic.TimeLogic;
 import main.ClickListener;
 
-public class MonthView extends JPanel implements MouseListener {
+public class MonthView extends JPanel{
 
 	private static final long serialVersionUID = 6304391601622162482L;
 	private JTable tableMonth;
@@ -89,11 +89,8 @@ public class MonthView extends JPanel implements MouseListener {
 		containDays.setLayout(new GridLayout(1, 1));
 		add(containDays, BorderLayout.CENTER);
 		
-		
-		
 		tableMonth = new JTable(6, 7){
 			public boolean isCellEditable(int aRow, int aColumn) {
-
 				 return false;
 				}
 		};
@@ -101,25 +98,7 @@ public class MonthView extends JPanel implements MouseListener {
 		tableMonth.setRowHeight(92);
 		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare(this));
 		tableMonth.setCellSelectionEnabled(true);	
-		tableMonth.addMouseListener(new ClickListener(this){
-			@Override
-			public void DoubleClick(MouseEvent e) {
-				JTable source = (JTable)e.getSource();
-		        int row = source.rowAtPoint( e.getPoint() );
-		        int column = source.columnAtPoint( e.getPoint() );
-		        
-		        if(source.isRowSelected(row)){
-		        	System.out.println("Row:" +row+ "Happy birthday!");
-		        	
-		        }
-		        if (! source.isRowSelected(row))
-		            source.changeSelection(row, column, false, false);
-				System.out.println("Col: "+column+ " Row: "+row);
-			}
-
-			
-			
-		});
+		tableMonth.addMouseListener(new ClickListener(this));
 		containDays.add(tableMonth);
 		
 		ArrayList<String> dag = TimeLogic.getWeekday();
@@ -129,9 +108,10 @@ public class MonthView extends JPanel implements MouseListener {
 		int firstDayNextMonth = TimeLogic.firstDayNextMonth();
 		int lastDayLastMonth = TimeLogic.lastDayLastMonth();
 		int justering = dayOfWeek;
-		//int justering = TimeLogic.justering();
+		int thisMonth = TimeLogic.getCurrentMonth();
+		int firstDayOfMonth = TimeLogic.firstDayMonth();
 		int lopNummer = 1;
-		
+		System.out.println(thisMonth);
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
 			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
 			tableMonth.getColumnModel().getColumn(j+1).setCellRenderer(new TabellRenderare(this));
