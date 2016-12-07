@@ -7,9 +7,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class TimeLogic {
-	private ArrayList<String> temp;
-	private ArrayList<String> tamp;
-	private Calendar cal;
+	private ArrayList<String> temp, tamp;
+	private Calendar cal = new GregorianCalendar();
 
 	// Retunerar dagar i månad, in = sträng på månadens namn.
 	public ArrayList<String> getDays(String month) {
@@ -23,7 +22,6 @@ public class TimeLogic {
 				break;
 			}
 		}
-		cal = new GregorianCalendar();
 		cal.set(cal.get(Calendar.YEAR), monthValue, cal.get(Calendar.DAY_OF_MONTH));
 		int nrDays = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
@@ -48,17 +46,13 @@ public class TimeLogic {
 	}
 
 	public int firstDayMonth() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), 1);
-		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+		cal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
+		return cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
 	}
 
 	public int lastDayMonth() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), 1);
-		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
+		cal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
+		return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
 	}
 
@@ -103,15 +97,12 @@ public class TimeLogic {
 
 	// returnerar den aktuella månaden.
 	public int getCurrentMonth() {
-		cal = new GregorianCalendar();
 		int currentMonth = cal.get(Calendar.MONTH);
 		return currentMonth;
 	}
 
 	// returnerar den aktuella veckan.
 	public int getWeek() {
-
-		cal = new GregorianCalendar();
 		int week = cal.get(Calendar.WEEK_OF_YEAR);
 		return week;
 	}
@@ -135,4 +126,31 @@ public class TimeLogic {
 		}		
 		return time;
 	}
+	
+	
+	public String parseOutYear(String time){
+		String[] parts = time.split("-");
+		return parts[0];
+	}
+	
+	public String parseOutMonth(String time){
+		String[] parts = time.split("-");
+		return parts[1];
+	}
+	
+	public String parseOutDay(String time){
+		String[] parts = time.split("-| ");
+		return parts[2];
+	}
+	
+	public String parseOutHour(String time){
+		String[] parts = time.split(":| ");
+		return parts[1];
+	}
+	
+	public String parseOutMinute(String time){
+		String[] parts = time.split(":");
+		return parts[1];
+	}
+
 }

@@ -80,9 +80,6 @@ public class EventPane extends JPanel implements ActionListener {
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.weightx = 0.5;
-
-		System.out.println(4 % 2);
-
 		// set labels
 		for (int i = 0; i < labelText.length; i++) {
 			labels[i] = new JLabel(labelText[i]);

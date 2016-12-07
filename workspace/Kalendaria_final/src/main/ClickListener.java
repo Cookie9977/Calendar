@@ -23,7 +23,7 @@ public class ClickListener extends MouseAdapter implements ActionListener {
 	public ClickListener(JPanel holder) {
 		this.holder = holder;
 		timer = new Timer(clickInterval, this);
-		
+
 	}
 
 	public void mouseReleased(MouseEvent e) {

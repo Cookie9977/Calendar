@@ -15,5 +15,4 @@ public class FriendList extends DefaultComboBoxModel<Friend> {
 			this.addElement(new Friend(data[i]));
 		}
 	}
-
 }

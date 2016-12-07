@@ -32,42 +32,44 @@ public class DayView extends JPanel {
 		calendar = new JPanel();
 		logic = new TimeLogic();
 		scroll = new JScrollPane();
-		
+
+		// TODO visa dagens datum med event
+
 		scroll.setViewportView(calendar);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setPreferredSize(new Dimension(620, 600));
 		scroll.getVerticalScrollBar().setUnitIncrement(10);
-		
+
 		calendar.setLayout(new BorderLayout());
 		calendar.setAutoscrolls(true);
-		
+
 		holders = new JPanel[48][2];
 		layoutHolders = new JPanel[2];
 		timeLabels = new JLabel[48];
 		eventLabels = new JLabel[48];
-		
+
 		for (int i = 0; i < timeLabels.length; i++) {
-			timeLabels[i] = new JLabel(logic.doubleToTime((double)i/2));
+			timeLabels[i] = new JLabel(logic.doubleToTime((double) i / 2));
 			timeLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			timeLabels[i].setVerticalAlignment(SwingConstants.CENTER);
-			
+
 			eventLabels[i] = new JLabel("");
 			eventLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			eventLabels[i].setVerticalAlignment(SwingConstants.CENTER);
 		}
-		
+
 		for (int i = 0; i < layoutHolders.length; i++) {
 			layoutHolders[i] = new JPanel();
-			layoutHolders[i].setLayout(new GridLayout(48,1));
+			layoutHolders[i].setLayout(new GridLayout(48, 1));
 		}
-		
+
 		calendar.add(layoutHolders[0], BorderLayout.WEST);
 		calendar.add(layoutHolders[1], BorderLayout.CENTER);
-		
+
 		for (int i = 0; i < holders.length; i++) {
 			for (int j = 0; j < holders[i].length; j++) {
 				holders[i][j] = new JPanel();
-				holders[i][j].setBorder(BorderFactory.createMatteBorder(1,1,0,0, Color.BLACK));
+				holders[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.BLACK));
 				if (j == 0) {
 					holders[i][j].setPreferredSize(new Dimension(40, 20));
 					holders[i][j].add(timeLabels[i]);
@@ -77,8 +79,7 @@ public class DayView extends JPanel {
 					layoutHolders[1].add(holders[i][j]);
 					holders[i][j].addMouseListener(new ClickListener(holders[i][j]));
 				}
-				
-				
+
 			}
 		}
 		add(scroll);
