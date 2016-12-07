@@ -1,7 +1,6 @@
 package pane;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +14,7 @@ public class DatePanelDate extends JPanel {
 	private static final long serialVersionUID = 2465797833895976796L;
 
 	public DatePanelDate() {
+		setLayout(new BorderLayout());
 		JLabel dateLabel = new JLabel();
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy");
 		LocalDate localDate = LocalDate.now();
@@ -23,6 +23,8 @@ public class DatePanelDate extends JPanel {
 		dateLabel.setVerticalAlignment(SwingConstants.CENTER);
 		dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dateLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(dateLabel,BorderLayout.CENTER);
+		
 	}
 
 }
