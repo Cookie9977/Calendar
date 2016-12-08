@@ -24,6 +24,7 @@ public class DayView extends JPanel {
 	private JScrollPane scroll;
 	private JLabel[] timeLabels;
 	protected JLabel[] eventLabels;
+	protected int day;
 	// private JPanel hoursMinutes;
 	// private JPanel[][] dayPanel;
 	// private JTable timeTable;
@@ -32,11 +33,13 @@ public class DayView extends JPanel {
 		calendar = new JPanel();
 		logic = new TimeLogic();
 		scroll = new JScrollPane();
+		init();
 
 		// TODO visa dagens datum med event
 
 		scroll.setViewportView(calendar);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setPreferredSize(new Dimension(620, 600));
 		scroll.getVerticalScrollBar().setUnitIncrement(10);
 
@@ -83,5 +86,8 @@ public class DayView extends JPanel {
 			}
 		}
 		add(scroll);
+	}
+	public void init(){
+		day = logic.getCurrentDay();
 	}
 }

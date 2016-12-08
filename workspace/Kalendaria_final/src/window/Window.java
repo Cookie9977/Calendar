@@ -145,8 +145,8 @@ public class Window extends JFrame {
 		westLine.add(westBorder, BorderLayout.WEST);
 		westLine.add(eastBorder, BorderLayout.EAST);
 		westLine.add(menyBar, BorderLayout.CENTER);
-		
-		//Dagens datum.
+
+		// Dagens datum.
 		datePanel.add(datePanelDate);
 
 		// Holders till navbar knapparna
@@ -169,13 +169,13 @@ public class Window extends JFrame {
 		dayButton.setBackground(invis);
 		navBarHolders[2].add(dayButton, BorderLayout.CENTER);
 
-		//Registreringen i menybar
+		// Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
 		upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);
-		//menyBar.add(upcomingEvent);
+
 		/*
 		 * Padding rutor i centerBlock
 		 */
@@ -199,34 +199,35 @@ public class Window extends JFrame {
 		cSouth.setBackground(Color.GRAY);
 
 		// Center blockets Content del, här ska kalendrar visas upp.
-		
-		//XXX width är 772 och height 720 på cContent så skala era kalendrar efter den.
+
+		// XXX width är 772 och height 720 på cContent så skala era kalendrar
+		// efter den.
 		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
 		cContent.setBackground(Color.blue);
-		
-		//Lägg in blocken
+
+		// Lägg in blocken
 		centerBlock.add(cTop, BorderLayout.NORTH);
 		centerBlock.add(cWest, BorderLayout.WEST);
 		centerBlock.add(cEast, BorderLayout.EAST);
 		centerBlock.add(cSouth, BorderLayout.SOUTH);
 		centerBlock.add(cContent, BorderLayout.CENTER);
-		
-		//Vänster pilen i top vyn, följt av visa vilken kalender vi har sen högerknappen.
+
+		// Vänster pilen i top vyn, följt av visa vilken kalender vi har sen
+		// högerknappen.
 		leftArrowButton = new NavArrowButton(this, 0);
 		leftArrowButton.setBackground(invis);
 		cTop.add(leftArrowButton);
-		
+
 		cTop.add(view);
 
 		rightArrowButton = new NavArrowButton(this, 1);
 		rightArrowButton.setBackground(invis);
 		cTop.add(rightArrowButton);
-		
-		//default content view.
+
+		// default content view.
 		cContent.add(monthView);
 		// cContent.add(weekView);
 		// cContent.add(dayView);
-		
 
 		pack();
 	}

@@ -126,7 +126,6 @@ public class TimeLogic {
 		return temp;
 	}
 
-
 	public ArrayList<String> getWeekDays() {
 		temp = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
@@ -143,6 +142,7 @@ public class TimeLogic {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+
 		}
 		return temp;
 	}
