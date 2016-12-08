@@ -123,7 +123,7 @@ public class TimeLogic {
 
 	// returnerar den aktuella månaden.
 	public int getCurrentMonth() {
-		int currentMonth = (cal.get(Calendar.MONTH)+1);
+		int currentMonth = (cal.get(Calendar.MONTH));
 		return currentMonth;
 	}
 

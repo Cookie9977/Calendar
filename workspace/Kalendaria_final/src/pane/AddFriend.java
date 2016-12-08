@@ -43,7 +43,7 @@ public class AddFriend extends JFrame implements ActionListener {
 		setPreferredSize(new Dimension(width, height));
 
 		// stil
-		setBackground(new Color(123, 123, 123));
+		setBackground(new Color(238, 238, 238));
 		Font inputFont = new Font("SansSerif", Font.BOLD, 20);
 		Font labelFont = new Font("SansSerif", Font.PLAIN, 20);
 
