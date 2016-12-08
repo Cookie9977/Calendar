@@ -32,34 +32,30 @@ public class MonthView extends JPanel{
 		TimePane = new pane.TimePane();
 		TimeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
-		setPreferredSize(new Dimension(600, 600));
+		setPreferredSize(new Dimension(770, 720));
 		setLayout(new BorderLayout());
 		JPanel topLine = new JPanel();
-		topLine.setPreferredSize(new Dimension(600, 50));
+		topLine.setPreferredSize(new Dimension(772, 60));
 		topLine.setLayout(new BorderLayout());
 		add(topLine, BorderLayout.NORTH);
 
-		JPanel vecka = new JPanel();
-		vecka.setPreferredSize(new Dimension(50, 90));
-		JLabel veckaLabel = new JLabel();
-		veckaLabel.setText("Veckor");
-		vecka.add(veckaLabel);
-		topLine.add(vecka, BorderLayout.WEST);
+		
+		
 
-		JLabel[] dagLabel = new JLabel[7];
+		JLabel[] dagLabel = new JLabel[8];
 		String[] days;
-		days = new String[] { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
+		days = new String[] { "Vecka","Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
 		JPanel theDays = new JPanel();
-		theDays.setLayout(new GridLayout(1, 7));
-		theDays.setPreferredSize(new Dimension(550, 90));
-		topLine.add(theDays, BorderLayout.EAST);
+		theDays.setLayout(new GridLayout(1, 8));
+		theDays.setBackground(Color.MAGENTA);
+		theDays.setPreferredSize(new Dimension(770, 90));
+		topLine.add(theDays, BorderLayout.CENTER);
 
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			dagLabel[k].setText(days[k]);
-			//dagLabel[k].setPreferredSize(new Dimension(0, 50));
-			dagLabel[k].setBackground(Color.CYAN);
-			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			dagLabel[k].setPreferredSize(new Dimension(96,90));
+			dagLabel[k].setBorder(BorderFactory.createLineBorder(new Color(178, 178, 178)));
 			theDays.add(dagLabel[k]);
 		}
 		JPanel westLine = new JPanel();
@@ -68,24 +64,22 @@ public class MonthView extends JPanel{
 		add(westLine, BorderLayout.WEST);
 
 		JPanel timeView = new JPanel();
-		timeView.setBackground(Color.GRAY);
-		timeView.setPreferredSize(new Dimension(54, 500));
+		timeView.setBackground(Color.CYAN);
+		timeView.setPreferredSize(new Dimension(97, 640));
 		timeView.setLayout(new GridLayout(6, 1));
 		westLine.add(timeView);
-
+		int[] weeks = TimeLogic.getWeek();
 		for (int i = 0; i < 6; i++) {
 			JLabel veckan = new JLabel();
-			veckan.setText("v.");
-			veckan.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			veckan.setText(""+weeks+"");
+			veckan.setBorder(BorderFactory.createLineBorder(new Color(178, 178, 178)));
 			timeView.add(veckan);
 
 		}
-		
-		
 		JPanel containDays = new JPanel();
-		containDays.setPreferredSize(new Dimension(600, 500));
+		containDays.setPreferredSize(new Dimension(770, 645 ));
 		containDays.setBackground(Color.green);
-		containDays.setBorder(BorderFactory.createLineBorder(Color.RED));
+		
 		containDays.setLayout(new GridLayout(1, 1));
 		add(containDays, BorderLayout.CENTER);
 		
@@ -95,7 +89,7 @@ public class MonthView extends JPanel{
 				}
 		};
 		tableMonth.setTableHeader(null);
-		tableMonth.setRowHeight(92);
+		tableMonth.setRowHeight(110);
 		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare(this));
 		tableMonth.setCellSelectionEnabled(true);	
 		tableMonth.addMouseListener(new ClickListener(this));

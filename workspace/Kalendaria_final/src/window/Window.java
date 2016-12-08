@@ -33,7 +33,7 @@ public class Window extends JFrame {
 	protected WeekView weekView;
 	protected DatePanelDate datePanelDate;
 	protected JLabel view;
-
+	protected UpcomingEvent upcomingEvent;
 	public Color invis = new Color(0, 0, 0, 0);
 	// private JPanel[] menyBarHolders;
 	// private JLabel calendarLabel, menyBarLabel, navBarLabel, datePanelLabel;
@@ -166,9 +166,10 @@ public class Window extends JFrame {
 		//Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
+		upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);
-		
+		menyBar.add(upcomingEvent);
 		/*
 		 * Padding rutor i centerBlock
 		 */
