@@ -20,11 +20,14 @@ public class WeekView extends JPanel {
 	private JLabel veckaLabel;
 	private TimeLogic TimeLogic;
 	protected Color Invisible = new Color(0, 0, 0, 0);
+	protected int week;
+	ArrayList<String> days;
 
 	private static final long serialVersionUID = -1542039657044981535L;
 
 	public WeekView() {
 		TimeLogic = new logic.TimeLogic();
+		init();
 		// general window
 		setPreferredSize(new Dimension(700, 600));
 		setLayout(new BorderLayout());
@@ -45,7 +48,7 @@ public class WeekView extends JPanel {
 		// Aktuell vecka som label i vecko panel
 		veckaLabel = new JLabel();
 		veckaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		veckaLabel.setText("V." + TimeLogic.getWeek()[0]);
+		veckaLabel.setText("V." + week);
 		veckaLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		vecka.add(veckaLabel);
 
@@ -63,10 +66,9 @@ public class WeekView extends JPanel {
 		topLine.add(theDays, BorderLayout.CENTER);
 
 		// Labels veckodagarna i headernamepanelen
-		ArrayList<String> days;
+
 		//
-		int weekDaysParam[] = TimeLogic.getWeek();
-		days = TimeLogic.getWeekDays(weekDaysParam[0],weekDaysParam[1]);
+
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			String tempVal = days.get(k);
@@ -149,17 +151,9 @@ public class WeekView extends JPanel {
 
 	}
 
-	@SuppressWarnings("unused")
-	private int getXStart(Dimension screenSize, int width) {
-		int x = (((int) Math.ceil(screenSize.getWidth()) - (width)) / 2);
-		return x;
+	public void init(){
+		week = TimeLogic.getCurrentWeek();
+		days = TimeLogic.getCurrentWeekDays();
 	}
-
-	@SuppressWarnings("unused")
-	private int getYStart(Dimension screenSize, int height) {
-		int y = (((int) Math.ceil(screenSize.getHeight()) - (height)) / 2);
-		return y;
-	}
-
 	//
 }

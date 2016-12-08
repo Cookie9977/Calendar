@@ -14,6 +14,8 @@ import logic.TimeLogic;
 
 public class TabellRenderare extends DefaultTableCellRenderer {
 	private TimeLogic TimeLogic;
+	private MonthView monthRow;
+	private MonthView monthColumn;
 	private MonthView MonthViewColumnRow;
 	
 	 public TabellRenderare(MonthView monthView) {
@@ -33,20 +35,23 @@ public class TabellRenderare extends DefaultTableCellRenderer {
 			    /* 
 			    * Implementation Note :
 			    * It is important that no 'new' objects be present in this 
-			    * implementation (excluding exceptions):
+@@ -25,26 +37,47 @@ public class TabellRenderare extends DefaultTableCellRenderer {
 			    * if the table is large, then a large number of objects would be 
 			    * created during rendering.
 			    */
 				JLabel renderedLabel = (JLabel) super.getTableCellRendererComponent(aTable, aNumberValue, aIsSelected, aHasFocus, aRow, aColumn);
 				
 		 		
-		 		//System.out.println("Raden här"+MonthViewColumnRow.FmonthRow);
+		 	//	MonthView monthColumn = MonthView.MonthView().monthColumn;
+		 		//System.out.println("Raden hï¿½r"+MonthViewColumnRow.FmonthRow);
 			    if (aNumberValue == null) return this;
 			    Component renderer = super.getTableCellRendererComponent(
 			      aTable, aNumberValue, aIsSelected, aHasFocus, aRow, aColumn
 			    );
 			    
 			    Number value = (Number)aNumberValue;
+			    if (aColumn == 6) {
+			    	renderer.setFont(new Font("Sansserif", Font.BOLD, 15));
 			    
 			    
 			    renderer.setBackground(new Color(238, 238, 238));
@@ -72,11 +77,20 @@ public class TabellRenderare extends DefaultTableCellRenderer {
 				    }
 		    	else if (aColumn == 6) {	
 			    	renderer.setForeground(Color.RED);
+//			      renderer.setBackground(Color.red);
+			    }
+			    else if(aColumn < 7){
+			    	renderer.setFont(new Font("Sansserif", Font.BOLD, 15));
+			    }
+//			    else if(aColumn == monthCol) {
+//			      renderer.setBackground(Color.BLUE);
+//			    }
 			    
 		    	}
 			    return this;
 			    
 			  }
+			  
 			
 		
 
