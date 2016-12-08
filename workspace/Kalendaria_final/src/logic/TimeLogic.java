@@ -1,14 +1,17 @@
 package logic;
 
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class TimeLogic {
-	private ArrayList<String> temp, tamp;
+	private ArrayList<String> temp;
 	private Calendar cal = new GregorianCalendar();
+	public Calendar calIns = Calendar.getInstance(), tempCal;
 
 	// Retunerar dagar i månad, in = sträng på månadens namn.
 	public ArrayList<String> getDays(String month) {
@@ -31,73 +34,75 @@ public class TimeLogic {
 	}
 
 	// returnerar dagar i vecka, in = sträng på veckonummer,
-	public ArrayList<String> getWeekDays(int Week, int year) {
+	public ArrayList<String> getCurrentWeekDays() {
 		temp = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
-		Calendar calIns = Calendar.getInstance();
-		calIns.set(Calendar.YEAR, year);
-		calIns.set(Calendar.WEEK_OF_YEAR, Week);
-		for (int i = 1; i < 8; i++) {
-			// System.out.println(calIns.getTime());
-			calIns.set(Calendar.DAY_OF_WEEK, i + 1);
-			temp.add(String.valueOf(sdf.format(calIns.getTime())));
+		String dateString;
+		Date date;
+		int year = getCurrentYear();
+		int month = getCurrentMonth();
+		int start = cal.get(Calendar.DAY_OF_WEEK) + 1;
+		for (int i = start; i < start + 7; i++) {
+			dateString = String.format("%d-%d-%d", year, month, i);
+			try {
+				date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+				temp.add(sdf.format(date));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		return temp;
-	}
-
-	public int firstDayMonth() {
-		cal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
-		return cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-	}
-
-	public int firstDayNextMonth() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() + 1, 1);
-		return cal1.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-	}
-
-	public int lastDayMonth() {
-		cal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
-		return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-	}
-
-	public int lastDayLastMonth() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() - 1, 1);
-		return cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
-	}
-
-	public int dayOfWeek() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth(), -1);
-		return cal1.get(Calendar.DAY_OF_WEEK);
-	}
-
-	public int justering() {
-		Calendar cal1;
-		cal1 = new GregorianCalendar();
-		cal1.set(cal1.get(Calendar.YEAR), getCurrentMonth() - 1, -1);
-		return cal1.get(Calendar.DAY_OF_WEEK);
 	}
 
 	public ArrayList<String> getWeekday() {
 		temp = new ArrayList<String>();
-		tamp = new ArrayList<String>();
-		cal = new GregorianCalendar();
-		int weekDay = cal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-		String[] weekDayName = new String[] { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
 		for (int i = 0; i < 7; i++) {
-			temp.add(String.valueOf(weekDay + i));
-			tamp.add(weekDayName[i]);
+			temp.add(String.valueOf(i));
 		}
 		return temp;
 	}
 
-	// returnerar månadernas namn.
+	public int currentFirstDayMonth() {
+		tempCal = Calendar.getInstance();
+		tempCal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
+		return tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+	}
 
+	public int currentLastDayMonth() {
+		return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	public int currentLastDayLastMonth() {
+		tempCal = new GregorianCalendar();
+		tempCal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) - 1, 1);
+		return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	public int currentDayOfWeek() {
+		return cal.get(Calendar.DAY_OF_WEEK) - 2;
+	}
+
+	public int firstDayMonth() {
+		tempCal = Calendar.getInstance();
+		tempCal.set(calIns.get(Calendar.YEAR), getMonth(), 1);
+		return tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+	}
+
+	public int lastDayMonth() {
+		return calIns.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	public int lastDayLastMonth() {
+		tempCal = new GregorianCalendar();
+		tempCal.set(calIns.get(Calendar.YEAR), calIns.get(Calendar.MONTH) - 1, 1);
+		return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	public int dayOfWeek() {
+		return calIns.get(Calendar.DAY_OF_WEEK) - 2;
+	}
+
+	// returnerar månadernas namn.
 	public ArrayList<String> getMonths() {
 		DateFormatSymbols dfc = new DateFormatSymbols();
 		temp = new ArrayList<String>();
@@ -109,9 +114,9 @@ public class TimeLogic {
 	}
 
 	// Hämtar ut året plus 20 framåt(för planeirng)
-	public ArrayList<String> getYear() {
+	public ArrayList<String> getYears() {
 		temp = new ArrayList<String>();
-		cal = new GregorianCalendar();
+
 		int thisYear = cal.get(Calendar.YEAR);
 
 		for (int i = 0; i < 21; i++) {
@@ -121,29 +126,84 @@ public class TimeLogic {
 		return temp;
 	}
 
-	// returnerar den aktuella månaden.
-	public int getCurrentMonth() {
-		int currentMonth = cal.get(Calendar.MONTH);
-		return currentMonth;
-	}
 
-	// returnerar den aktuella veckan.
-	public int[] getWeek() {
-		int[] retval = new int[2];
-		cal = new GregorianCalendar();
-		int week = cal.get(Calendar.WEEK_OF_YEAR);
-		Calendar calIns = Calendar.getInstance();
-		int year = calIns.getWeekYear();
-		calIns.set(Calendar.YEAR, year);
-		if (week > 52) {
-			week = week - 52;
+	public ArrayList<String> getWeekDays() {
+		temp = new ArrayList<String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
+		String dateString;
+		Date date;
+		int year = getYear();
+		int month = getMonth();
+		int start = calIns.get(Calendar.DAY_OF_WEEK) + 1;
+		for (int i = start; i < start + 7; i++) {
+			dateString = String.format("%d-%d-%d", year, month, i);
+			try {
+				date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+				temp.add(sdf.format(date));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
-		retval[0] = week;
-		retval[1] = year;
-		return retval;
+		return temp;
 	}
 
-	// get a double between 0 and 24 only whole and halfs allowed outpust a
+	public int getCurrentYear() {
+		return cal.get(Calendar.YEAR);
+	}
+
+	public int getCurrentMonth() {
+		return cal.get(Calendar.MONTH) + 1;
+	}
+
+	public int getCurrentWeek() {
+		return cal.get(Calendar.WEEK_OF_YEAR);
+	}
+
+	public int getCurrentDay() {
+		return cal.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public void nextYear() {
+		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) + 1);
+	}
+
+	public void nextMonth() {
+		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) + 1);
+
+	}
+
+	public void nextWeek() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 60);
+	}
+
+	public void nextDay() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 1);
+	}
+
+	public int getYear() {
+		return calIns.get(Calendar.YEAR);
+	}
+
+	public int getMonth() {
+		return (calIns.get(Calendar.MONTH) + 1);
+	}
+
+	public int getWeek() {
+		return calIns.get(Calendar.WEEK_OF_YEAR);
+	}
+
+	public int getDay() {
+		return calIns.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public void printTime() {
+		System.out.println("År: " + getYear());
+		System.out.println("Månad: " + getMonth());
+		System.out.println("Vecka: " + getWeek());
+		System.out.println("Dag: " + getDay());
+	}
+
+	// get a double between 0 and 24 only whole and halfs allowed output a
 	// String in HH:mm format
 	public String doubleToTime(double input) {
 		double fraction = input % 1;
@@ -164,31 +224,31 @@ public class TimeLogic {
 		}
 		return time;
 	}
-	
-	
-	public String parseOutYear(String time){
+
+	// all paresOutX takes String YYYY-mm-dd hh:mm:ss and outputs x part of
+	// String
+	public String parseOutYear(String time) {
 		String[] parts = time.split("-");
 		return parts[0];
 	}
-	
-	public String parseOutMonth(String time){
+
+	public String parseOutMonth(String time) {
 		String[] parts = time.split("-");
 		return parts[1];
 	}
-	
-	public String parseOutDay(String time){
+
+	public String parseOutDay(String time) {
 		String[] parts = time.split("-| ");
 		return parts[2];
 	}
-	
-	public String parseOutHour(String time){
+
+	public String parseOutHour(String time) {
 		String[] parts = time.split(":| ");
 		return parts[1];
 	}
-	
-	public String parseOutMinute(String time){
+
+	public String parseOutMinute(String time) {
 		String[] parts = time.split(":");
 		return parts[1];
 	}
-
 }

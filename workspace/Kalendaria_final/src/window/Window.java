@@ -87,7 +87,7 @@ public class Window extends JFrame {
 		setLayout(new BorderLayout());
 
 		// components color
-		menyBar.setBackground(invis.RED);
+		menyBar.setBackground(invis);
 		navBar.setBackground(Color.BLUE);
 		datePanel.setBackground(Color.GREEN);
 
@@ -138,6 +138,7 @@ public class Window extends JFrame {
 		menyBar.setPreferredSize(new Dimension(gridWidth, (height - gridHeight)));
 		menyBar.setBackground(new Color(66, 86, 244, 255));
 		menyBar.setLayout(new GridLayout(5, 1));
+		
 		westLine.add(menyBar, BorderLayout.CENTER);
 		
 		//Dagens datum.
@@ -193,6 +194,8 @@ public class Window extends JFrame {
 		cSouth.setBackground(Color.GRAY);
 
 		// Center blockets Content del, här ska kalendrar visas upp.
+		
+		//XXX width är 772 och height 720 på cContent så skala era kalendrar efter den.
 		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
 		cContent.setBackground(Color.blue);
 		
