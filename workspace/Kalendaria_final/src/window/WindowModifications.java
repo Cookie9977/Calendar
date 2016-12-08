@@ -10,6 +10,7 @@ public class WindowModifications {
 	protected RegisterUser registerView;
 	protected LoginUser loginView;
 	protected AddButtonsPane addButtons;
+	protected UpcomingEvent upcomingEvent;
 
 	public WindowModifications(MonthView monthView, WeekView weekView, DayView dayView, Window window) {
 		this.monthView = monthView;
@@ -19,8 +20,10 @@ public class WindowModifications {
 
 	}
 
-	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons, Window window) {
+	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons,
+			UpcomingEvent upcomingEvent, Window window) {
 		this.window = window;
+		this.upcomingEvent = upcomingEvent;
 		this.loginView = loginView;
 		this.registerView = registerView;
 		this.addButtons = addButtons;
@@ -56,6 +59,7 @@ public class WindowModifications {
 	public void showLoggedinView() {
 		window.menyBar.remove(loginView);
 		window.menyBar.remove(registerView);
+		window.menyBar.add(upcomingEvent);
 		window.menyBar.add(addButtons);
 		window.revalidate();
 		window.repaint();
