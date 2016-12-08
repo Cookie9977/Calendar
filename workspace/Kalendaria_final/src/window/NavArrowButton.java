@@ -13,13 +13,14 @@ import javax.swing.JPanel;
 
 public class NavArrowButton extends JPanel implements ActionListener {
 	private String[] buttonText = { "", "" };
-	private JFrame frame;
+	private Window window;
 	private int direction;
+	private String view;
 
 	private static final long serialVersionUID = 5363273381463559887L;
 
-	public NavArrowButton(JFrame frame, int direction) {
-		this.frame = frame;
+	public NavArrowButton(Window window, int direction) {
+		this.window = window;
 		this.direction = direction;
 		JButton button = new JButton();
 		switch (direction) {
@@ -55,7 +56,42 @@ public class NavArrowButton extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent AE) {
 		// här ska det finnas val beroende på vart knappen befinner sig(dayview,
 		// vecka, månad)
-		JOptionPane.showMessageDialog(null, "du är i: " + frame + " .");
+		// JOptionPane.showMessageDialog(null, "du är i " +
+		// window.view.getText() + ".");
+		view = window.view.getText();
+		switch (direction) {
+		case 0: // left
+			switch (view) {
+			case "Dag":
+				System.out.println("detta är dag");
+				break;
+			case "Vecka":
+				System.out.println("detta är vecka");
+				break;
+			case "Månad":
+				System.out.println("detta är månad");
+				break;
+
+			}
+			System.out.println("Left");
+			break;
+
+		case 1: // right
+			switch (view) {
+			case "Dag":
+				System.out.println("detta är dag");
+				break;
+			case "Vecka":
+				System.out.println("detta är vecka");
+				break;
+			case "Månad":
+				System.out.println("detta är månad");
+				break;
+
+			}
+			System.out.println("Right");
+			break;
+		}
 	}
 
 }
