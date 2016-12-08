@@ -29,7 +29,7 @@ public class LoginUser extends JPanel implements ActionListener {
 
 	public LoginUser(Window windowVal) {
 		this.windowVal = windowVal;
-		setBackground(new Color(123, 123, 123));
+		setBackground(new Color(0, 0, 0, 0));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
 		// Font inputFont = new Font("SansSerif", Font.BOLD, 20);
@@ -103,7 +103,8 @@ public class LoginUser extends JPanel implements ActionListener {
 				Main.id = Integer.parseInt(ids);
 				System.out.println("Du är inloggad som " + email + " med ID: " + Main.id);
 				// TODO försvinn
-				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons, windowVal);
+				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,
+						windowVal);
 				// windowmodifications = windowVal.getModifications();
 				try {
 					windowmodifications.showLoggedinView();

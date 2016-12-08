@@ -27,36 +27,36 @@ public class WindowModifications {
 	}
 
 	public void showMonthView() {
-		window.calendar.remove(dayView);
-		window.calendar.remove(weekView);
-		window.calendar.add(monthView);
+		window.cContent.remove(dayView);
+		window.cContent.remove(weekView);
+		window.cContent.add(monthView);
 		window.view.setText("Månad");
-		window.calendar.revalidate();
+		window.cContent.revalidate();
 		window.repaint();
 	}
 
 	public void showWeekView() {
-		window.calendar.remove(dayView);
-		window.calendar.remove(monthView);
-		window.calendar.add(weekView);
+		window.cContent.remove(dayView);
+		window.cContent.remove(monthView);
+		window.cContent.add(weekView);
 		window.view.setText("Vecka");
-		window.calendar.revalidate();
+		window.cContent.revalidate();
 		window.repaint();
 	}
 
 	public void showDayView() {
-		window.calendar.remove(monthView);
-		window.calendar.remove(weekView);
-		window.calendar.add(dayView);
+		window.cContent.remove(monthView);
+		window.cContent.remove(weekView);
+		window.cContent.add(dayView);
 		window.view.setText("Dag");
-		window.calendar.revalidate();
+		window.cContent.revalidate();
 		window.repaint();
 	}
 
 	public void showLoggedinView() {
-		window.navBar.remove(loginView);
-		window.navBar.remove(registerView);
-		window.navBar.add(addButtons);
+		window.menyBar.remove(loginView);
+		window.menyBar.remove(registerView);
+		window.menyBar.add(addButtons);
 		window.revalidate();
 		window.repaint();
 	}
