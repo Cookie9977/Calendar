@@ -163,23 +163,6 @@ public class TimeLogic {
 		return cal.get(Calendar.DAY_OF_MONTH);
 	}
 
-	public void nextYear() {
-		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) + 1);
-	}
-
-	public void nextMonth() {
-		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) + 1);
-
-	}
-
-	public void nextWeek() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 60);
-	}
-
-	public void nextDay() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 1);
-	}
-
 	public int getYear() {
 		return calIns.get(Calendar.YEAR);
 	}
@@ -195,6 +178,41 @@ public class TimeLogic {
 	public int getDay() {
 		return calIns.get(Calendar.DAY_OF_MONTH);
 	}
+
+	public void nextYear() {
+		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) + 1);
+	}
+
+	public void nextMonth() {
+		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) + 1);
+
+	}
+
+	public void nextWeek() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 7);
+	}
+
+	public void nextDay() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 1);
+	}
+	
+	public void previousYear() {
+		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) - 1);
+	}
+
+	public void previousMonth() {
+		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) - 1);
+
+	}
+
+	public void previousWeek() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) - 7);
+	}
+
+	public void previousDay() {
+		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) - 1);
+	}
+
 
 	public void printTime() {
 		System.out.println("År: " + getYear());
