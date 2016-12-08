@@ -32,7 +32,7 @@ public class TimePane extends JPanel implements ActionListener {
 		month.setModel(addThings(logic.getMonths()));
 		month.addActionListener(this);
 		day.setModel(addThings(logic.getDays("")));
-		year.setModel(addThings(logic.getYear()));
+		year.setModel(addThings(logic.getYears()));
 		time.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("HH':'mm"))));
 		time.setValue(Calendar.getInstance().getTime());
 

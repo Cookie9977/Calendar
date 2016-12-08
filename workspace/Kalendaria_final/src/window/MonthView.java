@@ -19,7 +19,6 @@ public class MonthView extends JPanel {
 	private JTable tableMonth;
 	private pane.TimePane TimePane;
 	private TimeLogic TimeLogic;
-	
 
 	public MonthView() {
 		TimePane = new pane.TimePane();
@@ -50,13 +49,13 @@ public class MonthView extends JPanel {
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			dagLabel[k].setText(days[k]);
-			//dagLabel[k].setPreferredSize(new Dimension(0, 50));
+			// dagLabel[k].setPreferredSize(new Dimension(0, 50));
 			dagLabel[k].setBackground(Color.CYAN);
 			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			theDays.add(dagLabel[k]);
 		}
 		JPanel westLine = new JPanel();
-		//westLine.setSize(new Dimension(60, 400));
+		// westLine.setSize(new Dimension(60, 400));
 		westLine.setLayout(new BorderLayout());
 		add(westLine, BorderLayout.WEST);
 
@@ -73,17 +72,14 @@ public class MonthView extends JPanel {
 			timeView.add(veckan);
 
 		}
-		
-		
+
 		JPanel containDays = new JPanel();
 		containDays.setPreferredSize(new Dimension(600, 500));
 		containDays.setBackground(Color.green);
 		containDays.setBorder(BorderFactory.createLineBorder(Color.RED));
 		containDays.setLayout(new GridLayout(1, 1));
 		add(containDays, BorderLayout.CENTER);
-		
-		
-		
+
 		tableMonth = new JTable(6, 7);
 		tableMonth.setTableHeader(null);
 		tableMonth.setRowHeight(92);
@@ -93,52 +89,58 @@ public class MonthView extends JPanel {
 		int monthColumn;
 
 		containDays.add(tableMonth);
-		
-		ArrayList<String> dag = TimeLogic.getWeekday();
-		System.out.println(dag);
+
 		int thisMonth = TimeLogic.getCurrentMonth();
-		int firstDayOfMonth = TimeLogic.firstDayMonth();
-		int lastDayOfMonth = TimeLogic.lastDayMonth();
-		int dayOfWeek = TimeLogic.dayOfWeek();
-		int firstDayNextMonth = TimeLogic.firstDayNextMonth();
-		int lastDayLastMonth = TimeLogic.lastDayLastMonth();
+		System.out.println("Månad: " + thisMonth);
+		int firstDayOfMonth = TimeLogic.currentFirstDayMonth();
+		System.out.println("first day: " + firstDayOfMonth);
+		int lastDayOfMonth = TimeLogic.currentLastDayMonth();
+		System.out.println("last day " + lastDayOfMonth);
+		int dayOfWeek = TimeLogic.currentDayOfWeek();
+		System.out.println("day of week: " + dayOfWeek);
+		int firstDayNextMonth = 1;
+		System.out.println("f next month " + firstDayNextMonth);
+		int lastDayLastMonth = TimeLogic.currentLastDayLastMonth();
+		System.out.println("l next month: " + lastDayLastMonth);
 		int justering = dayOfWeek;
-		//int justering = TimeLogic.justering();
-		ArrayList<String> daysOfMonth = TimeLogic.getDays(""+thisMonth);
+		System.out.println("adjustment: " + justering);
+		// int justering = TimeLogic.justering();
+		ArrayList<String> daysOfMonth = TimeLogic.getDays("" + thisMonth);
 		int lopNummer = 1;
-		
-		
-		
-		
+
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
 			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
-			tableMonth.getColumnModel().getColumn(j+1).setCellRenderer(new TabellRenderare());
-				
-				if(lopNummer > 1 && lopNummer<lastDayOfMonth+1 ){
+				tableMonth.getColumnModel().getColumn(j + 1).setCellRenderer(new TabellRenderare());
+
+				if (lopNummer > 1 && lopNummer < lastDayOfMonth + 1) {
 					tableMonth.setValueAt(lopNummer, j, i);
-					
-					//tableMonth.getRowCount().getRow(i).setCellRenderer(new TabellRenderare());
+
+					// tableMonth.getRowCount().getRow(i).setCellRenderer(new
+					// TabellRenderare());
 					lopNummer++;
-				
-				}else if(j==0 && dayOfWeek == i){
+
+				} else if (j == 0 && dayOfWeek == i) {
 					tableMonth.setValueAt(lopNummer, j, i);
-//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
-//					System.out.println(i);
-//					System.out.println(j);
-					lopNummer++;	
-					
-				}else if(lopNummer>lastDayOfMonth){
-					tableMonth.setValueAt(firstDayNextMonth++, j, i);	
-//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
+					// tableMonth.getColumnModel().getColumn(j).setCellRenderer(new
+					// TabellRenderare());
+					// System.out.println(i);
+					// System.out.println(j);
+					lopNummer++;
+
+				} else if (lopNummer > lastDayOfMonth) {
+					tableMonth.setValueAt(firstDayNextMonth++, j, i);
+					// tableMonth.getColumnModel().getColumn(j).setCellRenderer(new
+					// TabellRenderare());
 				}
-				
-				else if(lopNummer<lastDayLastMonth){
-					tableMonth.setValueAt(lastDayLastMonth-justering+1, j, (dayOfWeek-justering));
-//					tableMonth.getColumnModel().getColumn(j).setCellRenderer(new TabellRenderare());
+
+				else if (lopNummer < lastDayLastMonth) {
+					tableMonth.setValueAt(lastDayLastMonth - justering + 1, j, (dayOfWeek - justering));
+					// tableMonth.getColumnModel().getColumn(j).setCellRenderer(new
+					// TabellRenderare());
 					justering--;
 					monthColumn = i;
-					System.out.println("MonthCol = "+monthColumn);
-				}	
+					System.out.println("MonthCol = " + monthColumn);
+				}
 			}
 		}
 	}

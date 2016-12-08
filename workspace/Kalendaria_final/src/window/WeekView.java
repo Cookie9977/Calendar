@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -46,7 +45,7 @@ public class WeekView extends JPanel {
 		// Aktuell vecka som label i vecko panel
 		veckaLabel = new JLabel();
 		veckaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		veckaLabel.setText("V." + TimeLogic.getWeek()[0]);
+		veckaLabel.setText("V." + TimeLogic.getCurrentWeek());
 		veckaLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		vecka.add(veckaLabel);
 
@@ -66,8 +65,7 @@ public class WeekView extends JPanel {
 		// Labels veckodagarna i headernamepanelen
 		ArrayList<String> days;
 		//
-		int weekDaysParam[] = TimeLogic.getWeek();
-		days = TimeLogic.getWeekDays(weekDaysParam[0],weekDaysParam[1]);
+		days = TimeLogic.getCurrentWeekDays();
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			String tempVal = days.get(k);
