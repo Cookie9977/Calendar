@@ -12,9 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.ClickListener;
-import main.Main;
+import main.Storage;
 
 public class UpcomingEvent extends JPanel {
+	private static final long serialVersionUID = 1020255122741607214L;
 	public JPanel eventBox;
 	public JLabel[] eventListItem;
 	public int id;
@@ -37,7 +38,7 @@ public class UpcomingEvent extends JPanel {
 		eventBox.setBackground(new Color(238, 238, 238));
 		add(eventBox, BorderLayout.CENTER);
 		eventListItem = new JLabel[5];
-		id = Main.id;
+		id = Storage.id;
 
 		for (int i = 0; i < eventContent.size(); i++) {
 			System.out.println("Hämta eventcontent i"+eventContent.get(i));
@@ -78,9 +79,9 @@ public class UpcomingEvent extends JPanel {
 		ArrayList<String> lokal = new ArrayList<String>();
 		try {
 		
-		//String SQLI = "select event_id from event_link where user_id = " + Main.id;
+		//String SQLI = "select event_id from event_link where user_id = " + Storage.id;
 		String SQLI = "select event_id from event_link where user_id =14";
-		Object[][] result = Main.db.getData(SQLI);
+		Object[][] result = Storage.db.getData(SQLI);
 
 		System.out.println(SQLI);;
 		for (int i = 0; i < result.length; i++) {
@@ -104,7 +105,7 @@ public class UpcomingEvent extends JPanel {
 			for (int i = 0; i < eventId.size(); i++) {
 				String SQLJ = "select title, location, start, end, category from event where id =" + eventId.get(i);
 				System.out.println("SQLJ "+SQLJ);
-				Object[][] resultat = Main.db.getData(SQLJ);
+				Object[][] resultat = Storage.db.getData(SQLJ);
 						eventContent.add((String) resultat[0][0]+", "+resultat[0][2]+","+resultat[0][3]);
 						System.out.println("STRL "+ eventContent.size());
 			}

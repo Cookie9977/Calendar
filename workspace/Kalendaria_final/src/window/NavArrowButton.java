@@ -53,10 +53,6 @@ public class NavArrowButton extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent AE) {
-		// här ska det finnas val beroende på vart knappen befinner sig(dayview,
-		// vecka, månad)
-		// JOptionPane.showMessageDialog(null, "du är i " +
-		// window.view.getText() + ".");
 		view = window.view.getText();
 		switch (direction) {
 		case 0: // left backwards
@@ -72,7 +68,8 @@ public class NavArrowButton extends JPanel implements ActionListener {
 //				System.out.println("detta är vecka");
 				break;
 			case "Månad":
-				System.out.println("detta är månad");
+				mod = new WindowModifications(window.monthView, window);
+				mod.previousMonth();
 				break;
 
 			}
@@ -91,7 +88,8 @@ public class NavArrowButton extends JPanel implements ActionListener {
 				//System.out.println("detta är vecka");
 				break;
 			case "Månad":
-				System.out.println("detta är månad");
+				mod = new WindowModifications(window.monthView, window);
+				mod.nextMonth();
 				break;
 
 			}

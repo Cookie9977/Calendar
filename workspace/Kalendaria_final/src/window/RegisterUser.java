@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import main.Main;
+import main.Storage;
 
 public class RegisterUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
@@ -86,7 +86,7 @@ public class RegisterUser extends JPanel implements ActionListener {
 					+ new String(pass) + "')";
 			System.out.println(SQL);
 			System.out.println(SQLI);
-			Object[][] data = Main.db.getData(SQL);
+			Object[][] data = Storage.db.getData(SQL);
 
 			if (!(data[0][0] == "")) {
 				System.out.println(SQL);
@@ -99,7 +99,7 @@ public class RegisterUser extends JPanel implements ActionListener {
 		} catch (Exception f) {
 			String SQLI = "insert into user(username,email,password) values('" + username + "','" + email + "','"
 					+ new String(pass) + "')";
-			Main.db.execute(SQLI);
+			Storage.db.execute(SQLI);
 			// Fuling, måste fixa med typ 'isNull'
 		}
 

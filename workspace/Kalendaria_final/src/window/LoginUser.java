@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import main.Main;
+import main.Storage;
 
 public class LoginUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
@@ -95,7 +95,7 @@ public class LoginUser extends JPanel implements ActionListener {
 			String SQL = "select * from user where email ='" + email + "' AND password ='" + new String(pass) + "'";
 			// System.out.println(SQL);
 
-			Object[][] data = Main.db.getData(SQL);
+			Object[][] data = Storage.db.getData(SQL);
 
 			// String SQLJ = "select id from user where email ='"+email+"' AND
 			// password ='"+new String(pass)+"'";
@@ -103,8 +103,8 @@ public class LoginUser extends JPanel implements ActionListener {
 			if (!(data[0][0] == "")) {
 				// System.out.println(SQL);
 				ids = (String) data[0][0];
-				Main.id = Integer.parseInt(ids);
-				System.out.println(" - Du är inloggad som " + email + " med ID: " + Main.id);
+				Storage.id = Integer.parseInt(ids);
+				System.out.println(" - Du är inloggad som " + email + " med ID: " + Storage.id);
 				// TODO försvinn
 				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,windowVal.upcomingEvent,
 						windowVal);

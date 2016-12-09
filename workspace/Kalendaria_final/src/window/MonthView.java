@@ -130,15 +130,17 @@ public class MonthView extends JPanel {
 
 	public void init() {
 		thisMonth = TimeLogic.getCurrentMonth();
-		System.out.println("månad: "+ thisMonth);
+		//System.out.println("denna månaden: "+ thisMonth);
 		lastDayOfMonth = TimeLogic.currentLastDayMonth();
-		System.out.println("sista dagan: " + lastDayLastMonth);
+		//System.out.println("Sista dagen: "+ lastDayOfMonth);
 		dayOfWeekMonth = justering = TimeLogic.currentFirstDayOfMonth();
-		System.out.println("veckans dag: " + dayOfWeekMonth);
+		//System.out.println("Dag i veckan: "+ dayOfWeekMonth);
 		lastDayLastMonth = TimeLogic.currentLastDayLastMonth();
-		System.out.println("Sista dagen förra månaden: " + lastDayLastMonth);
+		//System.out.println("Förra månadens sista dag; "+ lastDayLastMonth);
 		daysOfMonth = TimeLogic.getDays("" + thisMonth);
-		System.out.println("dagar i månaden: "+ daysOfMonth);
+		//System.out.println("days of month; "+ daysOfMonth);
+		//System.out.println("**********************************");
+		
 		
 	}
 }
