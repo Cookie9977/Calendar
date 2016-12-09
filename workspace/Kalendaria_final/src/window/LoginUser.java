@@ -87,6 +87,7 @@ public class LoginUser extends JPanel implements ActionListener {
 		String email = textBox[0].getText();
 		char[] pass = password.getPassword();
 		String ids = "";
+		String value = null;
 
 		try {
 			String SQL = "select * from user where email ='" + email + "' AND password ='" + new String(pass) + "'";
@@ -101,7 +102,7 @@ public class LoginUser extends JPanel implements ActionListener {
 				// System.out.println(SQL);
 				ids = (String) data[0][0];
 				Main.id = Integer.parseInt(ids);
-				System.out.println("Du är inloggad som " + email + " med ID: " + Main.id);
+				System.out.println(" - Du är inloggad som " + email + " med ID: " + Main.id);
 				// TODO försvinn
 				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,windowVal.upcomingEvent,
 						windowVal);
@@ -111,6 +112,18 @@ public class LoginUser extends JPanel implements ActionListener {
 				} catch (NullPointerException e2) {
 					System.err.println(e2);
 				}
+				String SQLI = "select event_id from event_link where user_id = "+ Main.id;
+				Object[][] result = Main.db.getData(SQLI);
+				
+				for (int i = 0; i < result.length; i++) {
+					for (int j = 0; j < result[i].length; j++) {
+						String SQLJ = "select * from event where id = "+ result[i];
+				Object[] resultat = Main.db.getData(SQLJ);
+						System.out.println(result[i][j]);
+					}
+				}
+				System.out.println("SQLI = "+SQLI);
+				
 
 			} else {
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
