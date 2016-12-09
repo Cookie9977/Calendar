@@ -34,7 +34,7 @@ public class DayView extends JPanel {
 		logic = new TimeLogic();
 		scroll = new JScrollPane();
 		init();
-
+		//System.out.println(day);
 		// TODO visa dagens datum med event
 
 		scroll.setViewportView(calendar);

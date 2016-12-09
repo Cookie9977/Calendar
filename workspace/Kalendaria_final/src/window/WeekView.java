@@ -17,7 +17,7 @@ import main.ClickListener;
 
 public class WeekView extends JPanel {
 
-	private JLabel veckaLabel;
+	protected JLabel veckaLabel;
 	private TimeLogic TimeLogic;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 	protected int week;
@@ -28,6 +28,10 @@ public class WeekView extends JPanel {
 	public WeekView() {
 		TimeLogic = new logic.TimeLogic();
 		init();
+//		for (int i = 0; i < days.size(); i++) {
+//			System.out.println(days.get(i));
+//		}
+//		System.out.println(week);
 		// general window
 		setPreferredSize(new Dimension(700, 600));
 		setLayout(new BorderLayout());

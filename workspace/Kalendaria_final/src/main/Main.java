@@ -10,8 +10,8 @@ import window.Window;
 public class Main {
 	public static int id;
 
-	public static Calendar cal = new GregorianCalendar();
-	public final static JavaDB db = new JavaDB("192.168.216.112", "Test", "qwerty123", "calendar");
+	public static Calendar cal = new GregorianCalendar(), calIns = Calendar.getInstance();
+	public final static JavaDB db = new JavaDB("192.168.1.203", "Test", "qwerty123", "calendar");
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {

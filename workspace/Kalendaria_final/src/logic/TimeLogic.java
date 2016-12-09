@@ -12,10 +12,11 @@ import main.Main;
 
 public class TimeLogic {
 	private ArrayList<String> temp;
-	public Calendar calIns = Calendar.getInstance(), tempCal;
+	public Calendar tempCal;
 
 	// Retunerar dagar i månad, in = sträng på månadens namn.
 	public ArrayList<String> getDays(String month) {
+		tempCal = Calendar.getInstance();
 		DateFormatSymbols dfc = new DateFormatSymbols();
 		temp = new ArrayList<String>();
 		int monthValue = 0;
@@ -26,7 +27,7 @@ public class TimeLogic {
 				break;
 			}
 		}
-		Main.cal.set(Main.cal.get(Calendar.YEAR), monthValue, Main.cal.get(Calendar.DAY_OF_MONTH));
+		tempCal.set(Main.cal.get(Calendar.YEAR), monthValue, Main.cal.get(Calendar.DAY_OF_MONTH));
 		int nrDays = Main.cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
 			temp.add(String.valueOf(i + 1));
@@ -42,7 +43,7 @@ public class TimeLogic {
 		Date date;
 		int year = getCurrentYear();
 		int month = getCurrentMonth();
-		int start = Main.cal.get(Calendar.DAY_OF_WEEK) + 1;
+		int start = getCurrentDay() - Main.cal.get(Calendar.DAY_OF_WEEK) + 2;
 		for (int i = start; i < start + 7; i++) {
 			dateString = String.format("%d-%d-%d", year, month, i);
 			try {
@@ -63,7 +64,6 @@ public class TimeLogic {
 		return temp;
 	}
 
-
 	public int currentLastDayMonth() {
 		return Main.cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
@@ -74,11 +74,11 @@ public class TimeLogic {
 		return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
-	public int currentFirstDayOfMonth() {		
+	public int currentFirstDayOfMonth() {
 		tempCal = new GregorianCalendar();
 		tempCal.set(Main.cal.get(Calendar.YEAR), Main.cal.get(Calendar.MONTH), 1);
-		int day = tempCal.get(Calendar.DAY_OF_WEEK)-2;
-		if(day == -1){
+		int day = tempCal.get(Calendar.DAY_OF_WEEK) - 2;
+		if (day == -1) {
 			day = 6;
 		}
 		return day;
@@ -86,25 +86,25 @@ public class TimeLogic {
 
 	public int firstDayMonth() {
 		tempCal = Calendar.getInstance();
-		tempCal.set(calIns.get(Calendar.YEAR), getMonth(), 1);
+		tempCal.set(Main.calIns.get(Calendar.YEAR), getMonth(), 1);
 		return tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
 	}
 
 	public int lastDayMonth() {
-		return calIns.getActualMaximum(Calendar.DAY_OF_MONTH);
+		return Main.calIns.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
 	public int lastDayLastMonth() {
 		tempCal = new GregorianCalendar();
-		tempCal.set(calIns.get(Calendar.YEAR), calIns.get(Calendar.MONTH) - 1, 1);
+		tempCal.set(Main.calIns.get(Calendar.YEAR), Main.calIns.get(Calendar.MONTH) - 1, 1);
 		return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
 	public int dayOfWeek() {
 		tempCal = new GregorianCalendar();
-		tempCal.set(calIns.get(Calendar.YEAR), calIns.get(Calendar.MONTH), 1);
-		int day = tempCal.get(Calendar.DAY_OF_WEEK)-2;
-		if(day == -1){
+		tempCal.set(Main.calIns.get(Calendar.YEAR), Main.calIns.get(Calendar.MONTH), 1);
+		int day = tempCal.get(Calendar.DAY_OF_WEEK) - 2;
+		if (day == -1) {
 			day = 6;
 		}
 		return day;
@@ -141,7 +141,8 @@ public class TimeLogic {
 		Date date;
 		int year = getYear();
 		int month = getMonth();
-		int start = calIns.get(Calendar.DAY_OF_WEEK) + 1;
+		int start = getDay() - Main.calIns.get(Calendar.DAY_OF_WEEK) + 2;
+		System.out.println(start);
 		for (int i = start; i < start + 7; i++) {
 			dateString = String.format("%d-%d-%d", year, month, i);
 			try {
@@ -172,55 +173,54 @@ public class TimeLogic {
 	}
 
 	public int getYear() {
-		return calIns.get(Calendar.YEAR);
+		return Main.calIns.get(Calendar.YEAR);
 	}
 
 	public int getMonth() {
-		return (calIns.get(Calendar.MONTH) + 1);
+		return (Main.calIns.get(Calendar.MONTH) + 1);
 	}
 
 	public int getWeek() {
-		return calIns.get(Calendar.WEEK_OF_YEAR);
+		return Main.calIns.get(Calendar.WEEK_OF_YEAR);
 	}
 
 	public int getDay() {
-		return calIns.get(Calendar.DAY_OF_MONTH);
+		return Main.calIns.get(Calendar.DAY_OF_MONTH);
 	}
 
 	public void nextYear() {
-		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) + 1);
+		Main.calIns.set(Calendar.YEAR, Main.calIns.get(Calendar.YEAR) + 1);
 	}
 
 	public void nextMonth() {
-		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) + 1);
+		Main.calIns.set(Calendar.MONTH, Main.calIns.get(Calendar.MONTH) + 1);
 
 	}
 
 	public void nextWeek() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 7);
+		Main.calIns.set(Calendar.DAY_OF_MONTH, Main.calIns.get(Calendar.DAY_OF_MONTH) + 7);
 	}
 
 	public void nextDay() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) + 1);
+		Main.calIns.set(Calendar.DAY_OF_MONTH, Main.calIns.get(Calendar.DAY_OF_MONTH) + 1);
 	}
-	
+
 	public void previousYear() {
-		calIns.set(Calendar.YEAR, calIns.get(Calendar.YEAR) - 1);
+		Main.calIns.set(Calendar.YEAR, Main.calIns.get(Calendar.YEAR) - 1);
 	}
 
 	public void previousMonth() {
-		calIns.set(Calendar.MONTH, calIns.get(Calendar.MONTH) - 1);
+		Main.calIns.set(Calendar.MONTH, Main.calIns.get(Calendar.MONTH) - 1);
 
 	}
 
 	public void previousWeek() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) - 7);
+		Main.calIns.set(Calendar.DAY_OF_MONTH, Main.calIns.get(Calendar.DAY_OF_MONTH) - 7);
 	}
 
 	public void previousDay() {
-		calIns.set(Calendar.DAY_OF_MONTH, calIns.get(Calendar.DAY_OF_MONTH) - 1);
+		Main.calIns.set(Calendar.DAY_OF_MONTH, Main.calIns.get(Calendar.DAY_OF_MONTH) - 1);
 	}
-
 
 	public void printTime() {
 		System.out.println("År: " + getYear());

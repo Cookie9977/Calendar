@@ -1,11 +1,13 @@
 package window;
 
+import logic.TimeLogic;
 import pane.AddButtonsPane;
 
 public class WindowModifications {
+	private TimeLogic logic;
 	protected MonthView monthView;
-	protected WeekView weekView;
-	protected DayView dayView;
+	protected WeekView weekView, newWeekView;
+	protected DayView dayView, newDayView;
 	protected Window window;
 	protected RegisterUser registerView;
 	protected LoginUser loginView;
@@ -48,29 +50,93 @@ public class WindowModifications {
 		this.monthView = monthView;
 		this.window = window;
 	}
-	
-	public void nextMonth(){
-		
+
+	public void nextMonth() {
+
 	}
-	
-	public void previousMonth(){
-		
+
+	public void previousMonth() {
+
 	}
-	
-	public void nextWeek(){
-		
+
+	public void nextWeek() {
+		logic = new TimeLogic();
+		logic.nextWeek();
+		// System.out.println(logic.getDay());
+		window.cContent.remove(weekView);
+		newWeekView = new WeekView() {
+			private static final long serialVersionUID = 4658993524466783899L;
+
+			@Override
+			public void init() {
+				week = logic.getWeek();
+				days = logic.getWeekDays();
+			}
+		};
+		weekView.veckaLabel.setText("v."+Integer.toString(logic.getWeek()));
+		weekView = newWeekView;
+		window.cContent.add(weekView);
+		window.cContent.revalidate();
+		window.navBar.revalidate();
+		window.repaint();
 	}
-	
-	public void previousWeek(){
-		
+
+	public void previousWeek() {
+		logic = new TimeLogic();
+		logic.previousWeek();
+		// System.out.println(logic.getDay());
+		window.cContent.remove(weekView);
+		newWeekView = new WeekView() {
+			private static final long serialVersionUID = -6093004429952979249L;
+
+			@Override
+			public void init() {
+				week = logic.getWeek();
+				days = logic.getWeekDays();
+			}
+		};
+		window.cContent.add(weekView);
+		window.cContent.revalidate();
+		window.navBar.revalidate();
+		window.repaint();
 	}
-	
-	public void nextDay(){
-		
+
+	public void nextDay() {
+		logic = new TimeLogic();
+		logic.nextDay();
+		// System.out.println(logic.getDay());
+		window.cContent.remove(dayView);
+		newDayView = new DayView() {
+			private static final long serialVersionUID = 4658993524466783899L;
+
+			@Override
+			public void init() {
+				day = logic.getDay();
+			}
+		};
+		window.cContent.add(dayView);
+		window.cContent.revalidate();
+		window.navBar.revalidate();
+		window.repaint();
 	}
-	
-	public void previousDay(){
-		
+
+	public void previousDay() {
+		logic = new TimeLogic();
+		logic.previousDay();
+		// System.out.println(logic.getDay());
+		window.cContent.remove(dayView);
+		newDayView = new DayView() {
+			private static final long serialVersionUID = 4658993524466783899L;
+
+			@Override
+			public void init() {
+				day = logic.getDay();
+			}
+		};
+		window.cContent.add(dayView);
+		window.cContent.revalidate();
+		window.navBar.revalidate();
+		window.repaint();
 	}
 
 	public void showMonthView() {
