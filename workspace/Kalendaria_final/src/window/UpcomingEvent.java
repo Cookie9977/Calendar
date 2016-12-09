@@ -4,60 +4,118 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.ClickListener;
 import main.Main;
 
 public class UpcomingEvent extends JPanel {
-	public UpcomingEvent(){
+	public JPanel eventBox;
+	public JLabel[] eventListItem;
+	public int id;
+	public ArrayList<String> eventId;
+	private ArrayList<String> eventContent;
+
+	public UpcomingEvent() {
 		
-		setPreferredSize(new Dimension(460,40));
+		
+	//	int tal = createEventList();
+		eventId = getEventId();
+		
+		eventContent = getEventContent();
+		JOptionPane.showMessageDialog(null,""+eventId.size());
+		setPreferredSize(new Dimension(460, 40));
 		setLayout(new BorderLayout());
-		JPanel eventBox = new JPanel();
+		setBackground(Color.BLACK);
+		eventBox = new JPanel();
 		eventBox.setLayout(new GridLayout(5, 1));
 		eventBox.setBackground(new Color(238, 238, 238));
 		add(eventBox, BorderLayout.CENTER);
-		JLabel[] eventListItem = new JLabel[5];
-		int id = Main.id;
-		
-		
-//		try {
-//			String SQL = "select * from user where id = "+ id;
-//			System.out.println(SQL);
-//
-//			Object[][] data = Main.db.getData(SQL);
-//
-//			// String SQLJ = "select id from user where email ='"+email+"' AND
-//			// password ='"+new String(pass)+"'";
-//
-//			if (!(data[0][0] == "")) {
-//				String SQLI = "select * from event_link where user_id = "+ id;
-//				Object[][] result = Main.db.getData(SQLI);
-//				for (int i = 0; i < result.length; i++) {
-//					for (int j = 0; j < result[i].length; j++) {
-//						System.out.println(result[i][j]);
-//					}
-//				}
-//				System.out.println("SQLI = "+SQLI);
-//				}
-//		}catch (Exception f) {
-//			System.out.println(f);
-//			
-//		
-//	}
+		eventListItem = new JLabel[5];
+		id = Main.id;
+
+		for (int i = 0; i < eventContent.size(); i++) {
+			System.out.println("Hämta eventcontent i"+eventContent.get(i));
+		}
 		for (int i = 0; i < eventListItem.length; i++) {
 			eventListItem[i] = new JLabel();
 			eventListItem[i].setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.BLACK));
 			eventListItem[i].setPreferredSize(new Dimension(40, 20));
-			eventListItem[i].addMouseListener(new ClickListener(this));	
-
-			eventListItem[i].setText("Test "+i);
+			eventListItem[i].addMouseListener(new ClickListener(this));
+			try{
+				eventListItem[i].setText(""+eventContent.get(i));
+			}catch(Exception e){
+				eventListItem[i].setText("Inget ");
+			}
+			
 			eventBox.add(eventListItem[i], BorderLayout.NORTH);
 		}
+	}
+	
+	
+	public ArrayList<String> getEvents()
+	{
+		return eventContent;
+	}
+	
+	
+	public ArrayList<String> getList()
+	{
+		ArrayList<String>lokal = new ArrayList<String>();
+		lokal.add("Kalle");
+		lokal.add("Olle");
+				return lokal;
+		
 		
 	}
+	
+	public ArrayList<String> getEventId(){
+		ArrayList<String> lokal = new ArrayList<String>();
+		try {
+		
+		//String SQLI = "select event_id from event_link where user_id = " + Main.id;
+		String SQLI = "select event_id from event_link where user_id =14";
+		Object[][] result = Main.db.getData(SQLI);
+
+		System.out.println(SQLI);;
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result[i].length; j++) {
+				System.out.println("Result " + result[i][j]);
+				lokal.add((String) result[i][j]);
+				JOptionPane.showMessageDialog(null, result[i]);
+			}
+		}
+	}catch (Exception f) {
+		System.out.println(f);
+
+	}
+		return lokal;
+}
+
+	public ArrayList<String> getEventContent() {
+		try {
+			eventContent = new ArrayList<String>();
+			
+			for (int i = 0; i < eventId.size(); i++) {
+				String SQLJ = "select title, location, start, end, category from event where id =" + eventId.get(i);
+				System.out.println("SQLJ "+SQLJ);
+				Object[][] resultat = Main.db.getData(SQLJ);
+						eventContent.add((String) resultat[0][0]+", "+resultat[0][2]+","+resultat[0][3]);
+						System.out.println("STRL "+ eventContent.size());
+			}
+
+		} catch (Exception f) {
+			System.out.println(f);
+
+		}
+		
+		return eventContent;
+
+	}
+
 }

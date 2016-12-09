@@ -33,16 +33,16 @@ public class EventLogic {
 
 		}
 		if(dubbleBok){
-			int ok = JOptionPane.showConfirmDialog(null, "Du har dubblebokat är du okej med detta?","Varning", JOptionPane.WARNING_MESSAGE);
+			int ok = JOptionPane.showConfirmDialog(null, "Du har dubblebokat. är du okej med detta?","Varning", JOptionPane.WARNING_MESSAGE);
 			if (ok == JOptionPane.OK_OPTION) {
 				dubbleBok = false;
 			}
 		}
-		if (!dubbleBok && correctTime) {
-			addEvent(Main.id, title, place, description, startTime, endTime, category, friend);
-		} else {
-			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
-		}
+//		if (!dubbleBok && correctTime) {
+//			addEvent(Main.id, title, place, description, startTime, endTime, category, friend);
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
+//		}
 	}
 
 	private void addEvent(int id, String title, String place, String description, String startTime, String endTime,
