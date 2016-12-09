@@ -39,6 +39,7 @@ public class DayView extends JPanel {
 
 		scroll.setViewportView(calendar);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setPreferredSize(new Dimension(620, 600));
 		scroll.getVerticalScrollBar().setUnitIncrement(10);
 
