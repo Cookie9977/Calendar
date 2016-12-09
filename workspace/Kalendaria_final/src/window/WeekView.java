@@ -134,7 +134,7 @@ public class WeekView extends JPanel {
 				dayTimeP.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 				dayTimeP.setLayout(new GridLayout(1, 1));
 				dayTimeP.addMouseListener(new ClickListener(dayTimeP));
-				
+
 				// Labels för dags cellerna.
 				JLabel dayTime = new JLabel();
 				dayTime.setText("");
@@ -151,7 +151,7 @@ public class WeekView extends JPanel {
 
 	}
 
-	public void init(){
+	public void init() {
 		week = TimeLogic.getCurrentWeek();
 		days = TimeLogic.getCurrentWeekDays();
 	}

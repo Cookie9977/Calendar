@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.SwingUtilities;
 
-import window.Window;
+import pane.RequestPanel;
 
 public class Main {
 	public static int id;
@@ -13,7 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new Window();
+//				new Window();
+				new RequestPanel();
 				//TimeLogic logic = new TimeLogic();
 //				logic.printTime();
 //				logic.nextWeek();
