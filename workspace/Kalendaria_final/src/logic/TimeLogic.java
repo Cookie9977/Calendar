@@ -8,9 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import main.Main;
+
 public class TimeLogic {
 	private ArrayList<String> temp;
-	private Calendar cal = new GregorianCalendar();
 	public Calendar calIns = Calendar.getInstance(), tempCal;
 
 	// Retunerar dagar i månad, in = sträng på månadens namn.
@@ -25,8 +26,8 @@ public class TimeLogic {
 				break;
 			}
 		}
-		cal.set(cal.get(Calendar.YEAR), monthValue, cal.get(Calendar.DAY_OF_MONTH));
-		int nrDays = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		Main.cal.set(Main.cal.get(Calendar.YEAR), monthValue, Main.cal.get(Calendar.DAY_OF_MONTH));
+		int nrDays = Main.cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
 			temp.add(String.valueOf(i + 1));
 		}
@@ -41,7 +42,7 @@ public class TimeLogic {
 		Date date;
 		int year = getCurrentYear();
 		int month = getCurrentMonth();
-		int start = cal.get(Calendar.DAY_OF_WEEK) + 1;
+		int start = Main.cal.get(Calendar.DAY_OF_WEEK) + 1;
 		for (int i = start; i < start + 7; i++) {
 			dateString = String.format("%d-%d-%d", year, month, i);
 			try {
@@ -62,24 +63,25 @@ public class TimeLogic {
 		return temp;
 	}
 
-	public int currentFirstDayMonth() {
-		tempCal = Calendar.getInstance();
-		tempCal.set(cal.get(Calendar.YEAR), getCurrentMonth(), 1);
-		return tempCal.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-	}
 
 	public int currentLastDayMonth() {
-		return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		return Main.cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
 	public int currentLastDayLastMonth() {
 		tempCal = new GregorianCalendar();
-		tempCal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) - 1, 1);
+		tempCal.set(Main.cal.get(Calendar.YEAR), Main.cal.get(Calendar.MONTH) - 1, 1);
 		return tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
 
-	public int currentDayOfWeek() {
-		return cal.get(Calendar.DAY_OF_WEEK) - 2;
+	public int currentFirstDayOfMonth() {		
+		tempCal = new GregorianCalendar();
+		tempCal.set(Main.cal.get(Calendar.YEAR), Main.cal.get(Calendar.MONTH), 1);
+		int day = tempCal.get(Calendar.DAY_OF_WEEK)-2;
+		if(day == -1){
+			day = 6;
+		}
+		return day;
 	}
 
 	public int firstDayMonth() {
@@ -99,7 +101,13 @@ public class TimeLogic {
 	}
 
 	public int dayOfWeek() {
-		return calIns.get(Calendar.DAY_OF_WEEK) - 2;
+		tempCal = new GregorianCalendar();
+		tempCal.set(calIns.get(Calendar.YEAR), calIns.get(Calendar.MONTH), 1);
+		int day = tempCal.get(Calendar.DAY_OF_WEEK)-2;
+		if(day == -1){
+			day = 6;
+		}
+		return day;
 	}
 
 	// returnerar månadernas namn.
@@ -117,7 +125,7 @@ public class TimeLogic {
 	public ArrayList<String> getYears() {
 		temp = new ArrayList<String>();
 
-		int thisYear = cal.get(Calendar.YEAR);
+		int thisYear = Main.cal.get(Calendar.YEAR);
 
 		for (int i = 0; i < 21; i++) {
 			temp.add(String.valueOf(thisYear + i));
@@ -148,19 +156,19 @@ public class TimeLogic {
 	}
 
 	public int getCurrentYear() {
-		return cal.get(Calendar.YEAR);
+		return Main.cal.get(Calendar.YEAR);
 	}
 
 	public int getCurrentMonth() {
-		return cal.get(Calendar.MONTH) + 1;
+		return Main.cal.get(Calendar.MONTH) + 1;
 	}
 
 	public int getCurrentWeek() {
-		return cal.get(Calendar.WEEK_OF_YEAR);
+		return Main.cal.get(Calendar.WEEK_OF_YEAR);
 	}
 
 	public int getCurrentDay() {
-		return cal.get(Calendar.DAY_OF_MONTH);
+		return Main.cal.get(Calendar.DAY_OF_MONTH);
 	}
 
 	public int getYear() {

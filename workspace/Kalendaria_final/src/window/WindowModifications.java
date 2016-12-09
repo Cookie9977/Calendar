@@ -11,6 +11,7 @@ public class WindowModifications {
 	protected LoginUser loginView;
 	protected AddButtonsPane addButtons;
 
+	// för att byta mellan vyer
 	public WindowModifications(MonthView monthView, WeekView weekView, DayView dayView, Window window) {
 		this.monthView = monthView;
 		this.weekView = weekView;
@@ -19,11 +20,55 @@ public class WindowModifications {
 
 	}
 
-	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons, Window window) {
+	// för att byta inloggad vs oinloggad
+	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons,
+			Window window) {
 		this.window = window;
 		this.loginView = loginView;
 		this.registerView = registerView;
 		this.addButtons = addButtons;
+	}
+
+	// för att byta mellan dagsyer
+	public WindowModifications(DayView dayView, Window window) {
+		this.dayView = dayView;
+		this.window = window;
+	}
+
+	// för att byta mellan veckovyer
+	public WindowModifications(WeekView weekView, Window window) {
+		this.weekView = weekView;
+		this.window = window;
+	}
+
+	// för att byta mellan måndadsvyer
+	public WindowModifications(MonthView monthView, Window window) {
+		this.monthView = monthView;
+		this.window = window;
+	}
+	
+	public void nextMonth(){
+		
+	}
+	
+	public void previousMonth(){
+		
+	}
+	
+	public void nextWeek(){
+		
+	}
+	
+	public void previousWeek(){
+		
+	}
+	
+	public void nextDay(){
+		
+	}
+	
+	public void previousDay(){
+		
 	}
 
 	public void showMonthView() {
