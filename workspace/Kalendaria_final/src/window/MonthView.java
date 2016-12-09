@@ -17,16 +17,14 @@ import main.ClickListener;
 public class MonthView extends JPanel {
 	private static final long serialVersionUID = 6304391601622162482L;
 	private JTable tableMonth;
-	private pane.TimePane TimePane;
 	private TimeLogic TimeLogic;
 	protected ArrayList<String> daysOfMonth;
-	protected int thisMonth, firstDayOfMonth, lastDayOfMonth, dayOfWeek, firstDayNextMonth, lastDayLastMonth, justering,
+	protected int thisMonth, firstDayOfMonth, lastDayOfMonth, dayOfWeekMonth, firstDayNextMonth, lastDayLastMonth, justering,
 			lopNummer;
 
 	public int FmonthColumn, LmonthRow, LmonthColumn;
 
 	public MonthView() {
-		TimePane = new pane.TimePane();
 		TimeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(770, 720));
@@ -96,7 +94,7 @@ public class MonthView extends JPanel {
 		tableMonth.setCellSelectionEnabled(true);
 		tableMonth.addMouseListener(new ClickListener(this));
 		containDays.add(tableMonth);
-
+		lopNummer = firstDayNextMonth = 1;
 		init();
 
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
@@ -110,7 +108,7 @@ public class MonthView extends JPanel {
 					// TabellRenderare());
 					lopNummer++;
 
-				} else if (j == 0 && dayOfWeek == i) {
+				} else if (j == 0 && dayOfWeekMonth == i) {
 					tableMonth.setValueAt(lopNummer, j, i);
 					lopNummer++;
 
@@ -118,11 +116,11 @@ public class MonthView extends JPanel {
 					tableMonth.setValueAt(firstDayNextMonth++, j, i);
 					LmonthColumn = i;
 					LmonthRow = j;
-					System.out.println("Column " + LmonthColumn + " Row " + LmonthRow);
+					//System.out.println("Column " + LmonthColumn + " Row " + LmonthRow);
 				}
 
 				else if (lopNummer < lastDayLastMonth) {
-					tableMonth.setValueAt(lastDayLastMonth - justering + 1, j, (dayOfWeek - justering));
+					tableMonth.setValueAt(lastDayLastMonth - justering + 1, j, (dayOfWeekMonth - justering));
 					justering--;
 					FmonthColumn = i;
 				}
@@ -132,11 +130,15 @@ public class MonthView extends JPanel {
 
 	public void init() {
 		thisMonth = TimeLogic.getCurrentMonth();
-		firstDayOfMonth = TimeLogic.currentFirstDayMonth();
+		System.out.println("månad: "+ thisMonth);
 		lastDayOfMonth = TimeLogic.currentLastDayMonth();
-		dayOfWeek = justering = TimeLogic.currentDayOfWeek();
+		System.out.println("sista dagan: " + lastDayLastMonth);
+		dayOfWeekMonth = justering = TimeLogic.currentFirstDayOfMonth();
+		System.out.println("veckans dag: " + dayOfWeekMonth);
 		lastDayLastMonth = TimeLogic.currentLastDayLastMonth();
+		System.out.println("Sista dagen förra månaden: " + lastDayLastMonth);
 		daysOfMonth = TimeLogic.getDays("" + thisMonth);
-		lopNummer = firstDayNextMonth = 1;
+		System.out.println("dagar i månaden: "+ daysOfMonth);
+		
 	}
 }

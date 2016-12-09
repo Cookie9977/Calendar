@@ -25,7 +25,7 @@ public class Window extends JFrame {
 	protected AddButtonsPane addButtons;
 	protected RegisterUser registerUser;
 	protected JPanel body, menyBar, navBar, datePanel, topLine, westLine, centerBlock, cTop, cContent, cWest, cEast,
-			cSouth;
+			cSouth, westBorder, eastBorder;
 	protected MenuNavBar monthButton, weekButton, dayButton;
 	protected WindowModifications windowmodifications;
 	protected MonthView monthView;
@@ -57,6 +57,8 @@ public class Window extends JFrame {
 		cEast = new JPanel();
 		cSouth = new JPanel();
 		menyBar = new JPanel();
+		westBorder = new JPanel();
+		eastBorder = new JPanel();
 		navBar = new JPanel();
 		datePanel = new JPanel();
 		datePanelDate = new DatePanelDate();
@@ -136,9 +138,12 @@ public class Window extends JFrame {
 		 * inloggningstatusen.
 		 */
 		menyBar.setPreferredSize(new Dimension(gridWidth, (height - gridHeight)));
+		westBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
+		eastBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
 		menyBar.setBackground(new Color(66, 86, 244, 255));
 		menyBar.setLayout(new GridLayout(5, 1));
-		
+		westLine.add(westBorder, BorderLayout.WEST);
+		westLine.add(eastBorder, BorderLayout.EAST);
 		westLine.add(menyBar, BorderLayout.CENTER);
 
 		// Dagens datum.
@@ -170,7 +175,6 @@ public class Window extends JFrame {
 		upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);
-		menyBar.add(upcomingEvent);
 
 		/*
 		 * Padding rutor i centerBlock
