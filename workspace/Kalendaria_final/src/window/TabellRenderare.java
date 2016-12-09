@@ -72,8 +72,8 @@ public class TabellRenderare extends DefaultTableCellRenderer {
 				      renderer.setForeground(new Color(238,238,238));
 				      renderer.setFont(new Font("SansSerif", Font.ITALIC, 15));
 				    //aColumn <= MonthViewColumnRow.LmonthColumn && aRow == MonthViewColumnRow.LmonthRow
-					    System.out.println("Column "+ aColumn);
-					    System.out.println("Row "+aRow);
+//					    System.out.println("Column "+ aColumn);
+//					    System.out.println("Row "+aRow);
 				    }
 		    	else if (aColumn == 6) {	
 			    	renderer.setForeground(Color.RED);

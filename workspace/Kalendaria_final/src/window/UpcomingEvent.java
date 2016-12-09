@@ -4,11 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.ClickListener;
@@ -20,32 +18,37 @@ public class UpcomingEvent extends JPanel {
 		setPreferredSize(new Dimension(460,40));
 		setLayout(new BorderLayout());
 		JPanel eventBox = new JPanel();
-		eventBox.setLayout(new GridLayout(10, 1));
+		eventBox.setLayout(new GridLayout(5, 1));
 		eventBox.setBackground(new Color(238, 238, 238));
 		add(eventBox, BorderLayout.CENTER);
-		JLabel[] eventListItem = new JLabel[10];
-		String ids = "";
-		try {
-			String SQL = "select * from event";
-			System.out.println(SQL);
-
-			Object[][] data = Main.db.getData(SQL);
-
-			// String SQLJ = "select id from user where email ='"+email+"' AND
-			// password ='"+new String(pass)+"'";
-
-			if (!(data[0][0] == "")) {
-				ids = (String) data[0][0];
-				Main.id = Integer.parseInt(ids);
-				String SQLI = "select * from event_link where user_id = "+ Main.id;
-				System.out.println("SQLI = "+SQLI);
-				}
-		}catch (Exception f) {
-			System.out.println(f);
-			
-		}
+		JLabel[] eventListItem = new JLabel[5];
+		int id = Main.id;
 		
 		
+//		try {
+//			String SQL = "select * from user where id = "+ id;
+//			System.out.println(SQL);
+//
+//			Object[][] data = Main.db.getData(SQL);
+//
+//			// String SQLJ = "select id from user where email ='"+email+"' AND
+//			// password ='"+new String(pass)+"'";
+//
+//			if (!(data[0][0] == "")) {
+//				String SQLI = "select * from event_link where user_id = "+ id;
+//				Object[][] result = Main.db.getData(SQLI);
+//				for (int i = 0; i < result.length; i++) {
+//					for (int j = 0; j < result[i].length; j++) {
+//						System.out.println(result[i][j]);
+//					}
+//				}
+//				System.out.println("SQLI = "+SQLI);
+//				}
+//		}catch (Exception f) {
+//			System.out.println(f);
+//			
+//		
+//	}
 		for (int i = 0; i < eventListItem.length; i++) {
 			eventListItem[i] = new JLabel();
 			eventListItem[i].setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.BLACK));
@@ -53,7 +56,6 @@ public class UpcomingEvent extends JPanel {
 			eventListItem[i].addMouseListener(new ClickListener(this));	
 
 			eventListItem[i].setText("Test "+i);
-			System.out.println(eventListItem[i]);
 			eventBox.add(eventListItem[i], BorderLayout.NORTH);
 		}
 		
