@@ -30,6 +30,13 @@ public class EventLogic {
 		boolean dubbleBok = true;
 		if (correctTime) {
 			dubbleBok = checkTime(startTime, endTime, Main.id, category);
+
+		}
+		if(dubbleBok){
+			int ok = JOptionPane.showConfirmDialog(null, "Du har dubblebokat är du okej med detta?","Varning", JOptionPane.WARNING_MESSAGE);
+			if (ok == JOptionPane.OK_OPTION) {
+				dubbleBok = false;
+			}
 		}
 		if (!dubbleBok && correctTime) {
 			addEvent(Main.id, title, place, description, startTime, endTime, category, friend);
