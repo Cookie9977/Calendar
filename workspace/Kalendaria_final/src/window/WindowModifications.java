@@ -236,7 +236,6 @@ public class WindowModifications {
 	}
 
 	public void showLoggedinView() {
-	
 		upcomingEvent = new UpcomingEvent();
 		window.menyBar.remove(loginView);
 		window.menyBar.remove(registerView);

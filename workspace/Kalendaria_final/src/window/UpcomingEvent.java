@@ -24,16 +24,9 @@ public class UpcomingEvent extends JPanel {
 
 	public UpcomingEvent() {
 		
-		
-	//	int tal = createEventList();
-
-		refreshEvent();
-		
-		
-		
+		refreshEvent();	
 	}
 	public void refreshEvent(){
-		id = Storage.id;
 		eventId = getEventId();
 		eventContent = getEventContent();
 		JOptionPane.showMessageDialog(null,""+eventId.size());
@@ -63,6 +56,12 @@ public class UpcomingEvent extends JPanel {
 			}
 			eventBox.add(eventListItem[i], BorderLayout.NORTH);
 		}
+			eventBox.removeAll();
+	}
+	public boolean updateEventList(){
+		
+		eventBox.updateUI();
+		return false;
 	}
 	
 	
