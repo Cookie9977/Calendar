@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import logic.RequestLogic;
 import main.Storage;
 
 public class RequestPanel extends JFrame implements ActionListener {
@@ -26,12 +27,15 @@ public class RequestPanel extends JFrame implements ActionListener {
 	private JScrollPane eventScroll, friendScroll;
 	private int reqLength, friendLength;
 	private Font fontPlain, fontBold;
+	private RequestLogic reqLogic;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 
 	private static final long serialVersionUID = 4593819136988113328L;
 
 	public RequestPanel() {
-		// basic setup
+		/*
+		 * basic setup
+		 */
 		super("Förfrågningar");
 		setResizable(false);
 		setVisible(true);
@@ -48,24 +52,26 @@ public class RequestPanel extends JFrame implements ActionListener {
 		setBounds(xStart, yStart, width, height);
 		setPreferredSize(new Dimension(width, height));
 
-		// stil
+		// stil + RequestLogic intialisering
 		setBackground(new Color(238, 238, 238));
-		Font fontPlain = new Font("SansSerif", Font.PLAIN, 18);
-		Font fontBold = new Font("SansSerif", Font.BOLD, 20);
+		fontPlain = new Font("SansSerif", Font.PLAIN, 18);
+		fontBold = new Font("SansSerif", Font.BOLD, 20);
+		reqLogic = new RequestLogic();
 
 		/*
 		 * Variabler som måste defineras tidigt
 		 */
+
 		friendLength = friendLength();
 		reqLength = eventLength();
-
+		
 		System.out.println("req Length: " + reqLength);
 		// JUMP
-		reqLength += 300;
+		reqLength += 7;
 		System.out.println(reqLength + " justerad för testing");
 
 		System.out.println("vän längd: " + friendLength);
-		friendLength += 20;
+		friendLength += 8;
 		System.out.println(friendLength + " justerad för testning");
 
 		// Hämtar ut storleken på scroll rutan baserat på antalet poster som
@@ -156,16 +162,9 @@ public class RequestPanel extends JFrame implements ActionListener {
 		/// FIXME pack ska bort när testning är klar tillsammans med exit
 
 		pack();
-
-		/*
-		 * System.out.println(topPanel); System.out.println(botPanel);
-		 * System.out.println(eventLabelP); System.out.println(eventPanel);
-		 * 
-		 * System.out.println(eventScroll); System.out.println(friendLabelP);
-		 * System.out.println(friendPanel); System.out.println(friendScroll);
-		 */
 	}
 
+	// Returnerar en storlek för vänfönstret, 55 * friendLength eller 320 min
 	private int friendSizing(int friendLength) {
 		int friendHeight = (friendLength * 55);
 		if (friendHeight >= 300) {
@@ -178,6 +177,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		}
 	}
 
+	// Returnerar en storlek för eventFönstret, 105 * reqLength eller 320 min
 	private int eventSizing(int reqLength) {
 		int eventHeight = (reqLength * 105);
 		if (eventHeight >= 300) {
@@ -190,6 +190,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		}
 	}
 
+	// Loopar igenom och skapar alla paneler med vänförfrågnignar
 	private void friendReq(int friendLength) {
 		// Variabel deklareringar för vänförfrågnignar.
 		if (friendLength > 0) {
@@ -253,10 +254,11 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 	}
 
-	// Eventförfrågningarpanelen görs här.
+	// Loopar ingeom och skapar alla paneler för eventförfrågnignar.
 	private void eventReq(int reqLength) {
 		// Variabel deklareringar för eventförfrågnignar.
 		if (reqLength > 0) {
+			Object[][] data = reqLogic.getEvent();
 			JPanel[] eventReqPanel = new JPanel[reqLength];
 			JLabel[] titleReq = new JLabel[reqLength];
 			JLabel[] personReq = new JLabel[reqLength];
@@ -278,12 +280,11 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 				// TODO Titeln, ska hämtas från databas
 				titleReq[i] = new JLabel();
-				titleReq[i].setText("Bygga pepparkakshus");
+				titleReq[i].setText((String) data[i][1]);
 				titleReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(titleReq[i]);
 
-				// person, ska hämtas från databas(typ allting ska så inga mer
-				// TODO för dom)
+				// person, 
 				personReq[i] = new JLabel();
 				personReq[i].setText("thisisatesttotestthelengthoflongemailsand@livet.se");
 				personReq[i].setFont(fontPlain);
@@ -346,6 +347,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		}
 	}
 
+	// En select Count för antalet eventförfrågningar till inloggade id
 	public int eventLength() {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Storage.id + " and accepted = 0";
@@ -353,6 +355,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		return retval;
 	}
 
+	// En select Count för antalet vänförfrågningar till inloggade id
 	public int friendLength() {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM friend_link WHERE reciver = " + Storage.id + " and accepted = 0";
@@ -362,15 +365,18 @@ public class RequestPanel extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
+	public void actionPerformed(ActionEvent ae) {
+		System.out.println(ae.getSource().toString());
+		
 	}
 
+	// Räknar ut en startposition i x-led, center
 	private int getXStart(Dimension screenSize, int width) {
 		int y = (((int) Math.ceil(screenSize.getWidth()) - (width)) / 2);
 		return y;
 	}
 
+	// Räknar ut en startposition i y-led, center
 	private int getYStart(Dimension screenSize, int height) {
 		int x = (((int) Math.ceil(screenSize.getHeight()) - (height)) / 2);
 		return x;
