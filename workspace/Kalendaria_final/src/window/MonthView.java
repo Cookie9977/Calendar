@@ -145,8 +145,8 @@ public class MonthView extends JPanel {
 					if (Integer.parseInt(timeLogic.parseOutDay(event.get(k).getTimeStart())) == lopNummer) {
 						temp = event.get(k);
 						System.out.println(lopNummer);
-						JLabel text = new JLabel(lopNummer+" "+temp.getTitle()+"<br>         feakfopaokfaopfeakopakpokfefpawfkepowakfapewe");
-						tableMonth.setValueAt(text.getText(), j, i);
+						String text = lopNummer+" "+temp.getTitle()+"<br> ";
+						tableMonth.setValueAt(text, j, i);
 					}
 				}
 			}

@@ -23,7 +23,7 @@ public class LoginUser extends JPanel implements ActionListener {
 	private JLabel[] headingLabel;
 	private JPanel[] holders;
 	private Window windowVal;
-	private UpcomingEvent upcomingEvent;
+	//private UpcomingEvent upcomingEvent;
 	private WindowModifications windowmodifications;
 
 	private static final long serialVersionUID = -2354560402587167649L;
@@ -86,7 +86,7 @@ public class LoginUser extends JPanel implements ActionListener {
 	// String password = textBox[1].getText();
 
 	public void actionPerformed(ActionEvent e) {
-		upcomingEvent = new UpcomingEvent();
+		
 		String email = textBox[0].getText();
 		char[] pass = password.getPassword();
 		String ids = "";
@@ -94,7 +94,7 @@ public class LoginUser extends JPanel implements ActionListener {
 		try {
 			String SQL = "select * from user where email ='" + email + "' AND password ='" + new String(pass) + "'";
 			// System.out.println(SQL);
-
+			
 			Object[][] data = Storage.db.getData(SQL);
 
 			// String SQLJ = "select id from user where email ='"+email+"' AND
@@ -105,16 +105,21 @@ public class LoginUser extends JPanel implements ActionListener {
 				ids = (String) data[0][0];
 				Storage.id = Integer.parseInt(ids);
 				System.out.println(" - Du är inloggad som " + email + " med ID: " + Storage.id);
+				
 				// TODO försvinn
 				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,windowVal.upcomingEvent,
 						windowVal);
 				// windowmodifications = windowVal.getModifications();
 				try {
+				
 					windowmodifications.showLoggedinView();
+					windowVal.upcomingEvent.refreshEvent();
+					
 				} catch (NullPointerException e2) {
 					System.err.println(e2);
 				}
-				upcomingEvent.getEventContent();
+				
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
 				System.out.println(SQL);

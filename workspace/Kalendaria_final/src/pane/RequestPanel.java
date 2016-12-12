@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import main.Main;
 import main.Storage;
 
 public class RequestPanel extends JFrame implements ActionListener {
@@ -57,12 +56,22 @@ public class RequestPanel extends JFrame implements ActionListener {
 		/*
 		 * Variabler som måste defineras tidigt
 		 */
+		friendLength = friendLength();
 		reqLength = eventLength();
-		System.out.println(reqLength);
+
+		System.out.println("req Length: " + reqLength);
 		// JUMP
 		reqLength += 300;
-		System.out.println(reqLength);
+		System.out.println(reqLength + " justerad för testing");
+
+		System.out.println("vän längd: " + friendLength);
+		friendLength += 20;
+		System.out.println(friendLength + " justerad för testning");
+
+		// Hämtar ut storleken på scroll rutan baserat på antalet poster som
+		// finns.
 		int eventSize = eventSizing(reqLength);
+		int friendSize = friendSizing(friendLength);
 
 		/*
 		 * paneler
@@ -85,9 +94,8 @@ public class RequestPanel extends JFrame implements ActionListener {
 		eventPanel.setBackground(Color.YELLOW);
 		// add(eventPanel);
 
-		// Scrollpanel
+		// Scrollpanel 1, events
 		eventScroll = new JScrollPane(eventPanel);
-		// eventScroll.setViewportView(eventPanel);
 		eventScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		eventScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		eventScroll.setPreferredSize(new Dimension(600, 350));
@@ -103,16 +111,15 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 		// Vänpanelen.
 		friendPanel = new JPanel();
-		friendPanel.setLayout(new BorderLayout());
-		friendPanel.setPreferredSize(new Dimension(600, 350));
+		friendPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		friendPanel.setPreferredSize(new Dimension(600, friendSize));
 		friendPanel.setBackground(Color.BLUE);
 
-		// Scrollpanel 2 TODO
-		friendScroll = new JScrollPane();
-		friendScroll.setViewportView(friendPanel);
+		// Scrollpanel 2, vänner
+		friendScroll = new JScrollPane(friendPanel);
 		friendScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		friendScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		// friendScroll.setPreferredSize(new Dimension(600, 350));
+		friendScroll.setPreferredSize(new Dimension(600, 350));
 		friendScroll.getVerticalScrollBar().setUnitIncrement(10);
 		botPanel.add(friendScroll, BorderLayout.CENTER);
 
@@ -136,7 +143,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 		// Friendlabel
 		friendLabel = new JLabel();
-		friendLabel.setText("Vänförfrågningar (" + reqLength + ")");
+		friendLabel.setText("Vänförfrågningar (" + friendLength + ")");
 		friendLabel.setFont(fontBold);
 		friendLabelP.add(friendLabel);
 
@@ -146,7 +153,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		eventReq(reqLength);
 		friendReq(friendLength);
 
-		/// FIXME den ska bort när testning är klar tillsammans med exit
+		/// FIXME pack ska bort när testning är klar tillsammans med exit
 
 		pack();
 
@@ -159,15 +166,27 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 */
 	}
 
-	private int eventSizing(int reqLength) {
-		int height = (reqLength * 105);
-		if (height >= 300) {
-			System.out.println(height + "if");
-			return height;
+	private int friendSizing(int friendLength) {
+		int friendHeight = (friendLength * 55);
+		if (friendHeight >= 300) {
+			// System.out.println(friendHeight + "if");
+			return friendHeight;
 		} else {
-			height = 320;
-			System.out.println(height + "else");
-			return height;
+			friendHeight = 320;
+			// System.out.println(friendHeight + "else");
+			return friendHeight;
+		}
+	}
+
+	private int eventSizing(int reqLength) {
+		int eventHeight = (reqLength * 105);
+		if (eventHeight >= 300) {
+			// System.out.println(eventHeight + "if");
+			return eventHeight;
+		} else {
+			eventHeight = 320;
+			// System.out.println(eventHeight + "else");
+			return eventHeight;
 		}
 	}
 
@@ -175,13 +194,46 @@ public class RequestPanel extends JFrame implements ActionListener {
 		// Variabel deklareringar för vänförfrågnignar.
 		if (friendLength > 0) {
 			JPanel[] friendReqPanel = new JPanel[friendLength];
-			JLabel[] userReqPanel = new JLabel[friendLength];
+			JPanel[] buttonPanel = new JPanel[friendLength];
+			JLabel[] userReqLabel = new JLabel[friendLength];
 			JButton[] yesButton = new JButton[friendLength];
-			JButton[] noButotn = new JButton[friendLength];
-			for(int i = 0; i < friendLength; i++){
-				//TODO fixa panel grejer
+			JButton[] noButton = new JButton[friendLength];
+			for (int i = 0; i < friendLength; i++) {
+				// Förälder panel
+				friendReqPanel[i] = new JPanel();
+				friendReqPanel[i].setLayout(new BorderLayout());
+				friendReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				friendReqPanel[i].setPreferredSize(new Dimension(600, 50));
+
+				// Panel där knapparna ska ligga i
+				buttonPanel[i] = new JPanel();
+				buttonPanel[i].setPreferredSize(new Dimension(250, 50));
+				buttonPanel[i].setLayout(new GridLayout(1, 2));
+				buttonPanel[i].setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				friendReqPanel[i].add(buttonPanel[i], BorderLayout.EAST);
+
+				// Användaren som skickat förfrågans email.
+				userReqLabel[i] = new JLabel();
+				userReqLabel[i].setPreferredSize(new Dimension(350, 50));
+				userReqLabel[i].setText("thisisatesttotestthelengthoflongemailsand@livet.se");
+				userReqLabel[i].setFont(fontPlain);
+				friendReqPanel[i].add(userReqLabel[i], BorderLayout.WEST);
+
+				// Ja knapp.
+				yesButton[i] = new JButton();
+				yesButton[i].setText("Acceptera");
+				yesButton[i].addActionListener(this);
+				buttonPanel[i].add(yesButton[i]);
+
+				// Nej knapp
+				noButton[i] = new JButton();
+				noButton[i].setText("Neka");
+				noButton[i].addActionListener(this);
+				buttonPanel[i].add(noButton[i]);
+
+				friendPanel.add(friendReqPanel[i]);
 			}
-			
+
 		} else {
 			JPanel sorryPanel = new JPanel();
 			JLabel sorryLabel = new JLabel();
@@ -224,7 +276,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				eventReqPanel[i].setPreferredSize(new Dimension(600, 100));
 				eventReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-				// Titeln, ska hämtas från databas TODO
+				// TODO Titeln, ska hämtas från databas
 				titleReq[i] = new JLabel();
 				titleReq[i].setText("Bygga pepparkakshus");
 				titleReq[i].setFont(fontPlain);
@@ -297,9 +349,15 @@ public class RequestPanel extends JFrame implements ActionListener {
 	public int eventLength() {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Storage.id + " and accepted = 0";
-		Object[][] data = Storage.db.getData(SQL);
-		// System.out.println(data[0][0]);
 		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
+		return retval;
+	}
+
+	public int friendLength() {
+		int retval;
+		String SQL = "SELECT COUNT(*) FROM friend_link WHERE reciver = " + Storage.id + " and accepted = 0";
+		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
+		System.out.println(retval);
 		return retval;
 	}
 
