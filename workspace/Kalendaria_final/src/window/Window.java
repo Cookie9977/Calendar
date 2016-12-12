@@ -172,7 +172,7 @@ public class Window extends JFrame {
 		// Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
-		upcomingEvent = new UpcomingEvent();
+		//upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);
 

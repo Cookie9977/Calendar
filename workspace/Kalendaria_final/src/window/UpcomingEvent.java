@@ -26,8 +26,15 @@ public class UpcomingEvent extends JPanel {
 		
 		
 	//	int tal = createEventList();
-		eventId = getEventId();
+
+		refreshEvent();
 		
+		
+		
+	}
+	public void refreshEvent(){
+		id = Storage.id;
+		eventId = getEventId();
 		eventContent = getEventContent();
 		JOptionPane.showMessageDialog(null,""+eventId.size());
 		setPreferredSize(new Dimension(460, 40));
@@ -38,31 +45,31 @@ public class UpcomingEvent extends JPanel {
 		eventBox.setBackground(new Color(238, 238, 238));
 		add(eventBox, BorderLayout.CENTER);
 		eventListItem = new JLabel[5];
-		id = Storage.id;
-
 		for (int i = 0; i < eventContent.size(); i++) {
-			System.out.println("Hämta eventcontent i"+eventContent.get(i));
+			System.out.println("Hämta eventcontent i "+eventContent.get(i));
 		}
+		
 		for (int i = 0; i < eventListItem.length; i++) {
 			eventListItem[i] = new JLabel();
 			eventListItem[i].setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.BLACK));
 			eventListItem[i].setPreferredSize(new Dimension(40, 20));
 			eventListItem[i].addMouseListener(new ClickListener(this));
+			
 			try{
 				eventListItem[i].setText(""+eventContent.get(i));
 			}catch(Exception e){
+			
 				eventListItem[i].setText("Inget ");
 			}
-			
 			eventBox.add(eventListItem[i], BorderLayout.NORTH);
 		}
 	}
 	
 	
-	public ArrayList<String> getEvents()
-	{
-		return eventContent;
-	}
+//	public ArrayList<String> getEvents()
+//	{
+//		return eventContent;
+//	}
 	
 	
 	public ArrayList<String> getList()
@@ -80,13 +87,15 @@ public class UpcomingEvent extends JPanel {
 		try {
 		
 		//String SQLI = "select event_id from event_link where user_id = " + Storage.id;
-		String SQLI = "select event_id from event_link where user_id =14";
+			int id = Storage.id;
+			//"+id
+		String SQLI = "select event_id from event_link where user_id = "+id;
 		Object[][] result = Storage.db.getData(SQLI);
-
+		
 		System.out.println(SQLI);;
 		for (int i = 0; i < result.length; i++) {
 			for (int j = 0; j < result[i].length; j++) {
-				System.out.println("Result " + result[i][j]);
+				System.out.println("EventID: " + result[i][j]);
 				lokal.add((String) result[i][j]);
 				JOptionPane.showMessageDialog(null, result[i]);
 			}
@@ -104,10 +113,10 @@ public class UpcomingEvent extends JPanel {
 			
 			for (int i = 0; i < eventId.size(); i++) {
 				String SQLJ = "select title, location, start, end, category from event where id =" + eventId.get(i);
-				System.out.println("SQLJ "+SQLJ);
+				System.out.println("SQLJ: "+SQLJ);
 				Object[][] resultat = Storage.db.getData(SQLJ);
 						eventContent.add((String) resultat[0][0]+", "+resultat[0][2]+","+resultat[0][3]);
-						System.out.println("STRL "+ eventContent.size());
+						System.out.println("Antal resultat:  "+ eventContent.size());
 			}
 
 		} catch (Exception f) {
