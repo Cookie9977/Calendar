@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import main.Main;
+import main.Storage;
 
 public class LoginUser extends JPanel implements ActionListener {
 	private JTextField[] textBox;
@@ -23,6 +23,7 @@ public class LoginUser extends JPanel implements ActionListener {
 	private JLabel[] headingLabel;
 	private JPanel[] holders;
 	private Window windowVal;
+	private UpcomingEvent upcomingEvent;
 	private WindowModifications windowmodifications;
 
 	private static final long serialVersionUID = -2354560402587167649L;
@@ -32,6 +33,7 @@ public class LoginUser extends JPanel implements ActionListener {
 		setBackground(new Color(0, 0, 0, 0));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
+		
 		// Font inputFont = new Font("SansSerif", Font.BOLD, 20);
 		// layout
 		GridBagLayout gridBag = new GridBagLayout();
@@ -84,16 +86,16 @@ public class LoginUser extends JPanel implements ActionListener {
 	// String password = textBox[1].getText();
 
 	public void actionPerformed(ActionEvent e) {
+		upcomingEvent = new UpcomingEvent();
 		String email = textBox[0].getText();
 		char[] pass = password.getPassword();
 		String ids = "";
-		String value = null;
 
 		try {
 			String SQL = "select * from user where email ='" + email + "' AND password ='" + new String(pass) + "'";
 			// System.out.println(SQL);
 
-			Object[][] data = Main.db.getData(SQL);
+			Object[][] data = Storage.db.getData(SQL);
 
 			// String SQLJ = "select id from user where email ='"+email+"' AND
 			// password ='"+new String(pass)+"'";
@@ -101,8 +103,8 @@ public class LoginUser extends JPanel implements ActionListener {
 			if (!(data[0][0] == "")) {
 				// System.out.println(SQL);
 				ids = (String) data[0][0];
-				Main.id = Integer.parseInt(ids);
-				System.out.println(" - Du är inloggad som " + email + " med ID: " + Main.id);
+				Storage.id = Integer.parseInt(ids);
+				System.out.println(" - Du är inloggad som " + email + " med ID: " + Storage.id);
 				// TODO försvinn
 				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,windowVal.upcomingEvent,
 						windowVal);
@@ -112,19 +114,7 @@ public class LoginUser extends JPanel implements ActionListener {
 				} catch (NullPointerException e2) {
 					System.err.println(e2);
 				}
-				String SQLI = "select event_id from event_link where user_id = "+ Main.id;
-				Object[][] result = Main.db.getData(SQLI);
-				
-				for (int i = 0; i < result.length; i++) {
-					for (int j = 0; j < result[i].length; j++) {
-						String SQLJ = "select * from event where id = "+ result[i];
-				Object[] resultat = Main.db.getData(SQLJ);
-						System.out.println(result[i][j]);
-					}
-				}
-				System.out.println("SQLI = "+SQLI);
-				
-
+				upcomingEvent.getEventContent();
 			} else {
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
 				System.out.println(SQL);

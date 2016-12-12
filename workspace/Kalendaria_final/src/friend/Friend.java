@@ -1,6 +1,6 @@
 package friend;
 
-import main.Main;
+import main.Storage;
 
 public class Friend {
 	public int id;
@@ -15,7 +15,7 @@ public class Friend {
 	public Friend(int id) {
 		this.id = id;
 		String SQL = "SELECT user.username, user.email FROM user WHERE user.id = " + id;
-		Object[][] data = Main.db.getData(SQL);
+		Object[][] data = Storage.db.getData(SQL);
 		this.username = (String) data[0][0];
 		this.email = (String) data[0][1];
 	}

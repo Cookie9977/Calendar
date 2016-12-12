@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import friend.Friend;
-import main.Main;
+import main.Storage;
 
 public class EventPane extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -492939221067396792L;
@@ -129,7 +129,7 @@ public class EventPane extends JPanel implements ActionListener {
 
 	public ArrayList<String> getCategories() {
 		String SQL = "SELECT name FROM category";
-		Object[][] data = Main.db.getData(SQL);
+		Object[][] data = Storage.db.getData(SQL);
 		temp = new ArrayList<String>();
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {

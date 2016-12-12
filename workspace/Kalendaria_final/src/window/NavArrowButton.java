@@ -7,15 +7,14 @@ import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class NavArrowButton extends JPanel implements ActionListener {
-	private String[] buttonText = { "", "" };
+	// private String[] buttonText = { "", "" };
 	private Window window;
 	private int direction;
 	private String view;
+	private WindowModifications mod;
 
 	private static final long serialVersionUID = 5363273381463559887L;
 
@@ -54,42 +53,47 @@ public class NavArrowButton extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent AE) {
-		// här ska det finnas val beroende på vart knappen befinner sig(dayview,
-		// vecka, månad)
-		// JOptionPane.showMessageDialog(null, "du är i " +
-		// window.view.getText() + ".");
 		view = window.view.getText();
 		switch (direction) {
-		case 0: // left
+		case 0: // left backwards
 			switch (view) {
 			case "Dag":
-				System.out.println("detta är dag");
+				mod = new WindowModifications(window.dayView, window);
+				mod.previousDay();
+				//System.out.println("detta är dag");
 				break;
 			case "Vecka":
-				System.out.println("detta är vecka");
+				mod = new WindowModifications(window.weekView, window);
+				mod.previousWeek();
+//				System.out.println("detta är vecka");
 				break;
 			case "Månad":
-				System.out.println("detta är månad");
+				mod = new WindowModifications(window.monthView, window);
+				mod.previousMonth();
 				break;
 
 			}
-			System.out.println("Left");
+			//System.out.println("Left");
 			break;
-
-		case 1: // right
+		case 1: // right forward
 			switch (view) {
 			case "Dag":
-				System.out.println("detta är dag");
+				mod = new WindowModifications(window.dayView, window);
+				mod.nextDay();
+				// System.out.println("detta är dag");
 				break;
 			case "Vecka":
-				System.out.println("detta är vecka");
+				mod = new WindowModifications(window.weekView, window);
+				mod.nextWeek();
+				//System.out.println("detta är vecka");
 				break;
 			case "Månad":
-				System.out.println("detta är månad");
+				mod = new WindowModifications(window.monthView, window);
+				mod.nextMonth();
 				break;
 
 			}
-			System.out.println("Right");
+			// System.out.println("Right");
 			break;
 		}
 	}

@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import main.Main;
+import main.Storage;
 
 public class AddFriend extends JFrame implements ActionListener {
 
@@ -121,10 +122,10 @@ public class AddFriend extends JFrame implements ActionListener {
 		if (regex == true) {
 			try {
 				String receiverSQL = "SELECT id FROM user WHERE email='" + Email + "'";
-				Object[][] receiverID = Main.db.getData(receiverSQL);
-				String friendsql = "INSERT INTO friend_link(`requester`, `reciver`, `accepted`) VALUES (" + Main.id
+				Object[][] receiverID = Storage.db.getData(receiverSQL);
+				String friendsql = "INSERT INTO friend_link(`requester`, `reciver`, `accepted`) VALUES (" + Storage.id
 						+ ", " + receiverID[0][0] + ", 0)";
-				Main.db.execute(friendsql);
+				Storage.db.execute(friendsql);
 				dispose();
 			} catch (Exception errorAdd) {
 				System.out.println("Vi har fångat ett fel!: " + errorAdd);

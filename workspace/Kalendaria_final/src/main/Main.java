@@ -1,25 +1,17 @@
 package main;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.swing.SwingUtilities;
 
 import pane.RequestPanel;
 import window.Window;
 
 public class Main {
-	public static int id;
-
-	public static Calendar cal = new GregorianCalendar();
-	public final static JavaDB db = new JavaDB("192.168.216.112", "Test", "qwerty123", "calendar");
-
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				
-//				new Window();
-				new RequestPanel();
+
+//				new RequestPanel();
 				// TimeLogic logic = new TimeLogic();
 				// logic.printTime();
 				// logic.nextWeek();
@@ -32,6 +24,7 @@ public class Main {
 				// }
 				// int i = logic.getdayOfWeek();
 				// System.out.println(i);
+				new Window();
 			}
 		});
 	}

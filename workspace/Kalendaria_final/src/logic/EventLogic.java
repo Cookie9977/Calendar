@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import friend.Friend;
-import main.Main;
+import main.Storage;
 import pane.EventPane;
 
 public class EventLogic {
@@ -29,7 +29,7 @@ public class EventLogic {
 		int category = event.category.getSelectedIndex() + 1;
 		boolean dubbleBok = true;
 		if (correctTime) {
-			dubbleBok = checkTime(startTime, endTime, Main.id, category);
+			dubbleBok = checkTime(startTime, endTime, Storage.id, category);
 
 		}
 		if (dubbleBok) {
@@ -39,18 +39,18 @@ public class EventLogic {
 				dubbleBok = false;
 			}
 		}
-		if (!dubbleBok && correctTime) {
-			addEvent(Main.id, title, place, description, startTime, endTime, category, friend);
-		} else {
-			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
-		}
+//		if (!dubbleBok && correctTime) {
+//			addEvent(Storage.id, title, place, description, startTime, endTime, category, friend);
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
+//		}
 	}
 
 	private void addEvent(int id, String title, String place, String description, String startTime, String endTime,
 			int category, ArrayList<Friend> friend) {
 		String SQL = "INSERT INTO event(title, description, location, start, end, category) VALUES ('" + title + "','"
 				+ description + "','" + place + "','" + startTime + "','" + endTime + "','" + category + "')";
-		int add_id = Main.db.executeReturn(SQL);
+		int add_id = Storage.db.executeReturn(SQL);
 		addLink(add_id, id, friend);
 
 	}
@@ -58,11 +58,11 @@ public class EventLogic {
 	private void addLink(int add_id, int id, ArrayList<Friend> friend) {
 		String SQL = "INSERT INTO event_link(event_id, user_id, owner, accepted) VALUES ('" + add_id + "','" + id
 				+ "','1','1')";
-		Main.db.execute(SQL);
+		Storage.db.execute(SQL);
 		for (int i = 0; i < friend.size(); i++) {
 			SQL = "INSERT INTO event_link(event_id, user_id, owner, accepted) VALUES ('" + add_id + "','"
 					+ friend.get(i).getId() + "','0', '0')";
-			Main.db.execute(SQL);
+			Storage.db.execute(SQL);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class EventLogic {
 		long db_timeStart, db_timeEnd;
 		String SQL = "SELECT DATE_FORMAT(event.start, '%Y%m%d%H%i%s'),DATE_FORMAT(event.end, '%Y%m%d%H%i%s') FROM event_link LEFT JOIN event ON event_link.event_id = event.id WHERE event_link.user_id = '"
 				+ id + "' AND event.category = '" + category + "'";
-		Object[][] booking = Main.db.getData(SQL);
+		Object[][] booking = Storage.db.getData(SQL);
 		for (int i = 0; i < booking.length; i++) {
 			if (dbook) {
 				break;
