@@ -80,7 +80,7 @@ public class UpcomingEvent extends JPanel {
 		try {
 		
 		//String SQLI = "select event_id from event_link where user_id = " + Storage.id;
-		String SQLI = "select event_id from event_link where user_id =14";
+		String SQLI = "select event_id from event_link where user_id ="+ Storage.id;
 		Object[][] result = Storage.db.getData(SQLI);
 
 		System.out.println(SQLI);;

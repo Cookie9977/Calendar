@@ -39,11 +39,11 @@ public class EventLogic {
 				dubbleBok = false;
 			}
 		}
-//		if (!dubbleBok && correctTime) {
-//			addEvent(Storage.id, title, place, description, startTime, endTime, category, friend);
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
-//		}
+		if (!dubbleBok && correctTime) {
+			addEvent(Storage.id, title, place, description, startTime, endTime, category, friend);
+		} else {
+			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
+		}
 	}
 
 	private void addEvent(int id, String title, String place, String description, String startTime, String endTime,

@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import main.Main;
 import main.Storage;
 
 public class AddFriend extends JFrame implements ActionListener {

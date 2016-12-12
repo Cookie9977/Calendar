@@ -69,12 +69,7 @@ public class WindowModifications {
 				dayOfWeekMonth = justering = logic.firstDayMonth();
 				lastDayLastMonth = logic.lastDayLastMonth();
 				daysOfMonth = logic.getDays("" + thisMonth);
-//				System.out.println("denna månaden: "+ thisMonth);
-//				System.out.println("Sista dagen: "+ lastDayOfMonth);
-//				System.out.println("Dag i veckan: "+ dayOfWeekMonth);
-//				System.out.println("Förra månadens sista dag; "+ lastDayLastMonth);
-//				System.out.println("days of month; "+ daysOfMonth);
-//				System.out.println("**********************************");
+				year = logic.getYear();
 			}
 		};
 		window.cContent.add(newMonthView);
@@ -100,12 +95,7 @@ public class WindowModifications {
 				dayOfWeekMonth = justering = logic.firstDayMonth();
 				lastDayLastMonth = logic.lastDayLastMonth();
 				daysOfMonth = logic.getDays("" + thisMonth);
-//				System.out.println("denna månaden: "+ thisMonth);
-//				System.out.println("Sista dagen: "+ lastDayOfMonth);
-//				System.out.println("Dag i veckan: "+ dayOfWeekMonth);
-//				System.out.println("Förra månadens sista dag; "+ lastDayLastMonth);
-//				System.out.println("days of month; "+ daysOfMonth);
-//				System.out.println("**********************************");
+				year = logic.getYear();
 			}
 		};
 		window.cContent.add(newMonthView);
