@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.SwingUtilities;
 
+import pane.RequestPanel;
 import window.Window;
 
 public class Main {
@@ -17,7 +18,8 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				
-				new Window();
+//				new Window();
+				new RequestPanel();
 				// TimeLogic logic = new TimeLogic();
 				// logic.printTime();
 				// logic.nextWeek();

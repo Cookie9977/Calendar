@@ -32,8 +32,9 @@ public class EventLogic {
 			dubbleBok = checkTime(startTime, endTime, Main.id, category);
 
 		}
-		if(dubbleBok){
-			int ok = JOptionPane.showConfirmDialog(null, "Du har dubblebokat är du okej med detta?","Varning", JOptionPane.WARNING_MESSAGE);
+		if (dubbleBok) {
+			int ok = JOptionPane.showConfirmDialog(null, "Du har dubblebokat är du okej med detta?", "Varning",
+					JOptionPane.WARNING_MESSAGE);
 			if (ok == JOptionPane.OK_OPTION) {
 				dubbleBok = false;
 			}
@@ -55,11 +56,13 @@ public class EventLogic {
 	}
 
 	private void addLink(int add_id, int id, ArrayList<Friend> friend) {
-		String SQL = "INSERT INTO event_link(event_id, user_id, owner) VALUES ('" + add_id + "','" + id + "','1')";
+		String SQL = "INSERT INTO event_link(event_id, user_id, owner, accepted) VALUES ('" + add_id + "','" + id
+				+ "','1','1')";
 		Main.db.execute(SQL);
 		for (int i = 0; i < friend.size(); i++) {
-			SQL = "INSERT INTO event_link(event_id, user_id, owner) VALUES ('" + add_id + "','" + friend.get(i).getId()
-					+ "','0')";
+			SQL = "INSERT INTO event_link(event_id, user_id, owner, accepted) VALUES ('" + add_id + "','"
+					+ friend.get(i).getId() + "','0', '0')";
+			Main.db.execute(SQL);
 		}
 	}
 
