@@ -34,6 +34,24 @@ public class TimeLogic {
 		}
 		return temp;
 	}
+	public ArrayList<String> getCurrentDate() {
+		temp = new ArrayList<String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
+		String dateString;
+		Date date;
+		int year = getCurrentYear();
+		int month = getCurrentMonth();
+		int day = getCurrentDay();
+		dateString = String.format("%d-%d-%d", year, month, day);
+		try {
+			date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+			temp.add(sdf.format(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+			return temp;
+	
+	}
 
 	// returnerar dagar i vecka, in = sträng på veckonummer,
 	public ArrayList<String> getCurrentWeekDays() {
