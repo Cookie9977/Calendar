@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import main.Main;
+import main.Storage;
 
 public class RequestPanel extends JFrame implements ActionListener {
 	private JLabel eventLabel, friendLabel;
@@ -295,10 +296,10 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 	public int eventLength() {
 		int retval;
-		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Main.id + " and accepted = 0";
-		Object[][] data = Main.db.getData(SQL);
+		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Storage.id + " and accepted = 0";
+		Object[][] data = Storage.db.getData(SQL);
 		// System.out.println(data[0][0]);
-		retval = Integer.parseInt((String) Main.db.getData(SQL)[0][0]);
+		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
 		return retval;
 	}
 
