@@ -9,9 +9,12 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,16 +65,16 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 * Variabler som måste defineras tidigt
 		 */
 
-		friendLength = friendLength();
-		reqLength = eventLength();
-		
+		friendLength = reqLogic.friendLength();
+		reqLength = reqLogic.eventLength();
+
 		System.out.println("req Length: " + reqLength);
 		// JUMP
-		reqLength += 7;
+		// reqLength += 7;
 		System.out.println(reqLength + " justerad för testing");
 
 		System.out.println("vän längd: " + friendLength);
-		friendLength += 8;
+		// friendLength += 8;
 		System.out.println(friendLength + " justerad för testning");
 
 		// Hämtar ut storleken på scroll rutan baserat på antalet poster som
@@ -194,6 +197,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 	private void friendReq(int friendLength) {
 		// Variabel deklareringar för vänförfrågnignar.
 		if (friendLength > 0) {
+			Object[][] data = reqLogic.getFriend();
 			JPanel[] friendReqPanel = new JPanel[friendLength];
 			JPanel[] buttonPanel = new JPanel[friendLength];
 			JLabel[] userReqLabel = new JLabel[friendLength];
@@ -216,23 +220,26 @@ public class RequestPanel extends JFrame implements ActionListener {
 				// Användaren som skickat förfrågans email.
 				userReqLabel[i] = new JLabel();
 				userReqLabel[i].setPreferredSize(new Dimension(350, 50));
-				userReqLabel[i].setText("thisisatesttotestthelengthoflongemailsand@livet.se");
+				userReqLabel[i].setText((String) data[i][1]);
 				userReqLabel[i].setFont(fontPlain);
 				friendReqPanel[i].add(userReqLabel[i], BorderLayout.WEST);
 
 				// Ja knapp.
 				yesButton[i] = new JButton();
 				yesButton[i].setText("Acceptera");
+				yesButton[i].setActionCommand((String) data[i][0]);
 				yesButton[i].addActionListener(this);
 				buttonPanel[i].add(yesButton[i]);
 
 				// Nej knapp
 				noButton[i] = new JButton();
 				noButton[i].setText("Neka");
+				noButton[i].setActionCommand((String) data[i][0]);
 				noButton[i].addActionListener(this);
 				buttonPanel[i].add(noButton[i]);
 
 				friendPanel.add(friendReqPanel[i]);
+				// JUMP friendpanel ending
 			}
 
 		} else {
@@ -240,7 +247,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 			JLabel sorryLabel = new JLabel();
 
 			sorryPanel.setBackground(Invisible);
-			sorryPanel.setPreferredSize(new Dimension(600, 200));
+			sorryPanel.setPreferredSize(new Dimension(600, 350));
 			sorryPanel.setLayout(new BorderLayout());
 
 			sorryLabel.setText(" Inga förfrågningar hittades. Vänligen återkom senare.");
@@ -278,56 +285,65 @@ public class RequestPanel extends JFrame implements ActionListener {
 				eventReqPanel[i].setPreferredSize(new Dimension(600, 100));
 				eventReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-				// TODO Titeln, ska hämtas från databas
+				// Titel
 				titleReq[i] = new JLabel();
 				titleReq[i].setText((String) data[i][1]);
 				titleReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(titleReq[i]);
 
-				// person, 
+				// Hämta variabel för personen
+				System.out.println(data[i][0]);
+				Object[][] person = reqLogic.getOwner(Integer.parseInt((String) data[i][0]));
+
+				// person,
 				personReq[i] = new JLabel();
-				personReq[i].setText("thisisatesttotestthelengthoflongemailsand@livet.se");
+				personReq[i].setText((String) person[0][0]);
 				personReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(personReq[i]);
 
 				// starttid.
 				startReq[i] = new JLabel();
-				startReq[i].setText("2016-12-09 11:30");
+				System.out.println((String) data[i][2]);
+				startReq[i].setText((String) data[i][2]);
 				startReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(startReq[i]);
 
 				// sluttid.
 				stopReq[i] = new JLabel();
-				stopReq[i].setText("2016-12-09 11:30");
+				stopReq[i].setText((String) data[i][3]);
 				stopReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(stopReq[i]);
 
 				// Kategori.
 				categoryReq[i] = new JLabel();
-				categoryReq[i].setText("Fritid");
+				categoryReq[i].setText((String) data[i][4]);
 				categoryReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(categoryReq[i]);
 
 				// "visa mer" knapp.
 				showReq[i] = new JButton();
 				showReq[i].setText("Visa mer");
+				showReq[i].setActionCommand((String) data[i][0]);
 				showReq[i].addActionListener(this);
 				eventReqPanel[i].add(showReq[i]);
 
 				// "Ja" knapp.
 				yesReq[i] = new JButton();
 				yesReq[i].setText("Ja");
+				yesReq[i].setActionCommand((String) data[i][0]);
 				yesReq[i].addActionListener(this);
 				eventReqPanel[i].add(yesReq[i]);
 
 				// "nej" knapp
 				noReq[i] = new JButton();
 				noReq[i].setText("Nej");
+				noReq[i].setActionCommand((String) data[i][0]);
 				noReq[i].addActionListener(this);
 				eventReqPanel[i].add(noReq[i]);
 
 				eventPanel.add(eventReqPanel[i]);
 				// System.out.println(eventReqPanel[i]);
+				// JUMP event panel ending
 			}
 		} else {
 			// visar upp en sak om att du inte har några förfrågningar
@@ -335,7 +351,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 			JLabel sorryLabel = new JLabel();
 
 			sorryPanel.setBackground(Invisible);
-			sorryPanel.setPreferredSize(new Dimension(600, 200));
+			sorryPanel.setPreferredSize(new Dimension(600, 350));
 			sorryPanel.setLayout(new BorderLayout());
 
 			sorryLabel.setText(" Inga förfrågningar hittades. Vänligen återkom senare.");
@@ -347,27 +363,33 @@ public class RequestPanel extends JFrame implements ActionListener {
 		}
 	}
 
-	// En select Count för antalet eventförfrågningar till inloggade id
-	public int eventLength() {
-		int retval;
-		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Storage.id + " and accepted = 0";
-		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
-		return retval;
-	}
-
-	// En select Count för antalet vänförfrågningar till inloggade id
-	public int friendLength() {
-		int retval;
-		String SQL = "SELECT COUNT(*) FROM friend_link WHERE reciver = " + Storage.id + " and accepted = 0";
-		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
-		System.out.println(retval);
-		return retval;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		System.out.println(ae.getSource().toString());
-		
+		String bText = ((AbstractButton) ae.getSource()).getText();
+		int reqId;
+		switch (bText) {
+		case "Visa mer":
+			reqId = Integer.parseInt(ae.getActionCommand());
+			reqLogic.showMore(reqId);
+			break;
+		case "Ja":
+			reqId = Integer.parseInt(ae.getActionCommand());
+			reqLogic.acceptEvent(reqId);
+			break;
+		case "Nej":
+			reqId = Integer.parseInt(ae.getActionCommand());
+			reqLogic.denyevent(reqId);
+			break;
+		case "Acceptera":
+			reqId = Integer.parseInt(ae.getActionCommand());
+			reqLogic.acceptFriend(reqId);
+			break;
+		case "Neka":
+			reqId = Integer.parseInt(ae.getActionCommand());
+			reqLogic.denyFriend(reqId);
+			break;
+		}
+
 	}
 
 	// Räknar ut en startposition i x-led, center
