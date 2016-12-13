@@ -137,7 +137,7 @@ public class Window extends JFrame {
 		 * och ut och saker som lägg till vänner o vänlista, lite beroende på
 		 * inloggningstatusen.
 		 */
-		menyBar.setPreferredSize(new Dimension(gridWidth, (height - gridHeight)));
+		menyBar.setPreferredSize(new Dimension(height, (height - gridHeight)));
 		westBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
 		eastBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
 		menyBar.setBackground(new Color(66, 86, 244, 255));

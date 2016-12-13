@@ -113,10 +113,10 @@ public class LoginUser extends JPanel implements ActionListener {
 				try {
 				
 					windowmodifications.showLoggedinView();
-					windowVal.upcomingEvent.refreshEvent();
+					//windowVal.upcomingEvent.updateEventList();
 					
 				} catch (NullPointerException e2) {
-					System.err.println(e2);
+					System.err.println("Login fel:"+e2);
 				}
 				
 				
