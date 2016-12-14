@@ -258,5 +258,13 @@ public class WindowModifications {
 		window.revalidate();
 		window.repaint();
 	}
+	public void updateButtonPane(){
+		addButtons = new AddButtonsPane(window);
+		window.menyBar.removeAll();
+		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
+		window.menyBar.add(addButtons, BorderLayout.SOUTH);
+		window.revalidate();
+		window.repaint();
+	}
 
 }
