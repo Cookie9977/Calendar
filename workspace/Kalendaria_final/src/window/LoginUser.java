@@ -107,7 +107,7 @@ public class LoginUser extends JPanel implements ActionListener {
 				System.out.println(" - Du är inloggad som " + email + " med ID: " + Storage.id);
 				
 				// TODO försvinn
-				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,windowVal.upcomingEvent,
+				windowmodifications = new WindowModifications(this, windowVal.registerUser, windowVal.addButtons,
 						windowVal);
 				// windowmodifications = windowVal.getModifications();
 				try {

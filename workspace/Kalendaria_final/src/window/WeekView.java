@@ -26,11 +26,13 @@ public class WeekView extends JPanel {
 	protected JLabel veckaLabel;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 	protected int week, month, year;
+	protected Window windowVal;
 	ArrayList<String> days;
 
 	private static final long serialVersionUID = -1542039657044981535L;
 
-	public WeekView() {
+	public WeekView(Window windowVal) {
+		this.windowVal = windowVal;
 		timeLogic = new logic.TimeLogic();
 		init();
 		// for (int i = 0; i < days.size(); i++) {
@@ -154,7 +156,7 @@ public class WeekView extends JPanel {
 				dayTimeP.setBackground(Invisible);
 				dayTimeP.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 				dayTimeP.setLayout(new GridLayout(1, 1));
-				dayTimeP.addMouseListener(new ClickListener(dayTimeP));
+				dayTimeP.addMouseListener(new ClickListener(dayTimeP, windowVal));
 
 				// Labels för dags cellerna.
 				JLabel dayTime = new JLabel();

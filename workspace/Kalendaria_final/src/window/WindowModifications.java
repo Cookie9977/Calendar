@@ -28,9 +28,9 @@ public class WindowModifications {
 
 	// för att byta inloggad vs oinloggad
 	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons,
-			UpcomingEvent upcomingEvent, Window window) {
+			 Window window) {
 		this.window = window;
-		this.upcomingEvent = upcomingEvent;
+//		this.upcomingEvent = upcomingEvent;
 		this.loginView = loginView;
 		this.registerView = registerView;
 		this.addButtons = addButtons;
@@ -61,7 +61,7 @@ public class WindowModifications {
 		if (Storage.oldMonthView != null) {
 			window.cContent.remove(Storage.oldMonthView);
 		}
-		newMonthView = new MonthView() {
+		newMonthView = new MonthView(window) {
 			private static final long serialVersionUID = 4658993524466783899L;
 
 			@Override
@@ -87,7 +87,7 @@ public class WindowModifications {
 		if (Storage.oldMonthView != null) {
 			window.cContent.remove(Storage.oldMonthView);
 		}
-		newMonthView = new MonthView() {
+		newMonthView = new MonthView(window) {
 			private static final long serialVersionUID = 4658993524466783899L;
 
 			@Override
@@ -113,7 +113,7 @@ public class WindowModifications {
 		if (Storage.oldWeekView != null) {
 			window.cContent.remove(Storage.oldWeekView);
 		}
-		newWeekView = new WeekView() {
+		newWeekView = new WeekView(window) {
 			private static final long serialVersionUID = 4658993524466783899L;
 
 			@Override
@@ -137,7 +137,7 @@ public class WindowModifications {
 		if (Storage.oldWeekView != null) {
 			window.cContent.remove(Storage.oldWeekView);
 		}
-		newWeekView = new WeekView() {
+		newWeekView = new WeekView(window) {
 			private static final long serialVersionUID = 4658993524466783899L;
 
 			@Override
@@ -161,7 +161,8 @@ public class WindowModifications {
 		if (Storage.oldDayView != null) {
 			window.cContent.remove(Storage.oldDayView);
 		}
-		newDayView = new DayView() {
+
+		newDayView = new DayView(window) {
 			private static final long serialVersionUID = -8969378343897882526L;
 
 			@Override
@@ -184,7 +185,7 @@ public class WindowModifications {
 		if (Storage.oldDayView != null) {
 			window.cContent.remove(Storage.oldDayView);
 		}
-		newDayView = new DayView() {
+		newDayView = new DayView(window) {
 			private static final long serialVersionUID = 4658993524466783899L;
 
 			@Override
@@ -246,11 +247,19 @@ public class WindowModifications {
 	}
 
 	public void showLoggedinView() {
-		upcomingEvent = new UpcomingEvent();
+		upcomingEvent = new UpcomingEvent(window);
 		window.menyBar.remove(loginView);
 		window.menyBar.remove(registerView);
 		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
-		window.menyBar.add(addButtons, BorderLayout.SOUTH);
+		window.menyBar.add(window.addButtons, BorderLayout.SOUTH);
+		window.revalidate();
+		window.repaint();
+	}
+	public void updateUpcomingEvents(){
+		upcomingEvent = new UpcomingEvent(window);
+		window.menyBar.removeAll();
+		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
+		window.menyBar.add(window.addButtons, BorderLayout.SOUTH);
 		window.revalidate();
 		window.repaint();
 	}

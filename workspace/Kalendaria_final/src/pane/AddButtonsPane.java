@@ -10,14 +10,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import logic.EventLogic;
+import window.Window;
 
 public class AddButtonsPane extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 5973341942470877467L;
 	private JButton[] buttons;
 	private JPanel[] holder;
 	private String[] labels = { "Lägg til en ny event", "Lägg till vänner", "visa vänner", "Förfrågningar" };
-
-	public AddButtonsPane() {
+	private Window windowVal;
+	
+	public AddButtonsPane(Window windowVal) {
+		this.windowVal = windowVal;
 		int rows = labels.length;
 		buttons = new JButton[rows];
 		holder = new JPanel[rows];
@@ -43,7 +46,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 			EventPane eventPane = new EventPane();
 			int test = JOptionPane.showConfirmDialog(null, eventPane, "test", JOptionPane.OK_CANCEL_OPTION);
 			if (test == JOptionPane.OK_OPTION) {
-				logic.checkEvent(eventPane);
+				logic.checkEvent(eventPane,windowVal);
 			}
 			break;
 		case "Lägg till vänner":

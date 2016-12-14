@@ -1,13 +1,10 @@
 package window;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -15,78 +12,49 @@ import main.Storage;
 
 public class UpcomingEvent extends JPanel {
 	private static final long serialVersionUID = 1020255122741607214L;
-	public JPanel eventBox;
-	public JLabel[] eventListItem;
 	public int id;
 	public ArrayList<String> eventId;
 	private DefaultListModel<CalendarEvent> eventContent;
 	private JList<CalendarEvent> lista;
 
-	public UpcomingEvent() {
-
-		refreshEvent();
+	private Window windowVal;
+	//private UpcomingEvent upcomingEvent;
+	private WindowModifications windowmodifications;
+	public UpcomingEvent(Window windowVal) {
+		this.windowVal = windowVal;
+		
+		refreshEvent();	
 	}
-
 	public void refreshEvent() {
 		eventId = getEventId();
+		try{
+		eventContent.clear();
+		}catch(Exception e){
+			System.out.println(e);
+		}
 		eventContent = getEventContent();
+
+		
 		lista = new JList<CalendarEvent>(eventContent);
 
-		// JOptionPane.showMessageDialog(null,""+eventId.size());
 		setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
-		setBackground(Color.BLACK);
-		eventBox = new JPanel();
-		eventBox.setLayout(new GridLayout(5, 1));
-		eventBox.setBackground(new Color(238, 238, 238));
 
-		add(eventBox, BorderLayout.CENTER);
-		eventListItem = new JLabel[5];
-		for (int i = 0; i < eventContent.size(); i++) {
-			// System.out.println("Hämta eventcontent i "+eventContent.get(i));
+		
+	
+			add(lista, BorderLayout.NORTH);
 		}
 
-		for (int i = 0; i < eventListItem.length; i++) {
-			eventListItem[i] = new JLabel();
-			// eventListItem[i].setBorder(BorderFactory.createMatteBorder(1, 1,
-			// 0, 0, Color.BLACK));
-			// eventListItem[i].setPreferredSize(new Dimension(40, 20));
-			// eventListItem[i].addMouseListener(new ClickListener(this));
-
-			try {
-				eventListItem[i].setText("" + eventContent.get(i));
-
-			} catch (Exception e) {
-
-				eventListItem[i].setText("Inget ");
-			}
-			// eventBox.add(eventListItem[i], BorderLayout.NORTH);
-			eventBox.add(lista, BorderLayout.NORTH);
-		}
-		//
-	}
-
-	public void updateEventList() {
-		eventContent.removeAllElements();
-		refreshEvent();
+	public void updateEventList(){
+		windowmodifications.updateUpcomingEvents();
 		System.out.println("HEllo");
 
 	}
 
-	// public ArrayList<String> getEvents()
-	// {
-	// return eventContent;
-	// }
 
-	public ArrayList<String> getList() {
-		ArrayList<String> lokal = new ArrayList<String>();
-		lokal.add("Kalle");
-		lokal.add("Olle");
-		return lokal;
-
-	}
 
 	public ArrayList<String> getEventId() {
+
 		ArrayList<String> lokal = new ArrayList<String>();
 		try {
 

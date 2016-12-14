@@ -13,14 +13,16 @@ import javax.swing.Timer;
 
 import logic.EventLogic;
 import pane.EventPane;
+import window.Window;
 
 public class ClickListener extends MouseAdapter implements ActionListener {
 	private int clickInterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
 	protected JPanel holder;
 	protected static JPanel oldHolder;
 	protected Timer timer;
-
-	public ClickListener(JPanel holder) {
+	private Window windowVal;
+	public ClickListener(JPanel holder, Window windowVal) {
+		this.windowVal = windowVal;
 		this.holder = holder;
 		timer = new Timer(clickInterval, this);
 	}
@@ -55,7 +57,7 @@ public class ClickListener extends MouseAdapter implements ActionListener {
 		EventPane eventPane = new EventPane();
 		int test = JOptionPane.showConfirmDialog(null, eventPane, "test", JOptionPane.OK_CANCEL_OPTION);
 		if (test == JOptionPane.OK_OPTION) {
-			logic.checkEvent(eventPane);
+			logic.checkEvent(eventPane, windowVal);
 		}
 	}
 	//För annan deselect färg, ta med den här och byt ut färgen.

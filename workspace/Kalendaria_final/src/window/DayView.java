@@ -31,12 +31,11 @@ public class DayView extends JPanel {
 	private ArrayList<Event> event;
 	private JLabel[] eventLabels;
 	private JLabel header;
+	protected Window windowVal;
 	protected int day, month, year;
-	// private JPanel hoursMinutes;
-	// private JPanel[][] dayPanel;
-	// private JTable timeTable;
 
-	public DayView() {
+	public DayView(Window windowVal) {
+		this.windowVal = windowVal;
 		setLayout(new BorderLayout());
 		logic = new TimeLogic();
 		init();
@@ -105,7 +104,7 @@ public class DayView extends JPanel {
 					}
 					holders[i][j].add(eventLabels[i]);
 					// System.out.println(eventLabels[i].getText());
-					holders[i][j].addMouseListener(new ClickListener(holders[i][j]));
+					holders[i][j].addMouseListener(new ClickListener(holders[i][j], windowVal));
 				}
 
 			}
