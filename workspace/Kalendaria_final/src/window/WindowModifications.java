@@ -74,7 +74,7 @@ public class WindowModifications {
 				year = logic.getYear();
 			}
 		};
-		window.cContent.add(newMonthView);
+		window.cContent.add(newMonthView,BorderLayout.CENTER);
 		Storage.oldMonthView = newMonthView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -100,7 +100,7 @@ public class WindowModifications {
 				year = logic.getYear();
 			}
 		};
-		window.cContent.add(newMonthView);
+		window.cContent.add(newMonthView,BorderLayout.CENTER);
 		Storage.oldMonthView = newMonthView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -124,7 +124,7 @@ public class WindowModifications {
 				days = logic.getWeekDays();
 			}
 		};
-		window.cContent.add(newWeekView);
+		window.cContent.add(newWeekView,BorderLayout.CENTER);
 		Storage.oldWeekView = newWeekView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -148,7 +148,7 @@ public class WindowModifications {
 				days = logic.getWeekDays();
 			}
 		};
-		window.cContent.add(newWeekView);
+		window.cContent.add(newWeekView,BorderLayout.CENTER);
 		Storage.oldWeekView = newWeekView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -173,7 +173,7 @@ public class WindowModifications {
 				dayName = logic.getDayName();
 			}
 		};
-		window.cContent.add(newDayView);
+		window.cContent.add(newDayView,BorderLayout.CENTER);
 		Storage.oldDayView = newDayView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -197,7 +197,7 @@ public class WindowModifications {
 				dayName = logic.getDayName();
 			}
 		};
-		window.cContent.add(newDayView);
+		window.cContent.add(newDayView,BorderLayout.CENTER);
 		Storage.oldDayView = newDayView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -212,7 +212,7 @@ public class WindowModifications {
 		if (Storage.oldWeekView != null) {
 			window.cContent.remove(Storage.oldWeekView);
 		}
-		window.cContent.add(monthView);
+		window.cContent.add(monthView,BorderLayout.CENTER);
 		window.view.setText("Månad");
 		window.cContent.revalidate();
 		window.repaint();
@@ -227,7 +227,7 @@ public class WindowModifications {
 		if (Storage.oldMonthView != null) {
 			window.cContent.remove(Storage.oldMonthView);
 		}
-		window.cContent.add(weekView);
+		window.cContent.add(weekView,BorderLayout.CENTER);
 		window.view.setText("Vecka");
 		window.cContent.revalidate();
 		window.repaint();
@@ -242,7 +242,7 @@ public class WindowModifications {
 		if (Storage.oldWeekView != null) {
 			window.cContent.remove(Storage.oldWeekView);
 		}
-		window.cContent.add(dayView);
+		window.cContent.add(dayView ,BorderLayout.CENTER);
 		window.view.setText("Dag");
 		window.cContent.revalidate();
 		window.repaint();

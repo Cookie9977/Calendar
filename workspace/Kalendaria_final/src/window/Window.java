@@ -205,6 +205,7 @@ public class Window extends JFrame {
 		// efter den.
 		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
 		cContent.setBackground(Color.blue);
+		cContent.setLayout(new BorderLayout());
 
 		// Lägg in blocken
 		centerBlock.add(cTop, BorderLayout.NORTH);
