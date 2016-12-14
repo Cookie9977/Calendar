@@ -31,9 +31,7 @@ public class MonthView extends JPanel {
 
 	public int FmonthColumn, LmonthRow, LmonthColumn;
 	private JLabel eventArea;
-	private Window windowVal;
 	public MonthView(Window windowVal) {
-		this.windowVal = windowVal;
 		timeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(770, 720));

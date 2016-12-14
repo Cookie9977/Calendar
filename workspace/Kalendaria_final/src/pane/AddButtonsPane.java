@@ -59,14 +59,14 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 			}
 			break;
 		case "Lägg till vänner":
-			AddFriend addFriend = new AddFriend();
+			new AddFriend();
 			break;
 		case "visa vänner":
 			FriendPane friendPane = new FriendPane();
 			JOptionPane.showMessageDialog(null, friendPane);
 			break;
 		case "Förfrågningar":
-			RequestPanel requestPanel = new RequestPanel();
+			new RequestPanel();
 			break;
 
 		}

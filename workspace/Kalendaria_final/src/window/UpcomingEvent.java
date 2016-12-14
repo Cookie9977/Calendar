@@ -17,41 +17,35 @@ public class UpcomingEvent extends JPanel {
 	private DefaultListModel<CalendarEvent> eventContent;
 	private JList<CalendarEvent> lista;
 
-	private Window windowVal;
-	//private UpcomingEvent upcomingEvent;
+	// private UpcomingEvent upcomingEvent;
 	private WindowModifications windowmodifications;
+
 	public UpcomingEvent(Window windowVal) {
-		this.windowVal = windowVal;
-		
-		refreshEvent();	
+		refreshEvent();
 	}
+
 	public void refreshEvent() {
 		eventId = getEventId();
-		try{
-		eventContent.clear();
-		}catch(Exception e){
-			System.out.println("Feli"+e);
+		try {
+			eventContent.clear();
+		} catch (Exception e) {
+			System.out.println("Feli" + e);
 		}
 		eventContent = getEventContent();
 
-		
 		lista = new JList<CalendarEvent>(eventContent);
 
 		setPreferredSize(new Dimension(100, 600));
 		setLayout(new BorderLayout());
 
-		
-	
-			add(lista, BorderLayout.NORTH);
-		}
+		add(lista, BorderLayout.NORTH);
+	}
 
-	public void updateEventList(){
+	public void updateEventList() {
 		windowmodifications.updateUpcomingEvents();
 		System.out.println("HEllo");
 
 	}
-
-
 
 	public ArrayList<String> getEventId() {
 
