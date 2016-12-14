@@ -108,7 +108,7 @@ public class MonthView extends JPanel {
 			}
 		};
 		tableMonth.setTableHeader(null);
-		tableMonth.setRowHeight(110);
+		tableMonth.setRowHeight(102);
 		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare(this));
 		tableMonth.setCellSelectionEnabled(true);
 		tableMonth.addMouseListener(new ClickListener(this,windowVal));
