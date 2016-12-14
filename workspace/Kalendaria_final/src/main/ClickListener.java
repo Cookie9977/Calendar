@@ -21,12 +21,15 @@ public class ClickListener extends MouseAdapter implements ActionListener {
 	protected static JPanel oldHolder;
 	protected Timer timer;
 	private Window windowVal;
+
 	public ClickListener(JPanel holder, Window windowVal) {
 		this.windowVal = windowVal;
 		this.holder = holder;
 		timer = new Timer(clickInterval, this);
 	}
-	//Den här ska kopieras över till överskrivningen för att kunna skriva över färg i deselect
+
+	// Den här ska kopieras över till överskrivningen för att kunna skriva över
+	// färg i deselect
 	public void mouseReleased(MouseEvent e) {
 		if (oldHolder != null && oldHolder != holder) {
 			deSelect();
@@ -53,14 +56,18 @@ public class ClickListener extends MouseAdapter implements ActionListener {
 	}
 
 	public void DoubleClick() {
-		EventLogic logic = new EventLogic();
-		EventPane eventPane = new EventPane();
-		int test = JOptionPane.showConfirmDialog(null, eventPane, "test", JOptionPane.OK_CANCEL_OPTION);
-		if (test == JOptionPane.OK_OPTION) {
-			logic.checkEvent(eventPane, windowVal);
+		if (Storage.id != 0) {
+			EventLogic logic = new EventLogic();
+			EventPane eventPane = new EventPane();
+			int test = JOptionPane.showConfirmDialog(null, eventPane, "test", JOptionPane.OK_CANCEL_OPTION);
+			if (test == JOptionPane.OK_OPTION) {
+				logic.checkEvent(eventPane, windowVal);
+
+			}
 		}
 	}
-	//För annan deselect färg, ta med den här och byt ut färgen.
+
+	// För annan deselect färg, ta med den här och byt ut färgen.
 	public void deSelect() {
 		oldHolder.setBackground(new Color(238, 238, 238));
 		holder.validate();
