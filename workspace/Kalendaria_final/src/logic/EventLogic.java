@@ -9,7 +9,6 @@ import main.Storage;
 import pane.EventPane;
 import window.UpcomingEvent;
 import window.Window;
-import window.WindowModifications;
 
 public class EventLogic {
 public UpcomingEvent upcomingEvent;
