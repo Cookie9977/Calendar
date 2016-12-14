@@ -20,7 +20,7 @@ public class WeekView extends JPanel {
 	protected JLabel veckaLabel;
 	private TimeLogic TimeLogic;
 	protected Color Invisible = new Color(0, 0, 0, 0);
-	protected int week;
+	protected int week,year,month;
 	ArrayList<String> days;
 	private Window windowVal;
 	private static final long serialVersionUID = -1542039657044981535L;

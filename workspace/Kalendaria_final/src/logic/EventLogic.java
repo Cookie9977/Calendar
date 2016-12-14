@@ -23,10 +23,8 @@ public UpcomingEvent upcomingEvent;
 			friend = new ArrayList<Friend>();
 		}
 		String description = event.description.getText();
-		boolean correctTime = true;
-		if (event.time_start == null || event.time_end == null) {
-			correctTime = false;
-		}
+		boolean correctTime = correctTime(event.time_start, event.time_end);
+
 		String startTime = event.time_start + ":00";
 		String endTime = event.time_end + ":00";
 		int category = event.category.getSelectedIndex() + 1;
@@ -108,5 +106,14 @@ public UpcomingEvent upcomingEvent;
 		time = time.replace(":", "");
 		time = time.replace(" ", "");
 		return Long.parseLong(time);
+	}
+	private boolean correctTime(String start, String end){
+		if (start == null || end == null) {
+			return false;
+		}
+		if (timeToLong(start) > timeToLong(end)) {
+			return false;
+		}
+		return true;
 	}
 }

@@ -28,7 +28,7 @@ public class MonthView extends JPanel {
 	private Event temp;
 	protected int thisMonth, firstDayOfMonth, lastDayOfMonth, dayOfWeekMonth, firstDayNextMonth, lastDayLastMonth,
 			justering, lopNummer, year;
-	
+
 	public int FmonthColumn, LmonthRow, LmonthColumn;
 	private JLabel eventArea;
 	private Window windowVal;
@@ -47,7 +47,7 @@ public class MonthView extends JPanel {
 			SQL = "SELECT event.id, event.title, event.description, event.location, event.start, event.end, category.name, event_link.owner  FROM `event_link` LEFT JOIN event ON event_link.event_id = event.id INNER JOIN category ON event.category = category.id WHERE (event_link.owner = 1 OR event_link.accepted = 1) AND event_link.user_id = "
 					+ Storage.id
 					+ " AND DATE_FORMAT(event.start, '%Y%m') =  DATE_FORMAT(event.end, '%Y%m') AND DATE_FORMAT(event.end, '%Y%m') = "
-					+ year+""+thisMonth;
+					+ year + "" + thisMonth;
 			Object[][] data = Storage.db.getData(SQL);
 			try {
 				event = new EventList(data);
@@ -141,23 +141,26 @@ public class MonthView extends JPanel {
 					justering--;
 					FmonthColumn = i;
 				}
-				for (int k = 0; k < event.size(); k++) {
-					if (Integer.parseInt(timeLogic.parseOutDay(event.get(k).getTimeStart())) == lopNummer) {
-						temp = event.get(k);
-						
-						System.out.println(lopNummer);
-						String text = temp.getTitle();
-						System.out.println(text);
-						JTextField eventTitle = new JTextField();
-						eventTitle.setText(text);
-						eventArea = new JLabel();
-						eventArea.setText(text);
-						eventArea.setPreferredSize(new Dimension(2,2));
-						eventArea.setSize(10, 90);
-						
-						tableMonth.setValueAt(lopNummer+ " "+eventArea.getText(), j, i);
+				try {
+					for (int k = 0; k < event.size(); k++) {
+						if (Integer.parseInt(timeLogic.parseOutDay(event.get(k).getTimeStart())) == lopNummer) {
+							temp = event.get(k);
+
+							System.out.println(lopNummer);
+							String text = temp.getTitle();
+							System.out.println(text);
+							JTextField eventTitle = new JTextField();
+							eventTitle.setText(text);
+							eventArea = new JLabel();
+							eventArea.setText(text);
+							eventArea.setPreferredSize(new Dimension(2, 2));
+							eventArea.setSize(10, 90);
+
+							tableMonth.setValueAt(lopNummer + " " + eventArea.getText(), j, i);
+							//TODO fixa datum
+						}
 					}
-				}
+				} catch (Exception e) {}
 			}
 		}
 	}

@@ -118,6 +118,8 @@ public class WindowModifications {
 
 			@Override
 			public void init() {
+				year = logic.getYear();
+				month = logic.getMonth();
 				week = logic.getWeek();
 				days = logic.getWeekDays();
 			}
@@ -140,6 +142,8 @@ public class WindowModifications {
 
 			@Override
 			public void init() {
+				year = logic.getYear();
+				month = logic.getMonth();
 				week = logic.getWeek();
 				days = logic.getWeekDays();
 			}

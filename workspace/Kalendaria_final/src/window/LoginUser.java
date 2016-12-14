@@ -122,7 +122,7 @@ public class LoginUser extends JPanel implements ActionListener {
 				
 			} else {
 				JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
-				System.out.println(SQL);
+				//System.out.println(SQL);
 
 			}
 
