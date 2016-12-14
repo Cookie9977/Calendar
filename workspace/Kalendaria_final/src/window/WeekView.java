@@ -52,18 +52,18 @@ public class WeekView extends JPanel {
 			}
 		}
 		// general window
-		setPreferredSize(new Dimension(700, 600));
+		setPreferredSize(new Dimension(772, 722));
 		setLayout(new BorderLayout());
 
 		// Top line(header names)
 		JPanel topLine = new JPanel();
-		topLine.setPreferredSize(new Dimension(700, 96));
+		topLine.setPreferredSize(new Dimension(772, 74));
 		topLine.setLayout(new BorderLayout());
 		add(topLine, BorderLayout.NORTH);
 
 		// Vecko panel
 		JPanel vecka = new JPanel();
-		vecka.setPreferredSize(new Dimension(70, 96));
+		vecka.setPreferredSize(new Dimension(77, 74));
 		vecka.setLayout(new GridLayout(0, 1));
 		vecka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		topLine.add(vecka, BorderLayout.WEST);
@@ -77,7 +77,7 @@ public class WeekView extends JPanel {
 
 		// West line, timestamps on the left
 		JPanel westLine = new JPanel();
-		westLine.setSize(new Dimension(70, 504));
+		westLine.setSize(new Dimension(77, 648));
 		westLine.setLayout(new GridLayout(1, 1));
 		add(westLine, BorderLayout.WEST);
 
@@ -85,7 +85,7 @@ public class WeekView extends JPanel {
 		JLabel[] dagLabel = new JLabel[7];
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 7));
-		theDays.setPreferredSize(new Dimension(630, 96));
+		theDays.setPreferredSize(new Dimension(694, 74));
 		topLine.add(theDays, BorderLayout.CENTER);
 
 		// Labels veckodagarna i headernamepanelen
@@ -98,7 +98,7 @@ public class WeekView extends JPanel {
 			String[] tempArray = tempVal.split("\\/");
 			// System.out.println(tempArray[0]+" + "+tempArray[1]);
 			dagLabel[k].setText("<html><p>" + tempArray[0] + "</p><p> " + tempArray[1] + "</p></html>");
-			dagLabel[k].setPreferredSize(new Dimension(90, 96));
+			dagLabel[k].setPreferredSize(new Dimension(99, 74));
 			dagLabel[k].setBackground(Color.CYAN);
 			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			dagLabel[k].setHorizontalAlignment(SwingConstants.CENTER);
@@ -108,7 +108,7 @@ public class WeekView extends JPanel {
 
 		// Dag kolumnerna, under dagarpanelen
 		JPanel containDays = new JPanel();
-		containDays.setPreferredSize(new Dimension(630, 504));
+		containDays.setPreferredSize(new Dimension(694, 648));
 		containDays.setBackground(Color.green);
 		containDays.setLayout(new GridLayout(1, 7));
 		add(containDays, BorderLayout.CENTER);
@@ -117,9 +117,9 @@ public class WeekView extends JPanel {
 		JLabel[] timeLabel = new JLabel[24];
 		JPanel timeView = new JPanel();
 		timeView.setBackground(Color.GRAY);
-		timeView.setPreferredSize(new Dimension(70, 504));
+		timeView.setPreferredSize(new Dimension(77, 648));
 		timeView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		timeView.setLayout(new GridLayout(24, 1, 0, 2));
+		timeView.setLayout(new GridLayout(24, 1, 0, 3));
 		westLine.add(timeView);
 
 		// Time label, tiderna i west line som labels.
@@ -130,7 +130,7 @@ public class WeekView extends JPanel {
 			} else {
 				timeLabel[i].setText(i + ":00");
 			}
-			timeLabel[i].setPreferredSize(new Dimension(70, 21));
+			timeLabel[i].setPreferredSize(new Dimension(77, 26));
 			timeLabel[i].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 			timeLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
 			timeLabel[i].setFont(new Font("SansSerif", Font.PLAIN, 10));
@@ -140,19 +140,18 @@ public class WeekView extends JPanel {
 		// Individuella dag kolumner
 		for (int i = 0; i < dagLabel.length; i++) {
 			// Här ska datum sättas in från en funktion
-			// TODO Kalender funktioner ska hit.
 			JPanel currentDay = new JPanel();
-			currentDay.setPreferredSize(new Dimension(90, 504));
+			currentDay.setPreferredSize(new Dimension(99, 614));
 			currentDay.setBackground(new Color(238, 238, 238));
 			currentDay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			currentDay.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			currentDay.setLayout(new GridLayout(24, 1, 0, 2));
+			currentDay.setLayout(new GridLayout(24, 1, 0, 3));
 
 			// Dagarnas egna celler
 			for (int j = 0; j < 24; j++) {
 				// Paneler för labels att ligga i, behövs för mouselistener
 				JPanel dayTimeP = new JPanel();
-				dayTimeP.setPreferredSize(new Dimension(90, 21));
+				dayTimeP.setPreferredSize(new Dimension(99, 26));
 				dayTimeP.setBackground(Invisible);
 				dayTimeP.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 				dayTimeP.setLayout(new GridLayout(1, 1));
@@ -161,13 +160,14 @@ public class WeekView extends JPanel {
 				// Labels för dags cellerna.
 				JLabel dayTime = new JLabel();
 				// dayTime.setText("");
-				dayTime.setPreferredSize(new Dimension(90, 21));
+				dayTime.setPreferredSize(new Dimension(99, 26));
 				dayTime.setHorizontalAlignment(SwingConstants.CENTER);
 				dayTime.setFont(new Font("SansSerif", Font.PLAIN, 12));
 				try {
 					addEvent(i, j, dayTime);
 
-				} catch (Exception e) {}
+				} catch (Exception e) {
+				}
 				dayTimeP.add(dayTime);
 				currentDay.add(dayTimeP);
 			}
@@ -175,7 +175,6 @@ public class WeekView extends JPanel {
 		}
 
 		setBackground(Color.WHITE);
-
 	}
 
 	public void init() {

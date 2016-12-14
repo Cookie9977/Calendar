@@ -35,6 +35,7 @@ public class TimeLogic {
 		}
 		return temp;
 	}
+
 	public ArrayList<String> getCurrentDate() {
 		temp = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE/d MMM");
@@ -50,8 +51,8 @@ public class TimeLogic {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-			return temp;
-	
+		return temp;
+
 	}
 
 	// returnerar dagar i vecka, in = sträng på veckonummer,
@@ -165,7 +166,7 @@ public class TimeLogic {
 		int year = getYear();
 		int month = getMonth();
 		int start = getDay() - Storage.calIns.get(Calendar.DAY_OF_WEEK) + 2;
-		//System.out.println(start);
+		// System.out.println(start);
 		for (int i = start; i < start + 7; i++) {
 			dateString = String.format("%d-%d-%d", year, month, i);
 			try {
@@ -246,19 +247,12 @@ public class TimeLogic {
 	}
 
 	public String getCurrentTime() {
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");// dd/MM/yyyy
 		String format = date.format(Calendar.getInstance().getTime());
 		return format;
 	}
-		public String getCurrentTimePlus() {//För en extra timme i eventPane
-			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
-			String format = date.format(Calendar.getInstance().getTime());
-			return format;
-//		System.out.println("År: " + getYear());
-//		System.out.println("Månad: " + getMonth());
-//		System.out.println("Vecka: " + getWeek());
-//		System.out.println("Dag: " + getDay());
-	}
+
+	
 
 	// get a double between 0 and 24 only whole and halfs allowed output a
 	// String in HH:mm format
@@ -307,5 +301,41 @@ public class TimeLogic {
 	public String parseOutMinute(String time) {
 		String[] parts = time.split(":");
 		return parts[1];
+	}
+
+	public String getCurrentDayName() {
+		String dateString;
+		Date date;
+		String dayOfWeek;
+		int year = getCurrentYear();
+		int month = getCurrentMonth();
+		int day = getCurrentDay();
+
+		try {
+			dateString = String.format("%d-%d-%d", year, month, day);
+			date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+			dayOfWeek = new SimpleDateFormat("EEEE/d MMM").format(date);
+			return dayOfWeek;
+		} catch (ParseException e) {
+			return "";
+		}
+	}
+
+	public String getDayName() {
+		String dateString;
+		Date date;
+		String dayOfWeek;
+		int year = getYear();
+		int month = getMonth();
+		int day = getDay();
+
+		try {
+			dateString = String.format("%d-%d-%d", year, month, day);
+			date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+			dayOfWeek = new SimpleDateFormat("EEEE/d MMM").format(date);
+			return dayOfWeek;
+		} catch (ParseException e) {
+			return "";
+		}
 	}
 }

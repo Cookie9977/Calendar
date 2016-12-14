@@ -67,6 +67,7 @@ public class Window extends JFrame {
 		weekView = new WeekView(this);
 		dayView = new DayView(this);
 		addButtons = new AddButtonsPane(this);
+		
 		// FIXME byt färg och sånt, gör den fin. ser hemskt ut just nu.
 		view = new JLabel("Månad");
 		view.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -141,7 +142,7 @@ public class Window extends JFrame {
 		menyBar.setPreferredSize(new Dimension(height, (height - gridHeight)));
 		westBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
 		eastBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
-		menyBar.setBackground(new Color(66, 86, 244, 255));
+		menyBar.setBackground(new Color(72, 90, 234, 255));
 		menyBar.setLayout(new GridLayout(5, 1));
 		westLine.add(westBorder, BorderLayout.WEST);
 		westLine.add(eastBorder, BorderLayout.EAST);
@@ -206,6 +207,7 @@ public class Window extends JFrame {
 		// efter den.
 		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
 		cContent.setBackground(Color.blue);
+		cContent.setLayout(new BorderLayout());
 
 		// Lägg in blocken
 		centerBlock.add(cTop, BorderLayout.NORTH);

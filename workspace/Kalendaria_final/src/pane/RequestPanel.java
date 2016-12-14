@@ -23,6 +23,7 @@ import javax.swing.ScrollPaneConstants;
 
 import logic.RequestLogic;
 import main.Storage;
+import window.Window;
 
 public class RequestPanel extends JFrame implements ActionListener {
 	private JLabel eventLabel, friendLabel;
@@ -31,11 +32,12 @@ public class RequestPanel extends JFrame implements ActionListener {
 	private int reqLength, friendLength;
 	private Font fontPlain, fontBold;
 	private RequestLogic reqLogic;
+	private Window window;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 
 	private static final long serialVersionUID = 4593819136988113328L;
 
-	public RequestPanel() {
+	public RequestPanel(Window windowVal) {
 		/*
 		 * basic setup
 		 */
@@ -43,8 +45,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		setResizable(false);
 		setVisible(true);
 		setLayout(new GridLayout(2, 1));
-		// TODO ändra exit till hide efter testfas. samma med pack()
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 
 		// size och pos.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -65,17 +66,10 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 * Variabler som måste defineras tidigt
 		 */
 
+		this.window = windowVal;
 		friendLength = reqLogic.friendLength();
 		reqLength = reqLogic.eventLength();
-
-		System.out.println("req Length: " + reqLength);
 		// JUMP
-		// reqLength += 7;
-		System.out.println(reqLength + " justerad för testing");
-
-		System.out.println("vän längd: " + friendLength);
-		// friendLength += 8;
-		System.out.println(friendLength + " justerad för testning");
 
 		// Hämtar ut storleken på scroll rutan baserat på antalet poster som
 		// finns.
@@ -100,7 +94,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		eventPanel = new JPanel();
 		eventPanel.setPreferredSize(new Dimension(600, eventSize));
 		eventPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		eventPanel.setBackground(Color.YELLOW);
+		eventPanel.setBackground(Invisible);
 		// add(eventPanel);
 
 		// Scrollpanel 1, events
@@ -115,14 +109,14 @@ public class RequestPanel extends JFrame implements ActionListener {
 		eventLabelP = new JPanel();
 		eventLabelP.setLayout(new BorderLayout());
 		eventLabelP.setPreferredSize(new Dimension(600, 50));
-		eventLabelP.setBackground(Color.GREEN);
+		eventLabelP.setBackground(new Color(72, 90, 234, 255));
 		topPanel.add(eventLabelP, BorderLayout.NORTH);
 
 		// Vänpanelen.
 		friendPanel = new JPanel();
 		friendPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		friendPanel.setPreferredSize(new Dimension(600, friendSize));
-		friendPanel.setBackground(Color.BLUE);
+		friendPanel.setBackground(Invisible);
 
 		// Scrollpanel 2, vänner
 		friendScroll = new JScrollPane(friendPanel);
@@ -136,7 +130,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		friendLabelP = new JPanel();
 		friendLabelP.setLayout(new BorderLayout());
 		friendLabelP.setPreferredSize(new Dimension(600, 50));
-		friendLabelP.setBackground(Color.gray);
+		friendLabelP.setBackground(new Color(72, 90, 234, 255));
 		// friendLabelP.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		botPanel.add(friendLabelP, BorderLayout.NORTH);
 
@@ -161,8 +155,6 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 */
 		eventReq(reqLength);
 		friendReq(friendLength);
-
-		/// FIXME pack ska bort när testning är klar tillsammans med exit
 
 		pack();
 	}
@@ -207,7 +199,8 @@ public class RequestPanel extends JFrame implements ActionListener {
 				// Förälder panel
 				friendReqPanel[i] = new JPanel();
 				friendReqPanel[i].setLayout(new BorderLayout());
-				friendReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				friendReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.black));
+				friendReqPanel[i].setBackground(new Color(72, 90, 234, 255));
 				friendReqPanel[i].setPreferredSize(new Dimension(600, 50));
 
 				// Panel där knapparna ska ligga i
@@ -220,7 +213,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				// Användaren som skickat förfrågans email.
 				userReqLabel[i] = new JLabel();
 				userReqLabel[i].setPreferredSize(new Dimension(350, 50));
-				userReqLabel[i].setText((String) data[i][1]);
+				userReqLabel[i].setText(" "+(String) data[i][1]);
 				userReqLabel[i].setFont(fontPlain);
 				friendReqPanel[i].add(userReqLabel[i], BorderLayout.WEST);
 
@@ -280,7 +273,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				// Panelen
 				// System.out.println("i: " + i + " req: " + reqLength);
 				eventReqPanel[i] = new JPanel();
-				eventReqPanel[i].setBackground(Color.red);
+				eventReqPanel[i].setBackground(new Color(72, 90, 234, 255));
 				eventReqPanel[i].setLayout(new GridLayout(2, 4));
 				eventReqPanel[i].setPreferredSize(new Dimension(600, 100));
 				eventReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -292,7 +285,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				eventReqPanel[i].add(titleReq[i]);
 
 				// Hämta variabel för personen
-				System.out.println(data[i][0]);
+				// System.out.println("person: "+data[i][0]);
 				Object[][] person = reqLogic.getOwner(Integer.parseInt((String) data[i][0]));
 
 				// person,
@@ -303,7 +296,6 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 				// starttid.
 				startReq[i] = new JLabel();
-				System.out.println((String) data[i][2]);
 				startReq[i].setText((String) data[i][2]);
 				startReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(startReq[i]);
@@ -356,37 +348,43 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 			sorryLabel.setText(" Inga förfrågningar hittades. Vänligen återkom senare.");
 			sorryLabel.setFont(new Font("SansSerif", Font.PLAIN, 22));
-			sorryLabel.setOpaque(true);
 			sorryPanel.add(sorryLabel, BorderLayout.CENTER);
 
 			eventPanel.add(sorryPanel);
 		}
 	}
-
+	
+	// Actionperformed, autogenerated
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		String bText = ((AbstractButton) ae.getSource()).getText();
 		int reqId;
 		switch (bText) {
+		// Visa mer info om event.
 		case "Visa mer":
 			reqId = Integer.parseInt(ae.getActionCommand());
 			reqLogic.showMore(reqId);
 			break;
+		// Tacka ja till att delta i event.
 		case "Ja":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptEvent(reqId);
+			reqLogic.acceptEvent(reqId, this, window);
 			break;
+		// Tacka nej till att delta i event.
 		case "Nej":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyevent(reqId);
+			reqLogic.denyevent(reqId, this, window);
 			break;
+		// Acceptera vänförfrågan.
 		case "Acceptera":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptFriend(reqId);
+			reqLogic.acceptFriend(reqId, this, window);
+			System.out.println(this);
 			break;
+		// Neka vänförfrågan.
 		case "Neka":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyFriend(reqId);
+			reqLogic.denyFriend(reqId, this, window);
 			break;
 		}
 

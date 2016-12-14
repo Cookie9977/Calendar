@@ -117,7 +117,7 @@ public class AddFriend extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String Email = textBox.getText();
-		boolean regex = Pattern.matches("^[a-zA-Z0-9]+\\@[a-zA-Z0-9]+\\.[a-zA-Z]+", Email);
+		boolean regex = Pattern.matches("^[a-zA-Z0-9\\_\\-]+\\@[a-zA-Z0-9\\_\\-]+\\.[a-zA-Z]+", Email);
 		if (regex == true) {
 			try {
 				String receiverSQL = "SELECT id FROM user WHERE email='" + Email + "'";
