@@ -54,7 +54,10 @@ public class TimePane extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("comboBoxChanged")) {
 			CustomComboBox temp = (CustomComboBox) e.getSource();
+			System.out.println(temp.getSelectedItem());
 			day.setModel(addThings(logic.getDays((String) temp.getSelectedItem())));
+			day.revalidate();
+			day.repaint();
 		}
 	}
 }

@@ -28,9 +28,10 @@ public class TimeLogic {
 			}
 		}
 		tempCal.set(Storage.cal.get(Calendar.YEAR), monthValue, Storage.cal.get(Calendar.DAY_OF_MONTH));
-		int nrDays = Storage.cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int nrDays = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int i = 0; i < nrDays; i++) {
 			temp.add(String.valueOf(i + 1));
+
 		}
 		return temp;
 	}
@@ -164,7 +165,7 @@ public class TimeLogic {
 		int year = getYear();
 		int month = getMonth();
 		int start = getDay() - Storage.calIns.get(Calendar.DAY_OF_WEEK) + 2;
-		System.out.println(start);
+		//System.out.println(start);
 		for (int i = start; i < start + 7; i++) {
 			dateString = String.format("%d-%d-%d", year, month, i);
 			try {
