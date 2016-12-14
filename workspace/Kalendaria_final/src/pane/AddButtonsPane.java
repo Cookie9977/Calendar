@@ -65,7 +65,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, friendPane);
 			break;
 		case "Förfrågningar":
-			new RequestPanel();
+			new RequestPanel(windowVal);
 			break;
 
 		}
