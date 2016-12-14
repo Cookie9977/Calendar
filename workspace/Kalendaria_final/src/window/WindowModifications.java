@@ -170,6 +170,7 @@ public class WindowModifications {
 				year = logic.getYear();
 				month = logic.getMonth();
 				day = logic.getDay();
+				dayName = logic.getDayName();
 			}
 		};
 		window.cContent.add(newDayView);
@@ -193,6 +194,7 @@ public class WindowModifications {
 				year = logic.getYear();
 				month = logic.getMonth();
 				day = logic.getDay();
+				dayName = logic.getDayName();
 			}
 		};
 		window.cContent.add(newDayView);

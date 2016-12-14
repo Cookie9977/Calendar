@@ -3,6 +3,7 @@ package window;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import main.Storage;
 
 public class DayView extends JPanel {
 	private static final long serialVersionUID = -5546841496999182019L;
-	private JPanel calendar;
+	private JPanel calendar,header;
 	private JPanel[][] holders;
 	private JPanel[] layoutHolders;
 	private TimeLogic logic;
@@ -30,19 +31,20 @@ public class DayView extends JPanel {
 	private String SQL;
 	private ArrayList<Event> event;
 	private JLabel[] eventLabels;
-	private JLabel header;
-	protected Window windowVal;
+	private JLabel dayNumber;
 	protected int day, month, year;
+	protected String dayName;
 
 	public DayView(Window windowVal) {
-		this.windowVal = windowVal;
-		setLayout(new BorderLayout());
 		logic = new TimeLogic();
 		init();
 		calendar = new JPanel();
 		scroll = new JScrollPane();
-		header = new JLabel();
-
+		header = new JPanel();
+		dayNumber = new JLabel();
+		
+		setLayout(new BorderLayout());
+		header.setLayout(new BorderLayout());
 		if (Storage.id != 0) {
 			SQL = "SELECT event.id, event.title, event.description, event.location, event.start, event.end, category.name, event_link.owner  FROM `event_link` LEFT JOIN event ON event_link.event_id = event.id INNER JOIN category ON event.category = category.id WHERE (event_link.owner = 1 OR event_link.accepted = 1) AND event_link.user_id = "
 					+ Storage.id + " AND DATE_FORMAT(event.start, '%Y%m%d') = " + year + "" + month + "" + day;
@@ -53,8 +55,14 @@ public class DayView extends JPanel {
 				System.out.println(e.getMessage());
 			}
 		}
-		System.out.println(day);
-		header.setText("Dag: " + day);
+		
+		dayNumber.setText(dayName);
+		dayNumber.setFont(new Font("SansSerif", Font.BOLD, 20));
+		dayNumber.setHorizontalAlignment(JLabel.CENTER);
+		dayNumber.setVerticalAlignment(JLabel.CENTER);
+		
+		header.add(dayNumber, BorderLayout.CENTER);
+		
 		scroll.setViewportView(calendar);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -117,6 +125,7 @@ public class DayView extends JPanel {
 		year = logic.getCurrentYear();
 		month = logic.getCurrentMonth();
 		day = logic.getCurrentDay();
+		dayName = logic.getCurrentDayName();
 	}
 
 	private void addEvent(int i, int j, JLabel eventLabel, JPanel panel) {
