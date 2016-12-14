@@ -23,6 +23,7 @@ import javax.swing.ScrollPaneConstants;
 
 import logic.RequestLogic;
 import main.Storage;
+import window.Window;
 
 public class RequestPanel extends JFrame implements ActionListener {
 	private JLabel eventLabel, friendLabel;
@@ -31,11 +32,12 @@ public class RequestPanel extends JFrame implements ActionListener {
 	private int reqLength, friendLength;
 	private Font fontPlain, fontBold;
 	private RequestLogic reqLogic;
+	private Window window;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 
 	private static final long serialVersionUID = 4593819136988113328L;
 
-	public RequestPanel() {
+	public RequestPanel(Window windowVal) {
 		/*
 		 * basic setup
 		 */
@@ -64,6 +66,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 * Variabler som måste defineras tidigt
 		 */
 
+		this.window = windowVal;
 		friendLength = reqLogic.friendLength();
 		reqLength = reqLogic.eventLength();
 		// JUMP
@@ -366,23 +369,23 @@ public class RequestPanel extends JFrame implements ActionListener {
 		// Tacka ja till att delta i event.
 		case "Ja":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptEvent(reqId, this);
+			reqLogic.acceptEvent(reqId, this, window);
 			break;
 		// Tacka nej till att delta i event.
 		case "Nej":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyevent(reqId, this);
+			reqLogic.denyevent(reqId, this, window);
 			break;
 		// Acceptera vänförfrågan.
 		case "Acceptera":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptFriend(reqId, this);
+			reqLogic.acceptFriend(reqId, this, window);
 			System.out.println(this);
 			break;
 		// Neka vänförfrågan.
 		case "Neka":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyFriend(reqId, this);
+			reqLogic.denyFriend(reqId, this, window);
 			break;
 		}
 
