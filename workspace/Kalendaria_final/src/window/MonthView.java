@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import event.Event;
 import event.EventList;
@@ -29,6 +30,7 @@ public class MonthView extends JPanel {
 			justering, lopNummer, year;
 
 	public int FmonthColumn, LmonthRow, LmonthColumn;
+	private JLabel eventArea;
 
 	public MonthView() {
 		timeLogic = new logic.TimeLogic();
@@ -117,7 +119,6 @@ public class MonthView extends JPanel {
 		for (int j = 0; j < tableMonth.getRowCount(); j++) {
 			for (int i = 0; i < tableMonth.getColumnCount(); i++) {
 				tableMonth.getColumnModel().getColumn(j + 1).setCellRenderer(new TabellRenderare(this));
-
 				if (lopNummer > 1 && lopNummer < lastDayOfMonth + 1) {
 
 					tableMonth.setValueAt(lopNummer, j, i);
@@ -132,8 +133,6 @@ public class MonthView extends JPanel {
 					tableMonth.setValueAt(firstDayNextMonth++, j, i);
 					LmonthColumn = i;
 					LmonthRow = j;
-					// System.out.println("Column " + LmonthColumn + " Row " +
-					// LmonthRow);
 				}
 
 				else if (lopNummer < lastDayLastMonth) {
@@ -145,23 +144,22 @@ public class MonthView extends JPanel {
 					for (int k = 0; k < event.size(); k++) {
 						if (Integer.parseInt(timeLogic.parseOutDay(event.get(k).getTimeStart())) == lopNummer) {
 							temp = event.get(k);
+
 							System.out.println(lopNummer);
-							//TODO refresha och break line
-							String text = lopNummer + "<br>" 
-									+ temp.getTitle() + "<br>"
-									+ timeLogic.parseOutHour(temp.getTimeStart()) + ":"
-									+ timeLogic.parseOutMinute(temp.getTimeStart()) + "<br>"
-									+ timeLogic.parseOutHour(temp.getTimeEnd()) + ":"
-									+ timeLogic.parseOutMinute(temp.getTimeEnd());
-							tableMonth.setValueAt(text, j, i);
-							lopNummer++;
+							String text = temp.getTitle();
+							System.out.println(text);
+							JTextField eventTitle = new JTextField();
+							eventTitle.setText(text);
+							eventArea = new JLabel();
+							eventArea.setText(text);
+							eventArea.setPreferredSize(new Dimension(2, 2));
+							eventArea.setSize(10, 90);
+
+							tableMonth.setValueAt(lopNummer + " " + eventArea.getText(), j, i);
+							//TODO fixa datum
 						}
 					}
-					
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					
-				}
+				} catch (Exception e) {}
 			}
 		}
 	}

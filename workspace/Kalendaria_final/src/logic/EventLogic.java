@@ -7,9 +7,10 @@ import javax.swing.JOptionPane;
 import friend.Friend;
 import main.Storage;
 import pane.EventPane;
+import window.UpcomingEvent;
 
 public class EventLogic {
-
+public UpcomingEvent upcomingEvent;
 	public void checkEvent(EventPane event) {
 		String title = event.textFields[0].getText();
 		String place = event.textFields[1].getText();
@@ -39,6 +40,8 @@ public class EventLogic {
 		}
 		if (!dubbleBok && correctTime) {
 			addEvent(Storage.id, title, place, description, startTime, endTime, category, friend);
+			upcomingEvent = new UpcomingEvent();
+			upcomingEvent.updateEventList();
 		} else {
 			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
 		}
@@ -50,7 +53,7 @@ public class EventLogic {
 				+ description + "','" + place + "','" + startTime + "','" + endTime + "','" + category + "')";
 		int add_id = Storage.db.executeReturn(SQL);
 		addLink(add_id, id, friend);
-
+		
 	}
 
 	private void addLink(int add_id, int id, ArrayList<Friend> friend) {

@@ -98,6 +98,8 @@ public class EventPane extends JPanel implements ActionListener {
 		// description setup
 		description.setPreferredSize(new Dimension(175, 100));
 		description.setBorder(BorderFactory.createEtchedBorder());
+		description.setLineWrap(true);
+		description.setWrapStyleWord(true);
 		labels[5].setLabelFor(description);
 
 		gbc.gridx = 0;

@@ -1,5 +1,7 @@
 package window;
 
+import java.awt.BorderLayout;
+
 import logic.TimeLogic;
 import main.Storage;
 import pane.AddButtonsPane;
@@ -240,12 +242,11 @@ public class WindowModifications {
 	}
 
 	public void showLoggedinView() {
-	
 		upcomingEvent = new UpcomingEvent();
 		window.menyBar.remove(loginView);
 		window.menyBar.remove(registerView);
-		window.menyBar.add(upcomingEvent);
-		window.menyBar.add(addButtons);
+		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
+		window.menyBar.add(addButtons, BorderLayout.SOUTH);
 		window.revalidate();
 		window.repaint();
 	}
