@@ -30,7 +30,7 @@ public class UpcomingEvent extends JPanel {
 		try{
 		eventContent.clear();
 		}catch(Exception e){
-			System.out.println(e);
+			System.out.println("Feli"+e);
 		}
 		eventContent = getEventContent();
 

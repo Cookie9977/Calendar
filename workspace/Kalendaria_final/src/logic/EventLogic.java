@@ -24,7 +24,6 @@ public UpcomingEvent upcomingEvent;
 		}
 		String description = event.description.getText();
 		boolean correctTime = correctTime(event.time_start, event.time_end);
-
 		String startTime = event.time_start + ":00";
 		String endTime = event.time_end + ":00";
 		int category = event.category.getSelectedIndex() + 1;
