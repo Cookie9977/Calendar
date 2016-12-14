@@ -11,7 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import event.Event;
 import event.EventList;
@@ -24,7 +23,6 @@ public class WeekView extends JPanel {
 	private TimeLogic timeLogic;
 	private String SQL;
 	private ArrayList<Event> event;
-	private Event temp;
 	protected JLabel veckaLabel;
 	protected Color Invisible = new Color(0, 0, 0, 0);
 	protected int week, month, year;

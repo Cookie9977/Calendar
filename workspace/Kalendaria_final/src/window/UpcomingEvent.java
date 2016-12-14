@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import main.ClickListener;
 import main.Storage;
 
 public class UpcomingEvent extends JPanel {
