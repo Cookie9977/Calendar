@@ -28,7 +28,7 @@ public class TimePane extends JPanel implements ActionListener {
 		month = new CustomComboBox();
 		day = new CustomComboBox();
 		time = new JFormattedTextField();
-
+		System.out.println(logic.getCurrentTime());
 		month.setModel(addThings(logic.getMonths()));
 		month.addActionListener(this);
 		day.setModel(addThings(logic.getDays("")));

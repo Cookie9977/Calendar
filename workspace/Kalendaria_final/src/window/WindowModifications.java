@@ -161,15 +161,18 @@ public class WindowModifications {
 		if (Storage.oldDayView != null) {
 			window.cContent.remove(Storage.oldDayView);
 		}
+
 		newDayView = new DayView(window) {
-			private static final long serialVersionUID = 4658993524466783899L;
+			private static final long serialVersionUID = -8969378343897882526L;
 
 			@Override
 			public void init() {
+				year = logic.getYear();
+				month = logic.getMonth();
 				day = logic.getDay();
 			}
 		};
-		window.cContent.add(dayView);
+		window.cContent.add(newDayView);
 		Storage.oldDayView = newDayView;
 		window.cContent.revalidate();
 		window.repaint();
@@ -187,10 +190,12 @@ public class WindowModifications {
 
 			@Override
 			public void init() {
+				year = logic.getYear();
+				month = logic.getMonth();
 				day = logic.getDay();
 			}
 		};
-		window.cContent.add(dayView);
+		window.cContent.add(newDayView);
 		Storage.oldDayView = newDayView;
 		window.cContent.revalidate();
 		window.repaint();

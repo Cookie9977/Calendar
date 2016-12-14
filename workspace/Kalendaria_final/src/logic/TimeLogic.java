@@ -245,11 +245,19 @@ public class TimeLogic {
 		Storage.calIns.set(Calendar.DAY_OF_MONTH, Storage.calIns.get(Calendar.DAY_OF_MONTH) - 1);
 	}
 
-	public void printTime() {
-		System.out.println("År: " + getYear());
-		System.out.println("Månad: " + getMonth());
-		System.out.println("Vecka: " + getWeek());
-		System.out.println("Dag: " + getDay());
+	public String getCurrentTime() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
+		String format = date.format(Calendar.getInstance().getTime());
+		return format;
+	}
+		public String getCurrentTimePlus() {
+			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
+			String format = date.format(Calendar.getInstance().getTime());
+			return format;
+//		System.out.println("År: " + getYear());
+//		System.out.println("Månad: " + getMonth());
+//		System.out.println("Vecka: " + getWeek());
+//		System.out.println("Dag: " + getDay());
 	}
 
 	// get a double between 0 and 24 only whole and halfs allowed output a

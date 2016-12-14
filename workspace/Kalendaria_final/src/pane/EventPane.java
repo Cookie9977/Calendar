@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import friend.Friend;
+import logic.TimeLogic;
 import main.Storage;
 
 public class EventPane extends JPanel implements ActionListener {
@@ -33,8 +33,8 @@ public class EventPane extends JPanel implements ActionListener {
 	private JPanel friend_display, time_s_display, time_e_display;
 	private JLabel friend_name, time_s_name, time_e_name;
 	private DefaultComboBoxModel<String> model;
+	private TimeLogic timeLogic;
 
-	public JFormattedTextField time_s, time_e;
 	public JTextField[] textFields;
 	public JTextArea description;
 	public ArrayList<Friend> friends;
@@ -46,7 +46,7 @@ public class EventPane extends JPanel implements ActionListener {
 		labels = new JLabel[labelText.length];
 		textFields = new JTextField[2];
 		description = new JTextArea();
-
+		timeLogic = new TimeLogic();
 		friend_display = new JPanel();
 		friend_display.setBorder(BorderFactory.createTitledBorder("Inbjudna vänner"));
 		friend_display.setPreferredSize(new Dimension(200, 200));
@@ -101,6 +101,11 @@ public class EventPane extends JPanel implements ActionListener {
 		description.setLineWrap(true);
 		description.setWrapStyleWord(true);
 		labels[5].setLabelFor(description);
+		time_start = time_end = timeLogic.getCurrentTime();
+		time_s_name = new JLabel(time_start);
+		time_s_display.add(time_s_name);
+		time_e_name = new JLabel(time_end);
+		time_e_display.add(time_e_name);
 
 		gbc.gridx = 0;
 		add(labels[5], gbc);
@@ -190,7 +195,7 @@ public class EventPane extends JPanel implements ActionListener {
 			if (result == JOptionPane.OK_OPTION) {
 				if (e.getActionCommand() == "Start tid") {
 					time_start = TimeFormat();
-					time_s_name = new JLabel(time_start);
+					time_s_name.setText(time_start);
 					time_s_display.removeAll();
 					time_s_display.add(time_s_name);
 					time_s_display.validate();
@@ -198,7 +203,7 @@ public class EventPane extends JPanel implements ActionListener {
 
 				} else {
 					time_end = TimeFormat();
-					time_e_name = new JLabel(time_end);
+					time_e_name.setText(time_end);
 					time_e_display.removeAll();
 					time_e_display.add(time_e_name);
 					time_e_display.validate();

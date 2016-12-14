@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -12,8 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import event.Event;
+import event.EventList;
 import logic.TimeLogic;
 import main.ClickListener;
+import main.Storage;
 
 public class DayView extends JPanel {
 	private static final long serialVersionUID = -5546841496999182019L;
@@ -23,25 +27,37 @@ public class DayView extends JPanel {
 	private TimeLogic logic;
 	private JScrollPane scroll;
 	private JLabel[] timeLabels;
-	protected JLabel[] eventLabels;
-	protected int day;
-	private Window windowVal;
-	// private JPanel hoursMinutes;
-	// private JPanel[][] dayPanel;
-	// private JTable timeTable;
+	private String SQL;
+	private ArrayList<Event> event;
+	private JLabel[] eventLabels;
+	private JLabel header;
+	protected Window windowVal;
+	protected int day, month, year;
 
 	public DayView(Window windowVal) {
 		this.windowVal = windowVal;
-		calendar = new JPanel();
+		setLayout(new BorderLayout());
 		logic = new TimeLogic();
-		scroll = new JScrollPane();
 		init();
-		//System.out.println(day);
-		// TODO visa dagens datum med event
+		calendar = new JPanel();
+		scroll = new JScrollPane();
+		header = new JLabel();
 
+		if (Storage.id != 0) {
+			SQL = "SELECT event.id, event.title, event.description, event.location, event.start, event.end, category.name, event_link.owner  FROM `event_link` LEFT JOIN event ON event_link.event_id = event.id INNER JOIN category ON event.category = category.id WHERE (event_link.owner = 1 OR event_link.accepted = 1) AND event_link.user_id = "
+					+ Storage.id + " AND DATE_FORMAT(event.start, '%Y%m%d') = " + year + "" + month + "" + day;
+			Object[][] data = Storage.db.getData(SQL);
+			try {
+				event = new EventList(data);
+			} catch (NullPointerException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		System.out.println(day);
+		header.setText("Dag: " + day);
 		scroll.setViewportView(calendar);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setPreferredSize(new Dimension(620, 600));
 		scroll.getVerticalScrollBar().setUnitIncrement(10);
 
@@ -58,7 +74,7 @@ public class DayView extends JPanel {
 			timeLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			timeLabels[i].setVerticalAlignment(SwingConstants.CENTER);
 
-			eventLabels[i] = new JLabel("");
+			eventLabels[i] = new JLabel();
 			eventLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			eventLabels[i].setVerticalAlignment(SwingConstants.CENTER);
 		}
@@ -80,16 +96,68 @@ public class DayView extends JPanel {
 					holders[i][j].add(timeLabels[i]);
 					layoutHolders[0].add(holders[i][j]);
 				} else {
-					holders[i][j].setPreferredSize(new Dimension(560, 20));
+					holders[i][j].setPreferredSize(new Dimension(20, 20));
 					layoutHolders[1].add(holders[i][j]);
-					holders[i][j].addMouseListener(new ClickListener(holders[i][j],windowVal));
+					try {
+						addEvent(i, j, eventLabels[i], holders[i][j]);
+					} catch (Exception e) {
+					}
+					holders[i][j].add(eventLabels[i]);
+					// System.out.println(eventLabels[i].getText());
+					holders[i][j].addMouseListener(new ClickListener(holders[i][j], windowVal));
 				}
 
 			}
 		}
-		add(scroll);
+		add(header, BorderLayout.NORTH);
+		add(scroll, BorderLayout.CENTER);
 	}
-	public void init(){
+
+	public void init() {
+		year = logic.getCurrentYear();
+		month = logic.getCurrentMonth();
 		day = logic.getCurrentDay();
 	}
+
+	private void addEvent(int i, int j, JLabel eventLabel, JPanel panel) {
+		for (int k = 0; k < event.size(); k++) {
+			int tabelNumber = panelNumber(day, i);
+
+			int sqlStartNumber = sqlNumber(logic.parseOutDay(event.get(k).getTimeStart()),
+					logic.parseOutHour(event.get(k).getTimeStart()), logic.parseOutMinute(event.get(k).getTimeStart()));
+
+			int sqlEndNumber = sqlNumber(logic.parseOutDay(event.get(k).getTimeEnd()),
+					logic.parseOutHour(event.get(k).getTimeEnd()), logic.parseOutMinute(event.get(k).getTimeEnd()));
+
+			if (tabelNumber >= sqlStartNumber && tabelNumber <= sqlEndNumber) {
+				eventLabel.setText("" + event.get(k).getTitle());
+			}
+		}
+	}
+
+	private int panelNumber(int day, int i) {
+		String number;
+		if (day < 10) {
+			number = "0" + day;
+		} else {
+			number = "" + day;
+		}
+		if ((int) Math.ceil(i / 2) < 10) {
+			number += "0" + (int) Math.ceil(i / 2);
+		} else {
+			number += "" + (int) Math.ceil(i / 2);
+		}
+		if (i % 2 == 0) {
+			number += "00";
+		} else {
+			number += "30";
+		}
+		return Integer.parseInt(number);
+	}
+
+	private int sqlNumber(String day, String hour, String minutes) {
+		int number = Integer.parseInt(day + "" + hour + minutes);
+		return number;
+	}
+
 }
