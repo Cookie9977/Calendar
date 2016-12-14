@@ -8,10 +8,12 @@ import friend.Friend;
 import main.Storage;
 import pane.EventPane;
 import window.UpcomingEvent;
+import window.Window;
+import window.WindowModifications;
 
 public class EventLogic {
 public UpcomingEvent upcomingEvent;
-	public void checkEvent(EventPane event) {
+	public void checkEvent(EventPane event,Window windowVal) {
 		String title = event.textFields[0].getText();
 		String place = event.textFields[1].getText();
 		ArrayList<Friend> friend;
@@ -42,8 +44,7 @@ public UpcomingEvent upcomingEvent;
 		}
 		if (!dubbleBok && correctTime) {
 			addEvent(Storage.id, title, place, description, startTime, endTime, category, friend);
-			upcomingEvent = new UpcomingEvent();
-			upcomingEvent.updateEventList();
+			windowVal.getModifications().updateUpcomingEvents();
 		} else {
 			JOptionPane.showMessageDialog(null, "Du har dubbelbokat eller skrivit in felaktig tid");
 		}

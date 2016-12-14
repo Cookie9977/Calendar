@@ -31,8 +31,9 @@ public class MonthView extends JPanel {
 	
 	public int FmonthColumn, LmonthRow, LmonthColumn;
 	private JLabel eventArea;
-
-	public MonthView() {
+	private Window windowVal;
+	public MonthView(Window windowVal) {
+		this.windowVal = windowVal;
 		timeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(770, 720));
@@ -112,7 +113,7 @@ public class MonthView extends JPanel {
 		tableMonth.setRowHeight(110);
 		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare(this));
 		tableMonth.setCellSelectionEnabled(true);
-		tableMonth.addMouseListener(new ClickListener(this));
+		tableMonth.addMouseListener(new ClickListener(this,windowVal));
 		containDays.add(tableMonth);
 		lopNummer = firstDayNextMonth = 1;
 

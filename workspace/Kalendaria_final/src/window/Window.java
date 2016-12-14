@@ -62,10 +62,10 @@ public class Window extends JFrame {
 		navBar = new JPanel();
 		datePanel = new JPanel();
 		datePanelDate = new DatePanelDate();
-		monthView = new MonthView();
-		weekView = new WeekView();
-		dayView = new DayView();
-		addButtons = new AddButtonsPane();
+		monthView = new MonthView(this);
+		weekView = new WeekView(this);
+		dayView = new DayView(this);
+		addButtons = new AddButtonsPane(this);
 		// FIXME byt färg och sånt, gör den fin. ser hemskt ut just nu.
 		view = new JLabel("Månad");
 		view.setFont(new Font("SansSerif", Font.BOLD, 20));

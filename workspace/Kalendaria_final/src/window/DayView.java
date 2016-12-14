@@ -25,11 +25,13 @@ public class DayView extends JPanel {
 	private JLabel[] timeLabels;
 	protected JLabel[] eventLabels;
 	protected int day;
+	private Window windowVal;
 	// private JPanel hoursMinutes;
 	// private JPanel[][] dayPanel;
 	// private JTable timeTable;
 
-	public DayView() {
+	public DayView(Window windowVal) {
+		this.windowVal = windowVal;
 		calendar = new JPanel();
 		logic = new TimeLogic();
 		scroll = new JScrollPane();
@@ -80,7 +82,7 @@ public class DayView extends JPanel {
 				} else {
 					holders[i][j].setPreferredSize(new Dimension(560, 20));
 					layoutHolders[1].add(holders[i][j]);
-					holders[i][j].addMouseListener(new ClickListener(holders[i][j]));
+					holders[i][j].addMouseListener(new ClickListener(holders[i][j],windowVal));
 				}
 
 			}
