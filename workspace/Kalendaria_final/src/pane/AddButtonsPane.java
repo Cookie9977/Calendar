@@ -10,25 +10,34 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import logic.EventLogic;
+import logic.RequestLogic;
 import window.Window;
 
 public class AddButtonsPane extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 5973341942470877467L;
+	private Window windowVal;
+	private RequestLogic reqLogic;
 	private JButton[] buttons;
 	private JPanel[] holder;
-	private String[] labels = { "Lägg til en ny event", "Lägg till vänner", "visa vänner", "Förfrågningar" };
-	private Window windowVal;
+	private String[] labels = { "Lägg till ett nytt event", "Lägg till vänner", "visa vänner", "Förfrågningar" };
 	
 	public AddButtonsPane(Window windowVal) {
 		this.windowVal = windowVal;
 		int rows = labels.length;
 		buttons = new JButton[rows];
 		holder = new JPanel[rows];
+		reqLogic = new RequestLogic();
 		setLayout(new GridLayout(4, 1));
 
 		for (int i = 0; i < rows; i++) {
 			holder[i] = new JPanel();
-			buttons[i] = new JButton(labels[i]);
+			if( i != 3){
+				buttons[i] = new JButton(labels[i]);				
+			}
+			else{
+				buttons[i] = new JButton(labels[i]+"("+reqLogic.requestLength()+")");
+			}
+			buttons[i].setActionCommand(labels[i]);
 			buttons[i].addActionListener(this);
 			buttons[i].setPreferredSize(new Dimension(150, 25));
 			add(holder[i]);
@@ -41,7 +50,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 		System.out.println(e.getActionCommand());
 		String command = e.getActionCommand();
 		switch (command) {
-		case "Lägg til en ny event":
+		case "Lägg till ett nytt event":
 			EventLogic logic = new EventLogic();
 			EventPane eventPane = new EventPane();
 			int test = JOptionPane.showConfirmDialog(null, eventPane, "test", JOptionPane.OK_CANCEL_OPTION);
