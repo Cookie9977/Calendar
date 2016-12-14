@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import main.Storage;
 import pane.RequestPanel;
+import window.Window;
 
 public class RequestLogic {
 	public RequestLogic() {
@@ -18,7 +19,7 @@ public class RequestLogic {
 				+ " FROM event_link INNER JOIN event on event_link.event_id = event.id "
 				+ " INNER JOIN category on event.category = category.id WHERE event_link.user_id = " + Storage.id
 				+ " AND event_link.accepted = 0";
-		System.out.println("Event för panel: " + SQL);
+		// System.out.println("Event för panel: " + SQL);
 		Object[][] data = Storage.db.getData(SQL);
 		return data;
 	}
@@ -29,7 +30,7 @@ public class RequestLogic {
 		String SQL = "SELECT event.id,event.title,event.description,event.location,DATE_FORMAT(event.start, '%Y-%m-%d - %H%:%i') AS 'Start', "
 				+ "DATE_FORMAT(event.end,'%Y-%m-%d - %H%:%i') AS 'End',category.name FROM event"
 				+ " INNER JOIN category on event.category = category.id WHERE event.id = " + EventId;
-		System.out.println("Event info: " + SQL);
+		// System.out.println("Event info: " + SQL);
 		Object[][] data = Storage.db.getData(SQL);
 		return data;
 	}
@@ -39,7 +40,7 @@ public class RequestLogic {
 	public Object[][] getOwner(int eventId) {
 		String SQL = "SELECT user.email FROM event_link INNER JOIN user on event_link.user_id = user.id where event_link.event_id = "
 				+ eventId + " AND event_link.owner = 1";
-		System.out.println("Get owner: " + SQL);
+		// System.out.println("Get owner: " + SQL);
 		Object[][] data = Storage.db.getData(SQL);
 		return data;
 	}
@@ -48,47 +49,66 @@ public class RequestLogic {
 	public Object[][] getFriend() {
 		String SQL = "SELECT user.id, user.email FROM friend_link INNER JOIN user on friend_link.requester = user.id WHERE friend_link.reciver = "
 				+ Storage.id + " AND friend_link.accepted = 0";
-		System.out.println("Get friend: " + SQL);
+		// System.out.println("Get friend: " + SQL);
 		Object[][] data = Storage.db.getData(SQL);
 		return data;
 	}
 
 	// Uppdaterar en rad i databasen med accepted = 1
-	public void acceptEvent(int reqId, RequestPanel requestPanel) {
+	public void acceptEvent(int reqId, RequestPanel requestPanel, Window window) {
 		String SQL = "UPDATE event_link SET accepted = 1 WHERE event_id = " + reqId;
-		System.out.println("acceptera event: " + SQL);
+		// System.out.println("acceptera event: " + SQL);
 		Storage.db.execute(SQL);
-		updateReqPanel(requestPanel);
 
-	}
-
-	// Tar bort en rad ur databasen för det event man nekar
-	public void denyevent(int reqId, RequestPanel requestPanel) {
-		String SQL = "DELETE FROM event_link WHERE event_id = " + reqId;
-		System.out.println("Neka event: " + SQL);
-		Storage.db.execute(SQL);
-		updateReqPanel(requestPanel);
-	}
-
-	// Uppdaterar en rad i databasen med accepted = 1
-	public void acceptFriend(int reqId, RequestPanel requestPanel) {
-		String SQL = "UPDATE friend_link SET accepted= 1 WHERE requester = " + reqId + " AND reciver = " + Storage.id;
-		System.out.println("Acceptera vän: " + SQL);
-		Storage.db.execute(SQL);
-		
 		/*
 		 * En lösning men blinkar till och flyttar rutan.
 		 */
 		requestPanel.dispose();
-		requestPanel = new RequestPanel();
+		requestPanel = new RequestPanel(window);
+		window.getModifications().updateButtonPane();
+
+	}
+
+	// Tar bort en rad ur databasen för det event man nekar
+	public void denyevent(int reqId, RequestPanel requestPanel, Window window) {
+		String SQL = "DELETE FROM event_link WHERE event_id = " + reqId;
+		// System.out.println("Neka event: " + SQL);
+		Storage.db.execute(SQL);
+
+		/*
+		 * En lösning men blinkar till och flyttar rutan.
+		 */
+		requestPanel.dispose();
+		requestPanel = new RequestPanel(window);
+		window.getModifications().updateButtonPane();
+	}
+
+	// Uppdaterar en rad i databasen med accepted = 1
+	public void acceptFriend(int reqId, RequestPanel requestPanel, Window window) {
+		String SQL = "UPDATE friend_link SET accepted= 1 WHERE requester = " + reqId + " AND reciver = " + Storage.id;
+		// System.out.println("Acceptera vän: " + SQL);
+		Storage.db.execute(SQL);
+
+		/*
+		 * En lösning men blinkar till och flyttar rutan.
+		 */
+		requestPanel.dispose();
+		requestPanel = new RequestPanel(window);
+		window.getModifications().updateButtonPane();
 	}
 
 	// Tar bort en rad i databasen för den förfrågan man nekade.
-	public void denyFriend(int reqId, RequestPanel requestPanel) {
+	public void denyFriend(int reqId, RequestPanel requestPanel, Window window) {
 		String SQL = "DELETE FROM friend_link WHERE requester = " + reqId + "AND reciver = " + Storage.id;
-		System.out.println("Neka vän: " + SQL);
+		// System.out.println("Neka vän: " + SQL);
 		Storage.db.execute(SQL);
-		updateReqPanel(requestPanel);
+
+		/*
+		 * En lösning men blinkar till och flyttar rutan.
+		 */
+		requestPanel.dispose();
+		requestPanel = new RequestPanel(window);
+		window.getModifications().updateButtonPane();
 	}
 
 	// En JOptionpane för att visa mer information angående eventet indata = id
@@ -115,7 +135,9 @@ public class RequestLogic {
 	public int eventLength() {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM event_link WHERE user_id = " + Storage.id + " and accepted = 0";
+		// System.out.println("Antal eventförfrågnignar SQL: "+SQL);
 		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
+		// System.out.println("Antal event förfrågningar:" + retval);
 		return retval;
 	}
 
@@ -123,8 +145,9 @@ public class RequestLogic {
 	public int friendLength() {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM friend_link WHERE reciver = " + Storage.id + " and accepted = 0";
+		// System.out.println("Antal vänförfrågnignar SQL: "+SQL);
 		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
-		// System.out.println(retval);
+		// System.out.println("Antal vänförfrågningar: " + retval);
 		return retval;
 	}
 
@@ -132,15 +155,10 @@ public class RequestLogic {
 	// siffra för antalet förfrågnignar
 	public int requestLength() {
 		int events = eventLength();
-		int friends = eventLength();
+		int friends = friendLength();
 		int retval = events + friends;
-		System.out.println("Antal förfrågnignar: " + retval);
+		// System.out.println("Antal förfrågnignar: " + retval);
 		return retval;
 	}
 
-	public void updateReqPanel(RequestPanel requestPanel) {
-		requestPanel.removeAll();
-		requestPanel.revalidate();
-		requestPanel.repaint();
-	}
 }

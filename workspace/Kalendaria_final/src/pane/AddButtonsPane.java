@@ -35,7 +35,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 				buttons[i] = new JButton(labels[i]);				
 			}
 			else{
-				buttons[i] = new JButton(labels[i]+"("+reqLogic.requestLength()+")");
+				buttons[i] = new JButton(labels[i]+" ("+reqLogic.requestLength()+")");
 			}
 			buttons[i].setActionCommand(labels[i]);
 			buttons[i].addActionListener(this);
@@ -66,7 +66,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, friendPane);
 			break;
 		case "Förfrågningar":
-			RequestPanel requestPanel = new RequestPanel();
+			RequestPanel requestPanel = new RequestPanel(windowVal);
 			break;
 
 		}

@@ -258,9 +258,10 @@ public class WindowModifications {
 
 	public void updateUpcomingEvents() {
 		upcomingEvent = new UpcomingEvent(window);
+		addButtons = new AddButtonsPane(window);
 		window.menyBar.removeAll();
 		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
-		window.menyBar.add(window.addButtons, BorderLayout.SOUTH);
+		window.menyBar.add(addButtons, BorderLayout.SOUTH);
 		window.revalidate();
 		window.repaint();
 	}
@@ -269,6 +270,7 @@ public class WindowModifications {
 	// förfrågnignar.
 	public void updateButtonPane() {
 		addButtons = new AddButtonsPane(window);
+		upcomingEvent = new UpcomingEvent(window);
 		window.menyBar.removeAll();
 		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
 		window.menyBar.add(addButtons, BorderLayout.SOUTH);

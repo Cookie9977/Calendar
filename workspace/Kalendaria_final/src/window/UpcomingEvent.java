@@ -92,7 +92,7 @@ public class UpcomingEvent extends JPanel {
 
 				eventContent.addElement(new CalendarEvent(resultat[0][0].toString(), resultat[0][2].toString(),
 						resultat[0][3].toString()));
-				System.out.println("Antal resultat:  " + eventContent.size());
+//				System.out.println("Antal resultat:  " + eventContent.size());
 
 			}
 
