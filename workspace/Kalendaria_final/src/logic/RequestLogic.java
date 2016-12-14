@@ -127,7 +127,7 @@ public class RequestLogic {
 		JOptionPane.showMessageDialog(null,
 				"<html><body width='400'> <p>Inbjuden av: " + person + "</p><p> Plats: " + Location + ". </p><p>Start: "
 						+ Start + "</p><p> Slut: " + End + ". </p><p>Kategori: " + Category + "</p><p>Beskrivning: "
-						+ Descript + ".</body></html>",
+						+ Descript + "</body></html>",
 				Title, JOptionPane.INFORMATION_MESSAGE);
 	}
 
