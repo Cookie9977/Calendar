@@ -43,8 +43,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		setResizable(false);
 		setVisible(true);
 		setLayout(new GridLayout(2, 1));
-		// TODO ändra exit till hide efter testfas. samma med pack()
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 
 		// size och pos.
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -67,15 +66,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 		friendLength = reqLogic.friendLength();
 		reqLength = reqLogic.eventLength();
-
-		System.out.println("req Length: " + reqLength);
 		// JUMP
-		// reqLength += 7;
-		System.out.println(reqLength + " justerad för testing");
-
-		System.out.println("vän längd: " + friendLength);
-		// friendLength += 8;
-		System.out.println(friendLength + " justerad för testning");
 
 		// Hämtar ut storleken på scroll rutan baserat på antalet poster som
 		// finns.
@@ -161,8 +152,6 @@ public class RequestPanel extends JFrame implements ActionListener {
 		 */
 		eventReq(reqLength);
 		friendReq(friendLength);
-
-		/// FIXME pack ska bort när testning är klar tillsammans med exit
 
 		pack();
 	}
@@ -292,18 +281,19 @@ public class RequestPanel extends JFrame implements ActionListener {
 				eventReqPanel[i].add(titleReq[i]);
 
 				// Hämta variabel för personen
-				System.out.println(data[i][0]);
+				System.out.println("person: "+data[i][0]);
 				Object[][] person = reqLogic.getOwner(Integer.parseInt((String) data[i][0]));
 
 				// person,
 				personReq[i] = new JLabel();
-				personReq[i].setText((String) person[0][0]);
+				// personReq[i].setText((String) person[0][0]);
+				personReq[i].setText("hej"); // FIXME byt till den andra, fel i
+												// databasen just nu.
 				personReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(personReq[i]);
 
 				// starttid.
 				startReq[i] = new JLabel();
-				System.out.println((String) data[i][2]);
 				startReq[i].setText((String) data[i][2]);
 				startReq[i].setFont(fontPlain);
 				eventReqPanel[i].add(startReq[i]);
@@ -368,25 +358,31 @@ public class RequestPanel extends JFrame implements ActionListener {
 		String bText = ((AbstractButton) ae.getSource()).getText();
 		int reqId;
 		switch (bText) {
+		// Visa mer info om event.
 		case "Visa mer":
 			reqId = Integer.parseInt(ae.getActionCommand());
 			reqLogic.showMore(reqId);
 			break;
+		// Tacka ja till att delta i event.
 		case "Ja":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptEvent(reqId);
+			reqLogic.acceptEvent(reqId, this);
 			break;
+		// Tacka nej till att delta i event.
 		case "Nej":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyevent(reqId);
+			reqLogic.denyevent(reqId, this);
 			break;
+		// Acceptera vänförfrågan.
 		case "Acceptera":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.acceptFriend(reqId);
+			reqLogic.acceptFriend(reqId, this);
+			System.out.println(this);
 			break;
+		// Neka vänförfrågan.
 		case "Neka":
 			reqId = Integer.parseInt(ae.getActionCommand());
-			reqLogic.denyFriend(reqId);
+			reqLogic.denyFriend(reqId, this);
 			break;
 		}
 

@@ -28,9 +28,9 @@ public class WindowModifications {
 
 	// för att byta inloggad vs oinloggad
 	public WindowModifications(LoginUser loginView, RegisterUser registerView, AddButtonsPane addButtons,
-			 Window window) {
+			Window window) {
 		this.window = window;
-//		this.upcomingEvent = upcomingEvent;
+		// this.upcomingEvent = upcomingEvent;
 		this.loginView = loginView;
 		this.registerView = registerView;
 		this.addButtons = addButtons;
@@ -250,7 +250,8 @@ public class WindowModifications {
 		window.revalidate();
 		window.repaint();
 	}
-	public void updateUpcomingEvents(){
+
+	public void updateUpcomingEvents() {
 		upcomingEvent = new UpcomingEvent(window);
 		window.menyBar.removeAll();
 		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);
@@ -258,7 +259,10 @@ public class WindowModifications {
 		window.revalidate();
 		window.repaint();
 	}
-	public void updateButtonPane(){
+
+	// Startar en ny instans av addbuttons för att uppdatera antalet
+	// förfrågnignar.
+	public void updateButtonPane() {
 		addButtons = new AddButtonsPane(window);
 		window.menyBar.removeAll();
 		window.menyBar.add(upcomingEvent, BorderLayout.NORTH);

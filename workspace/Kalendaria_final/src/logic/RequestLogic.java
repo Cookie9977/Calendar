@@ -1,20 +1,12 @@
 package logic;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import main.Storage;
+import pane.RequestPanel;
 
 public class RequestLogic {
-
 	public RequestLogic() {
-
 	}
 
 	// Returnerar ett object som innehåller data om eventet som man har blivit
@@ -31,7 +23,7 @@ public class RequestLogic {
 		return data;
 	}
 
-	// Returnernar objekt som innehåller data om ett specifikt event TODO join
+	// Returnernar objekt som innehåller data om ett specifikt event
 	// category id, title, description, start, end, category
 	public Object[][] getEventInfo(int EventId) {
 		String SQL = "SELECT event.id,event.title,event.description,event.location,DATE_FORMAT(event.start, '%Y-%m-%d - %H%:%i') AS 'Start', "
@@ -61,6 +53,44 @@ public class RequestLogic {
 		return data;
 	}
 
+	// Uppdaterar en rad i databasen med accepted = 1
+	public void acceptEvent(int reqId, RequestPanel requestPanel) {
+		String SQL = "UPDATE event_link SET accepted = 1 WHERE event_id = " + reqId;
+		System.out.println("acceptera event: " + SQL);
+		Storage.db.execute(SQL);
+		updateReqPanel(requestPanel);
+
+	}
+
+	// Tar bort en rad ur databasen för det event man nekar
+	public void denyevent(int reqId, RequestPanel requestPanel) {
+		String SQL = "DELETE FROM event_link WHERE event_id = " + reqId;
+		System.out.println("Neka event: " + SQL);
+		Storage.db.execute(SQL);
+		updateReqPanel(requestPanel);
+	}
+
+	// Uppdaterar en rad i databasen med accepted = 1
+	public void acceptFriend(int reqId, RequestPanel requestPanel) {
+		String SQL = "UPDATE friend_link SET accepted= 1 WHERE requester = " + reqId + " AND reciver = " + Storage.id;
+		System.out.println("Acceptera vän: " + SQL);
+		Storage.db.execute(SQL);
+		
+		/*
+		 * En lösning men blinkar till och flyttar rutan.
+		 */
+		requestPanel.dispose();
+		requestPanel = new RequestPanel();
+	}
+
+	// Tar bort en rad i databasen för den förfrågan man nekade.
+	public void denyFriend(int reqId, RequestPanel requestPanel) {
+		String SQL = "DELETE FROM friend_link WHERE requester = " + reqId + "AND reciver = " + Storage.id;
+		System.out.println("Neka vän: " + SQL);
+		Storage.db.execute(SQL);
+		updateReqPanel(requestPanel);
+	}
+
 	// En JOptionpane för att visa mer information angående eventet indata = id
 	// för eventet.
 	public void showMore(int reqId) {
@@ -81,30 +111,6 @@ public class RequestLogic {
 				Title, JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	//
-	public void acceptEvent(int reqId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	//
-	public void denyevent(int reqId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	//
-	public void acceptFriend(int reqId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	//
-	public void denyFriend(int reqId) {
-		// TODO Auto-generated method stub
-
-	}
-
 	// En select Count för antalet eventförfrågningar till inloggade id
 	public int eventLength() {
 		int retval;
@@ -118,7 +124,7 @@ public class RequestLogic {
 		int retval;
 		String SQL = "SELECT COUNT(*) FROM friend_link WHERE reciver = " + Storage.id + " and accepted = 0";
 		retval = Integer.parseInt((String) Storage.db.getData(SQL)[0][0]);
-		System.out.println(retval);
+		// System.out.println(retval);
 		return retval;
 	}
 
@@ -128,6 +134,13 @@ public class RequestLogic {
 		int events = eventLength();
 		int friends = eventLength();
 		int retval = events + friends;
+		System.out.println("Antal förfrågnignar: " + retval);
 		return retval;
+	}
+
+	public void updateReqPanel(RequestPanel requestPanel) {
+		requestPanel.removeAll();
+		requestPanel.revalidate();
+		requestPanel.repaint();
 	}
 }
