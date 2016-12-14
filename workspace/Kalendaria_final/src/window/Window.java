@@ -16,6 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import pane.AddButtonsPane;
 import pane.DatePanelDate;
 
+
 public class Window extends JFrame {
 	private static final long serialVersionUID = -7150710923108249953L;
 	// byt ut dessa mot respective jpanel classer som ni har gjort. Body ska
@@ -172,6 +173,7 @@ public class Window extends JFrame {
 		// Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
+
 		//upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);

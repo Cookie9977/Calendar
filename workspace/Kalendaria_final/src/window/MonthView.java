@@ -60,20 +60,18 @@ public class MonthView extends JPanel {
 		days = new String[] { "Vecka", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 8));
-		theDays.setBackground(Color.MAGENTA);
+		theDays.setBackground(new Color(196, 56, 110));
 		theDays.setPreferredSize(new Dimension(770, 90));
 		topLine.add(theDays, BorderLayout.CENTER);
-
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			dagLabel[k].setText(days[k]);
-
+			dagLabel[k].setForeground(new Color(220, 220, 220));
 			dagLabel[k].setPreferredSize(new Dimension(96, 90));
-			dagLabel[k].setBorder(BorderFactory.createLineBorder(new Color(178, 178, 178)));
+			//dagLabel[k].setBorder(BorderFactory.createLineBorder(new Color(196, 56, 110)));
 			// dagLabel[k].setPreferredSize(new Dimension(0, 50));
-			dagLabel[k].setBackground(Color.CYAN);
-			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		
+			dagLabel[k].setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, (new Color(50,50,50))));
 			theDays.add(dagLabel[k]);
 		}
 		JPanel westLine = new JPanel();
@@ -82,7 +80,7 @@ public class MonthView extends JPanel {
 		add(westLine, BorderLayout.WEST);
 
 		JPanel timeView = new JPanel();
-		timeView.setBackground(Color.CYAN);
+		timeView.setBackground(new Color(247, 74, 140));
 		timeView.setPreferredSize(new Dimension(97, 640));
 		timeView.setLayout(new GridLayout(6, 1));
 		westLine.add(timeView);
@@ -90,14 +88,13 @@ public class MonthView extends JPanel {
 		for (int i = 0; i < 6; i++) {
 			JLabel veckan = new JLabel();
 			veckan.setText("sdsd");
-			veckan.setBorder(BorderFactory.createLineBorder(new Color(178, 178, 178)));
+			veckan.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (new Color(50,50,50))));
 			timeView.add(veckan);
 
 		}
 
 		JPanel containDays = new JPanel();
 		containDays.setPreferredSize(new Dimension(770, 645));
-		containDays.setBackground(Color.green);
 
 		containDays.setLayout(new GridLayout(1, 1));
 		add(containDays, BorderLayout.CENTER);
@@ -131,9 +128,13 @@ public class MonthView extends JPanel {
 					lopNummer++;
 
 				} else if (lopNummer > lastDayOfMonth) {
-					tableMonth.setValueAt(firstDayNextMonth++, j, i);
+					if(firstDayNextMonth == 1){
 					LmonthColumn = i;
 					LmonthRow = j;
+					System.out.println("Column "+i+ "   Rad "+ j);
+					}
+					tableMonth.setValueAt(firstDayNextMonth++, j, i);
+					
 				}
 
 				else if (lopNummer < lastDayLastMonth) {
@@ -157,6 +158,7 @@ public class MonthView extends JPanel {
 							eventArea.setSize(10, 90);
 
 							tableMonth.setValueAt(lopNummer + " " + eventArea.getText(), j, i);
+							
 							//TODO fixa datum
 						}
 					}

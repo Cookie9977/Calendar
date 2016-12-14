@@ -250,7 +250,7 @@ public class TimeLogic {
 		String format = date.format(Calendar.getInstance().getTime());
 		return format;
 	}
-		public String getCurrentTimePlus() {
+		public String getCurrentTimePlus() {//För en extra timme i eventPane
 			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
 			String format = date.format(Calendar.getInstance().getTime());
 			return format;
