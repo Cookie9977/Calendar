@@ -9,12 +9,10 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,7 +20,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import logic.RequestLogic;
-import main.Storage;
 import window.Window;
 
 public class RequestPanel extends JFrame implements ActionListener {
@@ -109,7 +106,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		eventLabelP = new JPanel();
 		eventLabelP.setLayout(new BorderLayout());
 		eventLabelP.setPreferredSize(new Dimension(600, 50));
-		eventLabelP.setBackground(new Color(72, 90, 234, 255));
+		eventLabelP.setBackground(new Color(32, 86, 173));
 		topPanel.add(eventLabelP, BorderLayout.NORTH);
 
 		// Vänpanelen.
@@ -130,7 +127,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 		friendLabelP = new JPanel();
 		friendLabelP.setLayout(new BorderLayout());
 		friendLabelP.setPreferredSize(new Dimension(600, 50));
-		friendLabelP.setBackground(new Color(72, 90, 234, 255));
+		friendLabelP.setBackground(new Color(32, 86, 173));
 		// friendLabelP.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		botPanel.add(friendLabelP, BorderLayout.NORTH);
 
@@ -140,14 +137,17 @@ public class RequestPanel extends JFrame implements ActionListener {
 
 		// eventlabel
 		eventLabel = new JLabel();
-		eventLabel.setText("Eventförfrågningar (" + reqLength + ")");
+		eventLabel.setText("  Eventförfrågningar (" + reqLength + ")");
 		eventLabel.setFont(fontBold);
+		eventLabel.setForeground(new Color(245, 245, 245));
 		eventLabelP.add(eventLabel);
+		
 
 		// Friendlabel
 		friendLabel = new JLabel();
-		friendLabel.setText("Vänförfrågningar (" + friendLength + ")");
+		friendLabel.setText("  Vänförfrågningar (" + friendLength + ")");
 		friendLabel.setFont(fontBold);
+		friendLabel.setForeground(new Color(245, 245, 245));
 		friendLabelP.add(friendLabel);
 
 		/*
@@ -200,7 +200,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				friendReqPanel[i] = new JPanel();
 				friendReqPanel[i].setLayout(new BorderLayout());
 				friendReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.black));
-				friendReqPanel[i].setBackground(new Color(72, 90, 234, 255));
+				friendReqPanel[i].setBackground(new Color(32, 86, 173));
 				friendReqPanel[i].setPreferredSize(new Dimension(600, 50));
 
 				// Panel där knapparna ska ligga i
@@ -215,6 +215,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				userReqLabel[i].setPreferredSize(new Dimension(350, 50));
 				userReqLabel[i].setText(" "+(String) data[i][1]);
 				userReqLabel[i].setFont(fontPlain);
+				userReqLabel[i].setForeground(new Color(245, 245, 245));
 				friendReqPanel[i].add(userReqLabel[i], BorderLayout.WEST);
 
 				// Ja knapp.
@@ -273,7 +274,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				// Panelen
 				// System.out.println("i: " + i + " req: " + reqLength);
 				eventReqPanel[i] = new JPanel();
-				eventReqPanel[i].setBackground(new Color(72, 90, 234, 255));
+				eventReqPanel[i].setBackground(new Color(32, 86, 173));
 				eventReqPanel[i].setLayout(new GridLayout(2, 4));
 				eventReqPanel[i].setPreferredSize(new Dimension(600, 100));
 				eventReqPanel[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -282,6 +283,7 @@ public class RequestPanel extends JFrame implements ActionListener {
 				titleReq[i] = new JLabel();
 				titleReq[i].setText((String) data[i][1]);
 				titleReq[i].setFont(fontPlain);
+				titleReq[i].setForeground(new Color(245, 245, 245));
 				eventReqPanel[i].add(titleReq[i]);
 
 				// Hämta variabel för personen
@@ -292,24 +294,28 @@ public class RequestPanel extends JFrame implements ActionListener {
 				personReq[i] = new JLabel();
 				personReq[i].setText((String) person[0][0]);
 				personReq[i].setFont(fontPlain);
+				personReq[i].setForeground(new Color(245, 245, 245));
 				eventReqPanel[i].add(personReq[i]);
 
 				// starttid.
 				startReq[i] = new JLabel();
 				startReq[i].setText((String) data[i][2]);
 				startReq[i].setFont(fontPlain);
+				startReq[i].setForeground(new Color(245, 245, 245));
 				eventReqPanel[i].add(startReq[i]);
 
 				// sluttid.
 				stopReq[i] = new JLabel();
 				stopReq[i].setText((String) data[i][3]);
 				stopReq[i].setFont(fontPlain);
+				stopReq[i].setForeground(new Color(245, 245, 245));
 				eventReqPanel[i].add(stopReq[i]);
 
 				// Kategori.
 				categoryReq[i] = new JLabel();
 				categoryReq[i].setText((String) data[i][4]);
 				categoryReq[i].setFont(fontPlain);
+				categoryReq[i].setForeground(new Color(245, 245, 245));
 				eventReqPanel[i].add(categoryReq[i]);
 
 				// "visa mer" knapp.
@@ -379,7 +385,6 @@ public class RequestPanel extends JFrame implements ActionListener {
 		case "Acceptera":
 			reqId = Integer.parseInt(ae.getActionCommand());
 			reqLogic.acceptFriend(reqId, this, window);
-			System.out.println(this);
 			break;
 		// Neka vänförfrågan.
 		case "Neka":

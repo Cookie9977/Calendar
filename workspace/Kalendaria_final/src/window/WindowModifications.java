@@ -71,6 +71,7 @@ public class WindowModifications {
 				dayOfWeekMonth = justering = logic.firstDayMonth();
 				lastDayLastMonth = logic.lastDayLastMonth();
 				daysOfMonth = logic.getDays("" + thisMonth);
+				firstWeek = logic.getFirstWeekOfMonth(thisMonth);
 				year = logic.getYear();
 			}
 		};
@@ -97,6 +98,7 @@ public class WindowModifications {
 				dayOfWeekMonth = justering = logic.firstDayMonth();
 				lastDayLastMonth = logic.lastDayLastMonth();
 				daysOfMonth = logic.getDays("" + thisMonth);
+				firstWeek = logic.getFirstWeekOfMonth(thisMonth);
 				year = logic.getYear();
 			}
 		};

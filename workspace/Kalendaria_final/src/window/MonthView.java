@@ -27,10 +27,11 @@ public class MonthView extends JPanel {
 	private ArrayList<Event> event;
 	private Event temp;
 	protected int thisMonth, firstDayOfMonth, lastDayOfMonth, dayOfWeekMonth, firstDayNextMonth, lastDayLastMonth,
-			justering, lopNummer, year;
+			justering, lopNummer, year, firstWeek;
 
 	public int FmonthColumn, LmonthRow, LmonthColumn;
 	private JLabel eventArea;
+
 	public MonthView(Window windowVal) {
 		timeLogic = new logic.TimeLogic();
 		setBackground(Color.WHITE);
@@ -55,21 +56,23 @@ public class MonthView extends JPanel {
 		}
 		JLabel[] dagLabel = new JLabel[8];
 		String[] days;
-		days = new String[] { "Vecka", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
+		days = new String[] { "  Vecka", "  Måndag", "  Tisdag", "  Onsdag", "  Torsdag", "  Fredag", "  Lördag",
+				"  Söndag" };
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 8));
-		theDays.setBackground(new Color(196, 56, 110));
-		theDays.setPreferredSize(new Dimension(770, 90));
+		theDays.setBackground(new Color(204, 51, 145));
+		theDays.setPreferredSize(new Dimension(770, 86));
 		topLine.add(theDays, BorderLayout.CENTER);
 		for (int k = 0; k < dagLabel.length; k++) {
 			dagLabel[k] = new JLabel();
 			dagLabel[k].setText(days[k]);
-			dagLabel[k].setForeground(new Color(220, 220, 220));
-			dagLabel[k].setPreferredSize(new Dimension(96, 90));
-			//dagLabel[k].setBorder(BorderFactory.createLineBorder(new Color(196, 56, 110)));
+			dagLabel[k].setForeground(new Color(245, 245, 245));
+			dagLabel[k].setPreferredSize(new Dimension(96, 94));
+			// dagLabel[k].setBorder(BorderFactory.createLineBorder(new
+			// Color(196, 56, 110)));
 			// dagLabel[k].setPreferredSize(new Dimension(0, 50));
-		
-			dagLabel[k].setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, (new Color(50,50,50))));
+
+			dagLabel[k].setBorder(BorderFactory.createMatteBorder(0, 1, 1, 0, (new Color(50, 50, 50))));
 			theDays.add(dagLabel[k]);
 		}
 		JPanel westLine = new JPanel();
@@ -78,15 +81,22 @@ public class MonthView extends JPanel {
 		add(westLine, BorderLayout.WEST);
 
 		JPanel timeView = new JPanel();
-		timeView.setBackground(new Color(247, 74, 140));
+		timeView.setBackground(new Color(204, 51, 145));
 		timeView.setPreferredSize(new Dimension(97, 640));
 		timeView.setLayout(new GridLayout(6, 1));
 		westLine.add(timeView);
 		// int[] weeks = timeLogic.getWeek();
+		int newyear = 1;
 		for (int i = 0; i < 6; i++) {
 			JLabel veckan = new JLabel();
-			veckan.setText("sdsd");
-			veckan.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (new Color(50,50,50))));
+			veckan.setForeground(new Color(245, 245, 245));
+			if (firstWeek + i <= 52) {
+				veckan.setText("  v." + String.valueOf(firstWeek + i));
+			} else {
+				veckan.setText("  v." + String.valueOf(newyear));
+				newyear++;
+			}
+			veckan.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (new Color(50, 50, 50))));
 			timeView.add(veckan);
 
 		}
@@ -105,10 +115,10 @@ public class MonthView extends JPanel {
 			}
 		};
 		tableMonth.setTableHeader(null);
-		tableMonth.setRowHeight(102);
+		tableMonth.setRowHeight(105);
 		tableMonth.getColumnModel().getColumn(0).setCellRenderer(new TabellRenderare(this));
 		tableMonth.setCellSelectionEnabled(true);
-		tableMonth.addMouseListener(new ClickListener(this,windowVal));
+		tableMonth.addMouseListener(new ClickListener(this, windowVal));
 		containDays.add(tableMonth);
 		lopNummer = firstDayNextMonth = 1;
 
@@ -126,13 +136,13 @@ public class MonthView extends JPanel {
 					lopNummer++;
 
 				} else if (lopNummer > lastDayOfMonth) {
-					if(firstDayNextMonth == 1){
-					LmonthColumn = i;
-					LmonthRow = j;
-					System.out.println("Column "+i+ "   Rad "+ j);
+					if (firstDayNextMonth == 1) {
+						LmonthColumn = i;
+						LmonthRow = j;
+						System.out.println("Column " + i + "   Rad " + j);
 					}
 					tableMonth.setValueAt(firstDayNextMonth++, j, i);
-					
+
 				}
 
 				else if (lopNummer < lastDayLastMonth) {
@@ -156,11 +166,12 @@ public class MonthView extends JPanel {
 							eventArea.setSize(10, 90);
 
 							tableMonth.setValueAt(lopNummer + " " + eventArea.getText(), j, i);
-							
-							//TODO fixa datum
+
+							// TODO fixa datum
 						}
 					}
-				} catch (Exception e) {}
+				} catch (Exception e) {
+				}
 			}
 		}
 	}
@@ -177,6 +188,7 @@ public class MonthView extends JPanel {
 		daysOfMonth = timeLogic.getDays("" + thisMonth);
 		// System.out.println("days of month; "+ daysOfMonth);
 		// System.out.println("**********************************");
+		firstWeek = timeLogic.getFirstWeekOfMonth(thisMonth);
 		year = timeLogic.getCurrentYear();
 
 	}

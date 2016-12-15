@@ -7,11 +7,13 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.MatteBorder;
 
 import pane.AddButtonsPane;
 import pane.DatePanelDate;
@@ -71,7 +73,7 @@ public class Window extends JFrame {
 		// FIXME byt färg och sånt, gör den fin. ser hemskt ut just nu.
 		view = new JLabel("Månad");
 		view.setFont(new Font("SansSerif", Font.BOLD, 20));
-		view.setForeground(Color.YELLOW);
+		view.setForeground(new Color(70, 70, 70));
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
 
 		// menyBarHolders = new JPanel[3];
@@ -80,6 +82,7 @@ public class Window extends JFrame {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = 1125; // 1125
 		int height = 900; // 900
+		setResizable(false);
 		int xStart = getXStart(screenSize, width);
 		int yStart = getYStart(screenSize, height);
 		setBounds(xStart, yStart, width, height);
@@ -90,11 +93,6 @@ public class Window extends JFrame {
 		setPreferredSize(new Dimension(width, height));
 		setLayout(new BorderLayout());
 
-		// components color
-		menyBar.setBackground(invis);
-		navBar.setBackground(Color.BLUE);
-		datePanel.setBackground(Color.GREEN);
-
 		// window grid
 		// GridBagConstraints gbc = new GridBagConstraints();
 		body.setPreferredSize(new Dimension(width, height));
@@ -103,7 +101,6 @@ public class Window extends JFrame {
 
 		// TopLine för allt som ska vara på samma linje i norra delen
 		topLine.setPreferredSize(new Dimension(width, gridHeight));
-		topLine.setBackground(invis);
 		topLine.setLayout(new BorderLayout());
 		body.add(topLine, BorderLayout.NORTH);
 
@@ -118,21 +115,22 @@ public class Window extends JFrame {
 		 * Content panelen där kalender vyer kommer att finnas.
 		 */
 		centerBlock.setPreferredSize(new Dimension((width - gridWidth), (height - gridHeight)));
-		centerBlock.setBackground(new Color(255, 0, 255));
+		centerBlock.setBackground(invis);
 		centerBlock.setLayout(new BorderLayout());
 		body.add(centerBlock, BorderLayout.CENTER);
 
 		// Top höger där dagens datum kommer att stå. finns i topLine.
 		datePanel.setPreferredSize(new Dimension(gridWidth, gridHeight));
-		datePanel.setBackground(new Color(238, 231, 56));
-		datePanel.setLayout(new GridLayout(1, 1));
+		datePanel.setLayout(new BorderLayout());
+		datePanel.setBackground(new Color(32, 86, 173));
 		topLine.add(datePanel, BorderLayout.WEST);
 
 		// NavBar, där navigering mellan vyer sker. finns i topLine.
 		navBar.setPreferredSize(new Dimension((width - gridWidth), gridHeight));
-		navBar.setBackground(new Color(66, 244, 229));
+		navBar.setBackground(new Color(32, 86, 173));
 		navBar.setLayout(new GridLayout(1, 3, 0, 0));
 		topLine.add(navBar, BorderLayout.CENTER);
+		topLine.setBackground(new Color(32, 86, 173));
 
 		/*
 		 * MenyBar, sidopanelen där funktionalitet kommer finnas t.ex. logga in
@@ -142,14 +140,14 @@ public class Window extends JFrame {
 		menyBar.setPreferredSize(new Dimension(height, (height - gridHeight)));
 		westBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
 		eastBorder.setPreferredSize(new Dimension(20,(height - gridHeight)));
-		menyBar.setBackground(new Color(72, 90, 234, 255));
-		menyBar.setLayout(new GridLayout(5, 1));
+		menyBar.setBackground(new Color(32, 86, 173));
+		menyBar.setLayout(new GridLayout(3, 1));
 		westLine.add(westBorder, BorderLayout.WEST);
 		westLine.add(eastBorder, BorderLayout.EAST);
 		westLine.add(menyBar, BorderLayout.CENTER);
 
 		// Dagens datum.
-		datePanel.add(datePanelDate);
+	//	datePanel.add(datePanelDate);
 
 		// Holders till navbar knapparna
 		JPanel[] navBarHolders = new JPanel[3];
@@ -174,39 +172,54 @@ public class Window extends JFrame {
 		// Registreringen i menybar
 		registerUser = new RegisterUser();
 		loginUser = new LoginUser(this);
-
+		
 		//upcomingEvent = new UpcomingEvent();
 		menyBar.add(loginUser);
 		menyBar.add(registerUser);
-
+		eastBorder.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 2, new Color(240, 240, 240)));
+		eastBorder.setBackground(new Color(32, 86, 173));
+		westBorder.setBackground(new Color(32, 86, 173));
+		
+		JPanel datePanelEast = new JPanel();
+		JPanel datePanelWest = new JPanel();
+		JPanel datePanelMain = new JPanel();
+		datePanel.add(datePanelMain, BorderLayout.CENTER);
+		datePanelMain.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(240, 240, 240)));
+		datePanelMain.setLayout(new BorderLayout());
+		datePanelEast.setPreferredSize(new Dimension(20, 10));
+		datePanelEast.setBackground(new Color(32, 86, 173));
+		datePanelWest.setBackground(new Color(32, 86, 173));
+		datePanelWest.setPreferredSize(new Dimension(20, 10));
+		datePanelMain.add(datePanelDate);
+		datePanel.add(datePanelEast, BorderLayout.EAST);
+		datePanel.add(datePanelWest, BorderLayout.WEST);
 		/*
 		 * Padding rutor i centerBlock
 		 */
 
 		// Center blockets top, ska inehålla view och nav pilar.
 		cTop.setPreferredSize(new Dimension((width - gridWidth), gridHeight / 2));
-		cTop.setBackground(Color.gray);
+		cTop.setBackground(invis);
 
 		// Center blockets västra del, ska vara padding i samma bredd som
 		// navknappavståndet
 		cWest.setPreferredSize(new Dimension((gridWidth / 8), (height - (gridHeight) * 2)));
-		cWest.setBackground(Color.DARK_GRAY);
+		cWest.setBackground(invis);
 
 		// Center blockets östra del, ska vara padding i samma bredd som
 		// navknappavståndet
 		cEast.setPreferredSize(new Dimension((gridWidth / 8), (height - (gridHeight) * 2)));
-		cEast.setBackground(Color.DARK_GRAY);
+		cEast.setBackground(invis);
 
 		// Center blockets södra del, ska vara padding i botten
 		cSouth.setPreferredSize(new Dimension((width - (gridWidth * 2)), gridHeight / 2));
-		cSouth.setBackground(Color.GRAY);
+		cSouth.setBackground(invis);
 
 		// Center blockets Content del, här ska kalendrar visas upp.
 
 		// XXX width är 772 och height 720 på cContent så skala era kalendrar
 		// efter den.
 		cContent.setPreferredSize(new Dimension((int) (gridWidth * 2.75), (gridHeight * 8)));
-		cContent.setBackground(Color.blue);
 		cContent.setLayout(new BorderLayout());
 
 		// Lägg in blocken

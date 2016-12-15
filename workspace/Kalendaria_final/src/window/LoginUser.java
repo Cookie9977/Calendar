@@ -2,12 +2,14 @@ package window;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,6 +35,7 @@ public class LoginUser extends JPanel implements ActionListener {
 		setBackground(new Color(0, 0, 0, 0));
 		setSize(new Dimension(100, 100));
 		setVisible(true);
+		setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, (new Color(245, 245, 245))));
 		
 		// Font inputFont = new Font("SansSerif", Font.BOLD, 20);
 		// layout
@@ -55,11 +58,13 @@ public class LoginUser extends JPanel implements ActionListener {
 
 		headingLabel = new JLabel[2];
 		String[] heading;
-		heading = new String[] { "Email", "Lösenord" };
+		heading = new String[] { "  Email", "  Lösenord" };
+		
 		textBox = new JTextField[1];
 		password = new JPasswordField(16);
 		for (int i = 0; i < headingLabel.length; i++) {
 			headingLabel[i] = new JLabel();
+			headingLabel[i].setFont(new Font("SansSerif", Font.PLAIN, 15));
 			headingLabel[i].setText(heading[i]);
 			holders[i].add(headingLabel[i]);
 		}

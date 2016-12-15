@@ -81,7 +81,8 @@ public class DayView extends JPanel {
 			timeLabels[i] = new JLabel(logic.doubleToTime((double) i / 2));
 			timeLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			timeLabels[i].setVerticalAlignment(SwingConstants.CENTER);
-
+			timeLabels[i].setForeground(new Color(245,245,245));
+			
 			eventLabels[i] = new JLabel();
 			eventLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			eventLabels[i].setVerticalAlignment(SwingConstants.CENTER);
@@ -102,6 +103,7 @@ public class DayView extends JPanel {
 				if (j == 0) {
 					holders[i][j].setPreferredSize(new Dimension(40, 20));
 					holders[i][j].add(timeLabels[i]);
+					holders[i][j].setBackground(new Color(204, 51, 145));
 					layoutHolders[0].add(holders[i][j]);
 				} else {
 					holders[i][j].setPreferredSize(new Dimension(20, 20));

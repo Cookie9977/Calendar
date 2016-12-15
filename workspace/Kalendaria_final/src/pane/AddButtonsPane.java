@@ -1,7 +1,8 @@
 package pane;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +20,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 	private RequestLogic reqLogic;
 	private JButton[] buttons;
 	private JPanel[] holder;
-	private String[] labels = { "Lägg till ett event", "Lägg till vänner", "visa vänner", "Förfrågningar" };
+	private String[] labels = { "Lägg till ett event", "Lägg till vänner", "Visa vänner", "Förfrågningar" };
 
 	public AddButtonsPane(Window windowVal) {
 		this.windowVal = windowVal;
@@ -27,7 +28,8 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 		buttons = new JButton[rows];
 		holder = new JPanel[rows];
 		reqLogic = new RequestLogic();
-		setLayout(new GridLayout(4, 1));
+		setLayout(new FlowLayout(FlowLayout.CENTER,0,30));
+		setBackground(new Color(32, 86, 173));
 
 		for (int i = 0; i < rows; i++) {
 			holder[i] = new JPanel();
@@ -39,6 +41,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 			buttons[i].setActionCommand(labels[i]);
 			buttons[i].addActionListener(this);
 			buttons[i].setPreferredSize(new Dimension(150, 25));
+			holder[i].setBackground(new Color(32, 86, 173));
 			add(holder[i]);
 			holder[i].add(buttons[i]);
 		}
@@ -60,7 +63,7 @@ public class AddButtonsPane extends JPanel implements ActionListener {
 		case "Lägg till vänner":
 			new AddFriend();
 			break;
-		case "visa vänner":
+		case "Visa vänner":
 			FriendPane friendPane = new FriendPane();
 			JOptionPane.showMessageDialog(null, friendPane);
 			break;

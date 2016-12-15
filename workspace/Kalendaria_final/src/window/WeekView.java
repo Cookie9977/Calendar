@@ -64,12 +64,14 @@ public class WeekView extends JPanel {
 		// Vecko panel
 		JPanel vecka = new JPanel();
 		vecka.setPreferredSize(new Dimension(77, 74));
+		vecka.setBackground(new Color(204, 51, 145));
 		vecka.setLayout(new GridLayout(0, 1));
 		vecka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		topLine.add(vecka, BorderLayout.WEST);
 
 		// Aktuell vecka som label i vecko panel
 		veckaLabel = new JLabel();
+		veckaLabel.setForeground(new Color(245,245,245));
 		veckaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		veckaLabel.setText("V." + week);
 		veckaLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
@@ -86,6 +88,7 @@ public class WeekView extends JPanel {
 		JPanel theDays = new JPanel();
 		theDays.setLayout(new GridLayout(1, 7));
 		theDays.setPreferredSize(new Dimension(694, 74));
+		theDays.setBackground(new Color(204, 51, 145));
 		topLine.add(theDays, BorderLayout.CENTER);
 
 		// Labels veckodagarna i headernamepanelen
@@ -99,8 +102,8 @@ public class WeekView extends JPanel {
 			// System.out.println(tempArray[0]+" + "+tempArray[1]);
 			dagLabel[k].setText("<html><p>" + tempArray[0] + "</p><p> " + tempArray[1] + "</p></html>");
 			dagLabel[k].setPreferredSize(new Dimension(99, 74));
-			dagLabel[k].setBackground(Color.CYAN);
 			dagLabel[k].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			dagLabel[k].setForeground(new Color(245,245,245));
 			dagLabel[k].setHorizontalAlignment(SwingConstants.CENTER);
 			dagLabel[k].setFont(new Font("SansSerif", Font.PLAIN, 18));
 			theDays.add(dagLabel[k]);
@@ -109,15 +112,16 @@ public class WeekView extends JPanel {
 		// Dag kolumnerna, under dagarpanelen
 		JPanel containDays = new JPanel();
 		containDays.setPreferredSize(new Dimension(694, 648));
-		containDays.setBackground(Color.green);
 		containDays.setLayout(new GridLayout(1, 7));
+		containDays.setForeground(new Color(245,245,245));
 		add(containDays, BorderLayout.CENTER);
 
 		// TimeView, Finns under vecka label i westLine
 		JLabel[] timeLabel = new JLabel[24];
 		JPanel timeView = new JPanel();
-		timeView.setBackground(Color.GRAY);
+		timeView.setBackground(new Color(204, 51, 145));
 		timeView.setPreferredSize(new Dimension(77, 648));
+		timeView.setForeground(new Color(245,245,245));
 		timeView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		timeView.setLayout(new GridLayout(24, 1, 0, 3));
 		westLine.add(timeView);
@@ -133,6 +137,7 @@ public class WeekView extends JPanel {
 			timeLabel[i].setPreferredSize(new Dimension(77, 26));
 			timeLabel[i].setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 			timeLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
+			timeLabel[i].setForeground(new Color(245,245,245));
 			timeLabel[i].setFont(new Font("SansSerif", Font.PLAIN, 10));
 			timeView.add(timeLabel[i]);
 		}
@@ -144,6 +149,7 @@ public class WeekView extends JPanel {
 			currentDay.setPreferredSize(new Dimension(99, 614));
 			currentDay.setBackground(new Color(238, 238, 238));
 			currentDay.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			
 			currentDay.setFont(new Font("SansSerif", Font.PLAIN, 20));
 			currentDay.setLayout(new GridLayout(24, 1, 0, 3));
 

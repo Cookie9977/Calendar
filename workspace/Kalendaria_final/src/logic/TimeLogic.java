@@ -338,4 +338,14 @@ public class TimeLogic {
 			return "";
 		}
 	}
+
+	public int getCurrentFirstWeekOfMonth(int thisMonth) {
+		tempCal = new GregorianCalendar(getCurrentYear(),getCurrentMonth()-1, 1);
+		System.out.println(tempCal.getTime());
+		return tempCal.get(Calendar.WEEK_OF_YEAR);
+	}
+	public int getFirstWeekOfMonth(int thisMonth) {
+		tempCal = new GregorianCalendar(getYear(),getMonth()-1, 1);
+		return tempCal.get(Calendar.WEEK_OF_YEAR);
+	}
 }

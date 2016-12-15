@@ -1,10 +1,14 @@
 package window;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -35,10 +39,16 @@ public class UpcomingEvent extends JPanel {
 
 		lista = new JList<CalendarEvent>(eventContent);
 
-		setPreferredSize(new Dimension(100, 600));
+		setPreferredSize(new Dimension(200, 600));
 		setLayout(new BorderLayout());
-
-		add(lista, BorderLayout.NORTH);
+		setBackground(new Color(32, 86, 173));
+		
+		String upcoming = "Kommande händelser";
+		JLabel heading = new JLabel(upcoming);
+		heading.setFont(new Font("SansSerif", Font.BOLD, 22));
+		heading.setForeground(new Color(245,245,245));
+		add(heading, BorderLayout.NORTH);
+		add(lista, BorderLayout.SOUTH);
 	}
 
 	public void updateEventList() {
