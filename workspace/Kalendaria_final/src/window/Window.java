@@ -73,7 +73,7 @@ public class Window extends JFrame {
 		// FIXME byt färg och sånt, gör den fin. ser hemskt ut just nu.
 		view = new JLabel("Månad");
 		view.setFont(new Font("SansSerif", Font.BOLD, 20));
-		view.setForeground(new Color(70, 70, 70));
+		view.setForeground(new Color(32, 86, 173));
 		windowmodifications = new WindowModifications(monthView, weekView, dayView, this);
 
 		// menyBarHolders = new JPanel[3];

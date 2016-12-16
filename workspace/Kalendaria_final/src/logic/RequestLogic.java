@@ -89,6 +89,11 @@ public class RequestLogic {
 		// System.out.println("Acceptera vän: " + SQL);
 		Storage.db.execute(SQL);
 
+		String SQL2 = "INSERT INTO friend_link(`requester`, `reciver`, `accepted`) VALUES (" + Storage.id + ", " + reqId
+				+ ", 1)";
+		Storage.db.execute(SQL2);
+		// System.out.println("Acceptera vän 2: "+SQL2);
+
 		/*
 		 * En lösning men blinkar till och flyttar rutan.
 		 */
