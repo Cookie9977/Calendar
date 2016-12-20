@@ -13,5 +13,5 @@ public class Storage {
 	public static MonthView oldMonthView;
 	public static int id;
 	public static Calendar cal = new GregorianCalendar(), calIns = Calendar.getInstance();
-	public final static JavaDB db = new JavaDB("192.168.216.87", "Test", "qwerty123", "calendar");
+	public final static JavaDB db = new JavaDB("192.168.216.95", "Test", "qwerty123", "calendar");
 }
